@@ -1,18 +1,20 @@
 "use client";
+import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-guest-section";
 
 export const GuestSection: React.FC<{}> = () => {
-    return <main>
-        <GuestButtons />
+    const presenter = useGuestSection();
+    
+    return <main className="py-[50px] mx-auto max-w-[1200px] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+        <div className="mx-auto mb-5 w-full flex">
+            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
+        </div>
         <GuestRows />
+        <GuestButtons />
     </main>
 }
 
 const GuestButtons: React.FC<{}> = () => {
-    return <div>
-        <div className="mx-auto mb-5 w-full flex">
-            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
-        </div>
-        <div className="w-full mx-auto flex justify-center gap-2">
+    return <div className="w-full mx-auto flex justify-center gap-2">
             <button
             type="button"
             className="inline-block rounded bg-[#458236] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
@@ -37,11 +39,10 @@ const GuestButtons: React.FC<{}> = () => {
             Suivant
             </button>
         </div>
-    </div>
 }
 
 const GuestRows: React.FC<{}> = () => {
-    return <div className="my-5 mx-auto max-w-[1200px] flex gap-2 justify-center">
+    return <div className="my-5 mx-auto flex gap-2 justify-center">
                 <div className="relative mb-3" data-te-input-wrapper-init>
                 <input
                     type="text"
