@@ -5,5 +5,5 @@ import { GuestSection } from "@ratatouille/modules/order/react/sections/GuestSec
 export const OrderPage: React.FC = () => {
   return <main className="min-h-[50vh]">
     <GuestSection />
-  </main>;
+  </main>
 };

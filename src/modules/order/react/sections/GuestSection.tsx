@@ -2,20 +2,35 @@
 import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-guest-section";
 
 export const GuestSection: React.FC<{}> = () => {
-    const presenter = useGuestSection();
-    
-    return <main className="py-[50px] mx-auto max-w-[1200px] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+    const presenter:any = useGuestSection();
+
+    return <main className="py-[50px] mx-auto max-w-[1200px] bg-emerald-50 shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         <div className="mx-auto mb-5 w-full flex">
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
-        <GuestRows />
-        <GuestButtons />
+        {presenter.guests.map((guest:any) => (
+            <div key={Math.random()}>
+                <GuestRows 
+                id={guest.id}
+                firstName={guest.firstName}
+                lastName={guest.lastName}
+                age={guest.age} 
+                onChange={presenter.updateGuest}
+                />
+            </div>
+             
+        ))}
+       
+        <GuestButtons  />
     </main>
 }
 
 const GuestButtons: React.FC<{}> = () => {
+    const presenter:any = useGuestSection();
+
     return <div className="w-full mx-auto flex justify-center gap-2">
             <button
+            onClick={presenter.addGuest}
             type="button"
             className="inline-block rounded bg-[#458236] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
@@ -27,6 +42,7 @@ const GuestButtons: React.FC<{}> = () => {
             Ajouter
             </button>
             <button
+            onClick={presenter.onNext}
             type="button"
             className="inline-block rounded bg-[#478512] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
@@ -41,42 +57,58 @@ const GuestButtons: React.FC<{}> = () => {
         </div>
 }
 
-const GuestRows: React.FC<{}> = () => {
+const GuestRows: React.FC<{
+    id: string,
+    firstName: string,
+    lastName: string,
+    age: number,
+    onChange: (id:string, key:string, value:string) => void,
+}> = ({id,firstName,lastName, age, onChange}) => {
     return <div className="my-5 mx-auto flex gap-2 justify-center">
-                <div className="relative mb-3" data-te-input-wrapper-init>
-                <input
-                    type="text"
-                    className="peer block min-h-[auto] w-full rounded border border-1 border-grey bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="firstName"
-                    placeholder="Example label" />
-                <label
-                    htmlFor="firstName"
-                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                    >Prénom
-                </label>
+                <div className="relative mb-3">
+                    <label className="block">
+                        <span className="block text-sm font-medium text-slate-700">Prénom</span>
+                            <input type="text" 
+                            id="firstName"
+                            placeholder="Andrew"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
+                            placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                            disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                            invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            value={firstName}
+                            onChange= {(e) => onChange(id, "firstName", e.target.value)} 
+                            />
+                    </label>
+      
                 </div>
-                <div className="relative mb-3" data-te-input-wrapper-init>
-                    <input
-                        type="text"
-                        className="peer block min-h-[auto] w-full rounded border border-1 border-grey bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="LastName"
-                        placeholder="Example label" />
-                    <label
-                        htmlFor="LastName"
-                        className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                        >Nom
+                <div className="relative mb-3">
+                    <label className="block">
+                        <span className="block text-sm font-medium text-slate-700">Nom</span>
+                            <input type="text" 
+                            id="firstName"
+                            placeholder="Collins"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
+                            placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                            disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                            invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            value={lastName}
+                            onChange= {(e) => onChange(id, "lastName", e.target.value)} 
+                            />
                     </label>
                 </div>
                 <div className="relative mb-3" data-te-input-wrapper-init>
-                    <input
-                        type="number"
-                        className="peer block min-h-[auto] w-full rounded border border-1 border-grey bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="guest-age"
-                        placeholder="Example label" />
-                    <label
-                        htmlFor="guest-age"
-                        className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                        >Age
+                    <label className="block">
+                        <span className="block text-sm font-medium text-slate-700">Âge</span>
+                            <input type="text" 
+                            id="age"
+                            placeholder="Collins"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
+                            placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                            disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                            invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            value={age}
+                            onChange= {(e) => onChange(id, "age", e.target.value)} 
+                            />
                     </label>
                 </div>
             </div>
