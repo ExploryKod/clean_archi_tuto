@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-guest-section";
+import { Button } from "flowbite-react";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
@@ -17,6 +19,7 @@ export const GuestSection: React.FC<{}> = () => {
                 lastName={guest.lastName}
                 age={guest.age} 
                 onChange={presenter.updateGuest}
+                remove={presenter.removeGuest}
                 />
             </div>
              
@@ -63,10 +66,11 @@ const GuestRows: React.FC<{
     lastName: string,
     age: number,
     onChange: (id:string, key:string, value:string | number) => void,
-}> = ({id,firstName,lastName, age, onChange}) => {
+    remove: (id:string) => void
+}> = ({id,firstName,lastName, age, onChange, remove}) => {
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
-            <div className="relative mb-3">
+            <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block text-sm font-medium text-slate-700">Prénom</span>
                         <input type="text" 
@@ -80,9 +84,8 @@ const GuestRows: React.FC<{
                         onChange= {(e) => onChange(id, "firstName", e.target.value)} 
                         />
                 </label>
-    
             </div>
-            <div className="relative mb-3">
+            <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block text-sm font-medium text-slate-700">Nom</span>
                         <input type="text" 
@@ -97,7 +100,7 @@ const GuestRows: React.FC<{
                         />
                 </label>
             </div>
-            <div className="relative mb-3" data-te-input-wrapper-init>
+            <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block text-sm font-medium text-slate-700">Âge</span>
                         <input type="number" 
@@ -111,6 +114,13 @@ const GuestRows: React.FC<{
                         onChange= {(e) => onChange(id, "age", parseInt(e.target.value))} 
                         />
                 </label>
+            </div>
+          
+            <div className="relative flex flex-col justify-end items-center">
+                <Button className="group shadow-[0_2px_3px_-2px_#000] block ml-5 mb-1 p-0 h-auto w-auto 
+                                    text-sm bg-gray-100 rounded" onClick={() => remove(id)}>
+                    <RiDeleteBin6Line className="text-red-600 group-hover:text-white h-4 w-4 self-center" />
+                </Button>
             </div>
         </div>
     )
