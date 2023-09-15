@@ -11,12 +11,31 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        mono: ['var(--font-roboto-mono)'],
+        mono: ['var(--font-oswald)']
+      },
+      keyframes: {
+        'fade-in-down': {
+          '0%': {
+            opacity: '0.3',
+            transform: 'translateY(-30px)'},
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'}
+          },
+      },
+      animation: {
+        'fade-in-down': 'fade-in-down 1s ease-out 1'
+      }
+    },
   },
   plugins: [
     require("flowbite/plugin")
   ],
-}
+};
 
 // module.exports = {
 //   purge: {

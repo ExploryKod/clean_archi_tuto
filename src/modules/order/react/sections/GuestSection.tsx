@@ -7,7 +7,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
 
-    return <main className="py-[50px] mx-auto max-w-[1200px] bg-emerald-50 shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+    return <main className="py-[50px] mx-auto max-w-[1200px] bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         <div className="mx-auto mb-5 w-full flex">
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
@@ -41,7 +41,7 @@ export const GuestSection: React.FC<{}> = () => {
             <button
             onClick={presenter.onNext}
             type="button"
-            className="inline-block rounded bg-[#478512] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
+            className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
             hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
             focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 
