@@ -8,18 +8,31 @@ type Guest = {
     age: number
 }
 
+const shuffle = (array: string[]) => { 
+    for (let i = array.length - 1; i > 0; i--) { 
+      const j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]]; 
+    } 
+    return array; 
+ }; 
+
 // Function to generate a random name
-function getRandomName(names:Array<string>) {
-    var randomIndex = Math.floor(Math.random() * names.length);
-    return names[randomIndex];
+function getRandomName(names:Array<string>):string {
+    shuffle(names);
+    let randomName:string;
+     
+    const randomIndex:number = Math.floor(Math.random() * names.length);
+    randomName = names[randomIndex];
+     
+    return randomName;
 }
 
 export const useGuestSection = () => {
 
     // Array of names
     const firstNames:Array<string> = ["John", "Jane", "Rudy", "Doe", "Emily", "Michael", "Remy", "Marc", "Randy", "Anna"];
-    const lastNames:Array<string> = ["Franssen", "Aissaoui", "Collins", "Halliwell", "Fisher", "Leluc"];
-
+    const lastNames:Array<string> = ["Franssen", "Aissaoui", "Collins", "Halliwell", "Fisher", "Leluc", "Bouwman", "Fsoussi", "Poullman"];
+    
     function addGuest() {
         setGuest([
             ...guests, 
@@ -32,12 +45,18 @@ export const useGuestSection = () => {
         ]);
     }
 
+    function openModal(id:string) {
+        console.log('open modal');
+        setToggle(true); 
+    }
+
     function removeGuest(id:string) {
         setGuest(guests.filter(guest => guest.id !== id));
     }
 
+
     function updateGuest(id:string, key:string, value:number | string) {
-        console.log('update guest');
+        setGuest(guests.map(guest => guest.id === id ? {...guest, [key]: value} : guest));
     }
 
     function changeOrganizer() {}
@@ -49,6 +68,7 @@ export const useGuestSection = () => {
     }
     
     const [guests, setGuest] = useState<Guest[]>([]);
+    const [toggle, setToggle] = useState<boolean>(false);
 
     return {
         addGuest,

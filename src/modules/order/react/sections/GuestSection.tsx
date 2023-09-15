@@ -20,6 +20,7 @@ export const GuestSection: React.FC<{}> = () => {
                 age={guest.age} 
                 onChange={presenter.updateGuest}
                 remove={presenter.removeGuest}
+                openModal={presenter.openModal}
                 />
             </div>
              
@@ -67,7 +68,8 @@ const GuestRows: React.FC<{
     age: number,
     onChange: (id:string, key:string, value:string | number) => void,
     remove: (id:string) => void
-}> = ({id,firstName,lastName, age, onChange, remove}) => {
+    openModal: (id:string) => void
+}> = ({id,firstName,lastName, age, onChange, remove, openModal}) => {
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
             <div className="relative flex flex-col justify-center items-center">
@@ -119,6 +121,12 @@ const GuestRows: React.FC<{
             <div className="relative flex flex-col justify-end items-center">
                 <Button className="group shadow-[0_2px_3px_-2px_#000] block ml-5 mb-1 p-0 h-auto w-auto 
                                     text-sm bg-gray-100 rounded" onClick={() => remove(id)}>
+                    <RiDeleteBin6Line className="text-red-600 group-hover:text-white h-4 w-4 self-center" />
+                </Button>
+            </div>
+            <div className="relative flex flex-col justify-end items-center">
+                <Button className="group shadow-[0_2px_3px_-2px_#000] block ml-5 mb-1 p-0 h-auto w-auto 
+                                    text-sm bg-gray-100 rounded" onClick={() => onclick(openModal(id))}>
                     <RiDeleteBin6Line className="text-red-600 group-hover:text-white h-4 w-4 self-center" />
                 </Button>
             </div>

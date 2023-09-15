@@ -44,3 +44,8 @@ order/react/pages/order -> OrderPage.tsx
 -> différentes fonctionnalités, features, aspects
 
 # Testing : fonction pour créer un store de test et le test des selector
+
+
+
+OTHER RESSOURCES:
+https://www.freecodecamp.org/news/best-practices-for-react/
