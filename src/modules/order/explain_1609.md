@@ -24,8 +24,8 @@ A place OrderingDomainModal.guest peut devenir le type à appeler (import néces
 ### TDD - Création des tests dans le fichier de test
 - Structure: 
 >- ***describe*** > **description** action de la fonctionnalité
->- ***it*** > **description** contrainte/resultat 
->-***expect*** - ***toEqual*** > **vérification** d'obtention du bon output de la fonctionnalité (résultat)
+>- dans describe (2e param sera une fonction) : ***it*** > **description** contrainte/resultat 
+>-dans it(2e param sera une fonction): ***expect*** - ***toEqual*** > **vérification** d'obtention du bon output de la fonctionnalité (résultat)
 on aura une instanciation de l'objet (new ...)
 on aura un ***state*** > le résultat de l'appel de la méthode de la class
 
@@ -34,3 +34,13 @@ Dans le test, on veux récup le nouveau state : on va fonctionner avec un paradi
 chaque *method* retourne un nouvel *objet* qui sera le nouveau *state*
 
 On se facilite la tâche avec **Wallaby** >> utilitaire de test (plugin)
+Il faut aussi configurer Jest > jest.config.ts
+Il faut que le linter l'ignore (lintignore)
+On passe un état et on récup un autre état 
+InitialState sera un tableau vide > quand on le passe dans la méthod, le test retourne un nouveau tableau
+Pour cela il me faut passer un tableau de guest à addGuest dans form.guest 
+avec le bon type issu du model > orderingDomainModel.Guest[]
+
+
+
+>`npm run test` permet de créer des test et un dossier coverage est donc créé

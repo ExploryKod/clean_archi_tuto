@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "pretty": "pretty-quick --staged",
+    "prepare": "husky install",
+    "hook:precommit": "npm typecheck & npm run lint && npm run pretty",
+    "hook:prepush": "npm run test"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
