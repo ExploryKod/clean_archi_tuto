@@ -1,11 +1,13 @@
 import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
-import { nanoid } from "nanoid";
+import { IIDProvider } from "@ratatouille/modules/core/id-provider";
 export class GuestForm {
-
+    constructor(
+        private idProvider:IIDProvider
+    ) { }
     addGuest(state:OrderingDomainModel.Guest[]) {
         // On ajoute ici temporairement le state pour mimer un paradigme fonctionnel
         return [...state,{
-            id:nanoid(),
+            id:this.idProvider.generate(),
             firstName: 'John',
             lastName: 'Doe',
             age: 0

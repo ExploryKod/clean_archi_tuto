@@ -1,14 +1,10 @@
 import { set } from 'husky';
 import { useState, useRef } from 'react';
+import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProvider';
+
 // namespaces
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
-
-// Function to generate a random name
-function getRandomName(names:Array<string>) {
-    var randomIndex = Math.floor(Math.random() * names.length);
-    return names[randomIndex];
-}
 
 export const useGuestSection = () => {
 
@@ -33,7 +29,8 @@ export const useGuestSection = () => {
         return false;
     }
     
-    const guestForm = useRef(new GuestForm());
+    const idProvider = useDependencies().idProvider;
+    const guestForm = useRef(new GuestForm(idProvider));
     const [guests, setGuest] = useState<OrderingDomainModel.Guest[]>([]);
 
     return {
