@@ -8,7 +8,7 @@ describe('Add a Guest', () => {
         const state = form.addGuest(initialState);
         expect(state).toEqual(
             [{
-                id:1,
+                id:expect.any(String),
                 firstName: 'John',
                 lastName: 'Doe',
                 age: 0
@@ -18,7 +18,7 @@ describe('Add a Guest', () => {
     it('It should add a guest when there is already one', () => {
         const form = new GuestForm();
         const initialState: OrderingDomainModel.Guest[] = [{
-            id:1,
+            id:expect.any(String),
             firstName: 'John',
             lastName: 'Doe',
             age: 0
@@ -26,13 +26,13 @@ describe('Add a Guest', () => {
         const state = form.addGuest(initialState);
         expect(state).toEqual(
             [{
-                id:1,
+                id:expect.any(String),
                 firstName: 'John',
                 lastName: 'Doe',
                 age: 0
             },
             {
-                id:2,
+                id:expect.any(String),
                 firstName: 'John',
                 lastName: 'Doe',
                 age: 0

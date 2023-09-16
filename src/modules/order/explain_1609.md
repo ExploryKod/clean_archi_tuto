@@ -42,10 +42,23 @@ InitialState sera un tableau vide > quand on le passe dans la méthod, le test r
 Pour cela il me faut passer un tableau de guest à addGuest dans form.guest 
 avec le bon type issu du model > orderingDomainModel.Guest[]
 
+# Connexion de notre domain à notre application React
 ### Retour dans le presenter de guestSection
 - Pour séparer le domaine complètement de notre application React:
 > On répète les fonctions de guest.form.ts dans le présenter et on va prendre la donnée issu du core/guest.form.ts
 > Là on utilisera useRef avec current dans lequel on instancie une nouvel objet (celui de guest.form) à chaque fois qu'on monte le nouvel état du composant react (useState).
+A ce stade on a forcé la donnée : l'ajout donnera toujours John Doe mais on voit bien que la donnée apparait dans l'UI React.
 
 
 >`npm run test` permet de créer des test et un dossier coverage est donc créé
+
+# Traiter le problème des id et création du dossier modules/core
+On va utiliser nanoid version 3.3.6 
+on teste des id aléatoires en utilisant nanoid() sur l'id de notre méthode 
+(via une fonction de jest: expect.any(String) on peux checker le type mais pas l'id lui-même) 
+= Mais on perd en testabilité si  car on aura pas d'id identique entre les test et l'application
+On doit donc combiner l'usage de nanoid avec un idprovider
+
+## Création d'un dossier core dans modules à l'occasion de la création d'un id provider
+modules/core sera donc le coeur de l'application en général
+
