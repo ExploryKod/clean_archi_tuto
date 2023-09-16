@@ -9,9 +9,9 @@ function getRandomName(names:Array<string>):string {
     return names[randomIndex];
 }
 
-export const useLayout = () => {
+export const useHeader = () => {
     // Array of fonts
-    const [font, setFont] = useState<string>("Arial");
+    const [font, setFont] = useState<string>("");
     
     useEffect(() => {
         const fonts:Array<MyFonts> = ["font-mono","font-oswald","font-inter"];

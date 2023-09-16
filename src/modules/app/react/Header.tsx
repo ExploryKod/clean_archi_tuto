@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { useLayout } from "@ratatouille/modules/app/react/use-layout";
+import { useHeader } from "@ratatouille/modules/app/react/use-header";
 
 export const Header: React.FC = () => {
-  const presenter:any = useLayout();
+  const presenter:any = useHeader();
   const fontFamily = presenter.font;
 
   return (

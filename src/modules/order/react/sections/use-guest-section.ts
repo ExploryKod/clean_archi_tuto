@@ -1,12 +1,7 @@
 import { set } from 'husky';
 import { useState } from 'react';
-
-type Guest = {
-    id: string, 
-    firstName: string,
-    lastName: string,
-    age: number
-}
+// namespaces
+import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 
 // Function to generate a random name
 function getRandomName(names:Array<string>) {
@@ -48,7 +43,7 @@ export const useGuestSection = () => {
         return false;
     }
     
-    const [guests, setGuest] = useState<Guest[]>([]);
+    const [guests, setGuest] = useState<OrderingDomainModel.Guest[]>([]);
 
     return {
         addGuest,
