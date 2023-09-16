@@ -30,17 +30,22 @@ on aura une instanciation de l'objet (new ...)
 on aura un ***state*** > le résultat de l'appel de la méthode de la class
 
 On crée des class dans nos fichiers de type de guest.form
-Dans le test, on veux récup le nouveau state : on va fonctionner avec un paradigme fonctionnel à l'intérieur d'une class
+Dans le test, on veux récup le nouveau state : on va fonctionner avec un **paradigme fonctionnel** à l'intérieur d'une class
 chaque *method* retourne un nouvel *objet* qui sera le nouveau *state*
 
 On se facilite la tâche avec **Wallaby** >> utilitaire de test (plugin)
 Il faut aussi configurer Jest > jest.config.ts
 Il faut que le linter l'ignore (lintignore)
+
 On passe un état et on récup un autre état 
 InitialState sera un tableau vide > quand on le passe dans la méthod, le test retourne un nouveau tableau
 Pour cela il me faut passer un tableau de guest à addGuest dans form.guest 
 avec le bon type issu du model > orderingDomainModel.Guest[]
 
+### Retour dans le presenter de guestSection
+- Pour séparer le domaine complètement de notre application React:
+> On répète les fonctions de guest.form.ts dans le présenter et on va prendre la donnée issu du core/guest.form.ts
+> Là on utilisera useRef avec current dans lequel on instancie une nouvel objet (celui de guest.form) à chaque fois qu'on monte le nouvel état du composant react (useState).
 
 
 >`npm run test` permet de créer des test et un dossier coverage est donc créé

@@ -1,7 +1,8 @@
 import { set } from 'husky';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 // namespaces
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
+import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
 
 // Function to generate a random name
 function getRandomName(names:Array<string>) {
@@ -11,20 +12,9 @@ function getRandomName(names:Array<string>) {
 
 export const useGuestSection = () => {
 
-    // Array of names
-    const firstNames:Array<string> = ["John", "Jane", "Rudy", "Doe", "Emily", "Michael", "Remy", "Marc", "Randy", "Anna"];
-    const lastNames:Array<string> = ["Franssen", "Aissaoui", "Collins", "Halliwell", "Fisher", "Leluc"];
-
     function addGuest() {
-        setGuest([
-            ...guests, 
-            {
-            id: Math.random().toString(),
-            firstName: getRandomName(firstNames),
-            lastName: getRandomName(lastNames),
-            age: Math.floor(Math.random() * 100)
-            }
-        ]);
+        const newState = guestForm.current.addGuest(guests);
+        setGuest(newState);
     }
 
     function removeGuest(id:string) {
@@ -43,6 +33,7 @@ export const useGuestSection = () => {
         return false;
     }
     
+    const guestForm = useRef(new GuestForm());
     const [guests, setGuest] = useState<OrderingDomainModel.Guest[]>([]);
 
     return {
