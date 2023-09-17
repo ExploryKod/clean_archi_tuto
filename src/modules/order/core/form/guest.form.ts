@@ -13,4 +13,8 @@ export class GuestForm {
             age: 0
         }];
     }
+
+    removeGuest(state:OrderingDomainModel.Guest[], id:string) {
+        return []
+    }
 }
