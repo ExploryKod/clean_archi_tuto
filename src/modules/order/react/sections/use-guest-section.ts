@@ -9,12 +9,16 @@ import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
 export const useGuestSection = () => {
 
     function addGuest() {
+        // On va présenter cette méthode issu de l'extérieur à React via une méthode de présentation du même nom
         const newState = guestForm.current.addGuest(guests);
         setGuest(newState);
     }
 
     function removeGuest(id:string) {
-        setGuest(guests.filter(guest => guest.id !== id));
+        const newState = guestForm.current.removeGuest(guests, id);
+        setGuest(newState);
+        // version avant d'avoir mis cette méthode en dehors de react:
+        // setGuest(guests.filter(guest => guest.id !== id));
     }
 
     function updateGuest(id:string, key:string, value:number | string) {

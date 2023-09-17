@@ -7,13 +7,36 @@ class StubIdProvider implements IIDProvider {
     }
 }
 
+// On hoiste nos states (intéressant pour refactor ensuite)
+// Cela n'est possible que si on reste stateless 
+// La class GuestForm est donc stateless sauf pour son paramètre IIDProvider qui est stateful mais on ne le changera pas (auto-discipline)
+// d'où on peux se permettre de hoister cet objet
 const idProvider = new StubIdProvider();
+const initialEmptyState: OrderingDomainModel.Guest[] = [];
+const stateWithOneUser: OrderingDomainModel.Guest[] = [{
+    id:"1",
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 0
+}];
+const stateWithTwoUsers: OrderingDomainModel.Guest[] = [{
+    id:"1",
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 0
+},
+{
+    id:"2",
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 0
+}];
 
 describe('Add a Guest', () => {
     it('It should add a guest', () => {
         const form = new GuestForm(idProvider);
-        const initialState: OrderingDomainModel.Guest[] = [];
-        const state = form.addGuest(initialState);
+        
+        const state = form.addGuest(initialEmptyState);
         expect(state).toEqual(
             [{
                 id:"1",
@@ -25,13 +48,8 @@ describe('Add a Guest', () => {
     });
     it('It should add a guest when there is already one', () => {
         const form = new GuestForm(idProvider);
-        const initialState: OrderingDomainModel.Guest[] = [{
-            id:"1",
-            firstName: 'John',
-            lastName: 'Doe',
-            age: 0
-        }];
-        const state = form.addGuest(initialState);
+    
+        const state = form.addGuest(stateWithOneUser);
         expect(state).toEqual(
             [{
                 id:"1",
@@ -49,19 +67,8 @@ describe('Add a Guest', () => {
     });
     it('It should add a guest when there is already two', () => {
         const form = new GuestForm(idProvider);
-        const initialState: OrderingDomainModel.Guest[] = [{
-            id:"1",
-            firstName: 'John',
-            lastName: 'Doe',
-            age: 0
-        },
-        {
-            id:"2",
-            firstName: 'John',
-            lastName: 'Doe',
-            age: 0
-        }];
-        const state = form.addGuest(initialState);
+        
+        const state = form.addGuest(stateWithTwoUsers);
         expect(state).toEqual(
             [{
                 id:"1",
@@ -82,5 +89,30 @@ describe('Add a Guest', () => {
                 age: 0
             }]
         );
+    });
+});
+
+describe('Remove a Guest', () => {
+    it('It should not remove anyone when there is an empty state', () => {
+        const form = new GuestForm(idProvider);
+        const state = form.removeGuest(initialEmptyState, "1");
+        expect(state).toEqual([]);
+    });
+    it('Should remove user with id 1 when there is only a user with id 1 and it remains no user', () => {
+        const form = new GuestForm(idProvider);
+        const state = form.removeGuest(stateWithOneUser, "1");
+        expect(state).toEqual([]);
+    });
+    it('Should remove user with id 2 when there is a user with id 2 and it remain a user with id 1', () => {
+        const form = new GuestForm(idProvider);
+        const state = form.removeGuest(stateWithTwoUsers, "2");
+        expect(state).toEqual([
+            {
+                id:"1",
+                firstName: 'John',
+                lastName: 'Doe',
+                age: 0
+            }
+        ]);
     });
 });
