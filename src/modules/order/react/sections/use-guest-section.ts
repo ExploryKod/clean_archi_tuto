@@ -25,7 +25,9 @@ export const useGuestSection = () => {
         console.log('update guest');
     }
 
-    function changeOrganizer() {}
+    function changeOrganizer(id:string) {
+        console.log('change organizer'+id)
+    }
 
     function onNext() {}
 
