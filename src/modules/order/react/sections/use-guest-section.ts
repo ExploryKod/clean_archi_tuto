@@ -26,13 +26,14 @@ export const useGuestSection = () => {
     }
 
     function changeOrganizer(id:string) {
-        console.log('change organizer'+id)
+        const newState = guestForm.current.changeOrganizer(form, id);
+        setForm(newState);
     }
 
     function onNext() {}
 
     function isSubmitable() {
-        return false;
+        return guestForm.current.isSubmitable(form)
     }
     
     const idProvider = useDependencies().idProvider;
