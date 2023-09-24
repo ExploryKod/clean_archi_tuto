@@ -12,32 +12,41 @@ class StubIdProvider implements IIDProvider {
 // La class GuestForm est donc stateless sauf pour son paramètre IIDProvider qui est stateful mais on ne le changera pas (auto-discipline)
 // d'où on peux se permettre de hoister cet objet
 const idProvider = new StubIdProvider();
-const initialEmptyState: OrderingDomainModel.Guest[] = [];
-const stateWithOneUser: OrderingDomainModel.Guest[] = [{
-    id:"1",
+const initialEmptyState: OrderingDomainModel.Form = {    
+    guests: [],
+    organizerId: null
+}
+
+const stateWithOneUser: OrderingDomainModel.Form = {
+    guests: [{ id:"1",
     firstName: 'John',
     lastName: 'Doe',
-    age: 0
-}];
-const stateWithTwoUsers: OrderingDomainModel.Guest[] = [{
-    id:"1",
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 0
-},
-{
-    id:"2",
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 0
-}];
+    age: 0}],
+    organizerId: null
+}
+   
+const stateWithTwoUsers: OrderingDomainModel.Form = {
+    guests: [{
+        id:"1",
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 0
+    },
+    {
+        id:"2",
+        firstName: 'John',
+        lastName: 'Doe',
+        age: 0
+    }],
+    organizerId: null
+};
+
+const form = new GuestForm(idProvider);
 
 describe('Add a Guest', () => {
     it('It should add a guest', () => {
-        const form = new GuestForm(idProvider);
-        
         const state = form.addGuest(initialEmptyState);
-        expect(state).toEqual(
+        expect(state.guests).toEqual(
             [{
                 id:"1",
                 firstName: 'John',
@@ -47,10 +56,8 @@ describe('Add a Guest', () => {
         );
     });
     it('It should add a guest when there is already one', () => {
-        const form = new GuestForm(idProvider);
-    
         const state = form.addGuest(stateWithOneUser);
-        expect(state).toEqual(
+        expect(state.guests).toEqual(
             [{
                 id:"1",
                 firstName: 'John',
@@ -66,10 +73,8 @@ describe('Add a Guest', () => {
         );
     });
     it('It should add a guest when there is already two', () => {
-        const form = new GuestForm(idProvider);
-        
         const state = form.addGuest(stateWithTwoUsers);
-        expect(state).toEqual(
+        expect(state.guests).toEqual(
             [{
                 id:"1",
                 firstName: 'John',
@@ -94,19 +99,16 @@ describe('Add a Guest', () => {
 
 describe('Remove a Guest', () => {
     it('It should not remove anyone when there is an empty state', () => {
-        const form = new GuestForm(idProvider);
         const state = form.removeGuest(initialEmptyState, "1");
-        expect(state).toEqual([]);
+        expect(state.guests).toEqual([]);
     });
     it('Should remove user with id 1 when there is only a user with id 1 and it remains no user', () => {
-        const form = new GuestForm(idProvider);
         const state = form.removeGuest(stateWithOneUser, "1");
-        expect(state).toEqual([]);
+        expect(state.guests).toEqual([]);
     });
     it('Should remove user with id 2 when there is a user with id 2 and it remain a user with id 1', () => {
-        const form = new GuestForm(idProvider);
         const state = form.removeGuest(stateWithTwoUsers, "2");
-        expect(state).toEqual([
+        expect(state.guests).toEqual([
             {
                 id:"1",
                 firstName: 'John',
@@ -115,4 +117,43 @@ describe('Remove a Guest', () => {
             }
         ]);
     });
+});
+
+describe('Set an organizer', () => {
+    it("set the organizer id when the user does not exist", () =>{
+        const state = form.changeOrganizer(initialEmptyState, "1")
+        expect(state.organizerId).toEqual(null)
+    })
+    it("set the organizer id when a user exist", () =>{
+        const state = form.changeOrganizer(stateWithOneUser, "1")
+        expect(state.organizerId).toEqual("1")
+    })
+});
+
+describe('Set Is Submittable', () => {
+    it("When there is no organizer, it can't be submittable", () =>{
+        const isSubmitable = form.isSubmitable(initialEmptyState)
+        expect(isSubmitable).toEqual(false)
+    })
+    it("When there is one organizer, it can be submittable", () =>{
+        const withOrganizerState = {
+            ...stateWithOneUser,
+            organizerId: "1"
+        }
+        const isSubmitable = form.isSubmitable(withOrganizerState)
+        expect(isSubmitable).toEqual(true)
+    })
+});
+
+describe('Upgrade a guest', () => {
+    it("Should change guest name", () =>{
+        const state = form.upgradeGuest(stateWithOneUser, "1", "firstName", "Helena")
+
+        expect(state.guests[0]).toEqual({   
+            id:"1",
+            firstName: 'Helena',
+            lastName: 'Doe',
+            age: 0
+        })
+    })
 });

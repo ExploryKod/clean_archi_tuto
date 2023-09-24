@@ -10,13 +10,13 @@ export const useGuestSection = () => {
 
     function addGuest() {
         // On va présenter cette méthode issu de l'extérieur à React via une méthode de présentation du même nom
-        const newState = guestForm.current.addGuest(guests);
-        setGuest(newState);
+        const newState = guestForm.current.addGuest(form);
+        setForm(newState);
     }
 
     function removeGuest(id:string) {
-        const newState = guestForm.current.removeGuest(guests, id);
-        setGuest(newState);
+        const newState = guestForm.current.removeGuest(form, id);
+        setForm(newState);
         // version avant d'avoir mis cette méthode en dehors de react:
         // setGuest(guests.filter(guest => guest.id !== id));
     }
@@ -25,17 +25,20 @@ export const useGuestSection = () => {
         console.log('update guest');
     }
 
-    function changeOrganizer() {}
+    function changeOrganizer(id:string) {
+        const newState = guestForm.current.changeOrganizer(form, id);
+        setForm(newState);
+    }
 
     function onNext() {}
 
     function isSubmitable() {
-        return false;
+        return guestForm.current.isSubmitable(form)
     }
     
     const idProvider = useDependencies().idProvider;
     const guestForm = useRef(new GuestForm(idProvider));
-    const [guests, setGuest] = useState<OrderingDomainModel.Guest[]>([]);
+    const [form, setForm] = useState<OrderingDomainModel.Form>({guests:[], organizerId: null});
 
     return {
         addGuest,
@@ -44,6 +47,6 @@ export const useGuestSection = () => {
         onNext,
         changeOrganizer,
         isSubmitable: isSubmitable(),
-        guests
+        form
     }
 }

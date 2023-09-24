@@ -4,6 +4,8 @@
 
 .custom-hero-bg {
     background-position: 50%;
-    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/146.webp');
+    /* background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/146.webp'); */
+    /* background-image: url('https://images.pexels.com/photos/13195474/pexels-photo-13195474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+    background-image: url('https://images.pexels.com/photos/206665/pexels-photo-206665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     height: 500px;
 }

@@ -3,7 +3,8 @@ import React from 'react';
 import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-guest-section";
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import { Checkbox } from "@material-tailwind/react";
+ 
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
 
@@ -11,7 +12,7 @@ export const GuestSection: React.FC<{}> = () => {
         <div className="mx-auto mb-5 w-full flex">
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
-        {presenter.guests.map((guest:any) => (
+        {presenter.form.guests.map((guest:any) => (
             <div key={Math.random()}>
                 <GuestRows 
                 id={guest.id}
@@ -20,9 +21,10 @@ export const GuestSection: React.FC<{}> = () => {
                 age={guest.age} 
                 onChange={presenter.updateGuest}
                 remove={presenter.removeGuest}
+                changeOrganizer={presenter.changeOrganizer}
+                isOrganizer={guest.id === presenter.form.organizerId}
                 />
             </div>
-             
         ))}
        
        <div className="w-full mx-auto flex justify-center gap-2">
@@ -40,9 +42,11 @@ export const GuestSection: React.FC<{}> = () => {
             </button>
             <button
             onClick={presenter.onNext}
+            disabled={presenter.isSubmitable === false}
             type="button"
             className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
+            disabled:bg-gray-500 disabled:text-gray-50 disabled:border-gray-200 disabled:shadow-none
             hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
             focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 
             active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
@@ -65,11 +69,14 @@ const GuestRows: React.FC<{
     firstName: string,
     lastName: string,
     age: number,
+    isOrganizer: boolean,
     onChange: (id:string, key:string, value:string | number) => void,
-    remove: (id:string) => void
-}> = ({id,firstName,lastName, age, onChange, remove}) => {
+    remove: (id:string) => void,
+    changeOrganizer: (id:string) => void
+}> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer}) => {
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
+        
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block text-sm font-medium text-slate-700">Prénom</span>
@@ -121,6 +128,18 @@ const GuestRows: React.FC<{
                                     text-sm bg-gray-100 rounded" onClick={() => remove(id)}>
                     <RiDeleteBin6Line className="text-red-600 group-hover:text-white h-4 w-4 self-center" />
                 </Button>
+            </div>
+            <div className="relative flex flex-col justify-end items-center">
+                <div className="absolute left-1 bottom-[-5px]">
+                    <Checkbox  
+                    defaultChecked={isOrganizer}
+                    onChange={() => changeOrganizer(id)} 
+                    ripple={true}
+                    color="teal"
+                    className="h-6 w-6 shadow-[0_2px_3px_-2px_#000] bg-gray-100 rounded"
+                    />
+                </div>
+              
             </div>
         </div>
     )
