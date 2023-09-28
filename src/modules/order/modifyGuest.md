@@ -12,7 +12,18 @@
 2. Core - On crée la fonction upgradeGuest qui prendra en paramètre le state, l'id et les valeurs à modifier
 3. On vérifie que le 1er test est ok 
 
+## Tests
+
+>> On gagne à utiliser un 'each' de Jest pour tester plusieurs cas avec le même test (itère sur un)
+>> Car les tests sont formattés pareils
+>> Ce qui change c'est key et value qu'on passe en variable dans les parenthèses de la fonction de test 'it'
+>> it.each([{key:x, value:z},{},{}])("should ...", ({key, value})=>{}) permet de tester plusieurs cas avec le même test
+>> Attention au typage dans le test 
+
+
 ## Typage
+
+Usage de <code>as</code>
 
 Usage de <code>keyof</code> et d' <code> extends </code> pour typer la fonction upgradeGuest:
 (T prend le typage de toute les clés de l'objet Guest)

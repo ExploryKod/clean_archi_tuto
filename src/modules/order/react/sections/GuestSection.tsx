@@ -4,6 +4,7 @@ import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-g
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Checkbox } from "@material-tailwind/react";
+import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
  
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
@@ -70,7 +71,11 @@ const GuestRows: React.FC<{
     lastName: string,
     age: number,
     isOrganizer: boolean,
-    onChange: (id:string, key:string, value:string | number) => void,
+    onChange: <T extends keyof OrderingDomainModel.Guest[T]>
+        (id:string, 
+        key:T, 
+        value:OrderingDomainModel.Guest[T]
+        ) => void,
     remove: (id:string) => void,
     changeOrganizer: (id:string) => void
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer}) => {

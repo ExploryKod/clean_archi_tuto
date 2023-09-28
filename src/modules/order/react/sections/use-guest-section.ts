@@ -21,10 +21,12 @@ export const useGuestSection = () => {
         // setGuest(guests.filter(guest => guest.id !== id));
     }
 
-    function updateGuest(id:string, key:string, value:number | string) {
-        console.log('update guest');
+    function updateGuest<T extends keyof OrderingDomainModel.Guest>
+    (id:string, key: T, value: OrderingDomainModel.Guest[T]) {
+        const newState = guestForm.current.updateGuest(form, id, key, value);
+        setForm(newState);
     }
-
+        
     function changeOrganizer(id:string) {
         const newState = guestForm.current.changeOrganizer(form, id);
         setForm(newState);
