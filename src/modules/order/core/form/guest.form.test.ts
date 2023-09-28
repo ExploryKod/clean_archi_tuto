@@ -145,15 +145,24 @@ describe('Set Is Submittable', () => {
     })
 });
 
-describe('Upgrade a guest', () => {
-    it("Should change guest name", () =>{
-        const state = form.upgradeGuest(stateWithOneUser, "1", "firstName", "Helena")
-
-        expect(state.guests[0]).toEqual({   
-            id:"1",
-            firstName: 'Helena',
-            lastName: 'Doe',
-            age: 0
-        })
+describe('Update a guest', () => {
+    it.each(
+        [
+            {
+                key: "firstName" as keyof OrderingDomainModel.Guest,
+                value: "Helena" as OrderingDomainModel.Guest["firstName"]
+            },
+            {
+                key: "lastName" as keyof OrderingDomainModel.Guest,
+                value: "Gilbert" as OrderingDomainModel.Guest["lastName"]
+            },
+            {
+                key: "age" as keyof OrderingDomainModel.Guest,
+                value: 18 as OrderingDomainModel.Guest["age"]
+            }
+        ]
+    )(`Should change guest s%`, ({key, value}) =>{
+        const state = form.updateGuest(stateWithOneUser, "1", key, value)
+        expect(state.guests[0][key]).toEqual(value)
     })
 });

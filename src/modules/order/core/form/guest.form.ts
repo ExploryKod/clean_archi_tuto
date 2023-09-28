@@ -41,7 +41,7 @@ export class GuestForm {
         return state.organizerId !== null
     }
 
-    upgradeGuest<T extends keyof OrderingDomainModel.Guest>(
+    updateGuest<T extends keyof OrderingDomainModel.Guest>(
         state: OrderingDomainModel.Form, 
         id:string, 
         key:T, 
