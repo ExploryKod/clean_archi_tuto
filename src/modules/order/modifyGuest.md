@@ -41,3 +41,6 @@ Usage de <code>keyof</code> et d' <code> extends </code> pour typer la fonction 
 > On check si c'est le bon id (égal à ce lui passé par le paramètre donc le guest dont le champ est touché)
 > La fonction upgrade guest prend une clé et une valeur en paramètre > on ajoute [key]: value aprés le spread operator sur ...guests et donc ça updatera le guest (ça n'ajoutera pas une nouvelle clé car elle est identique à l'une qui existe déjà)
 
+## Bug rencontré
+Le problème du focus qui 'saute' dés que j'écris une lettre:
+https://stackoverflow.com/questions/59715158/react-hooks-input-loses-focus-when-1-character-is-typed-in 

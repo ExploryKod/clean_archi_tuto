@@ -29,6 +29,7 @@ export class GuestForm {
     }
 
     changeOrganizer(state: OrderingDomainModel.Form, id:string) {
+        
         // La méthode some() teste si au moins un élément du tableau passe le test implémenté par la fonction fournie. 
         // Elle renvoie un booléen indiquant le résultat du test
         return {
@@ -50,6 +51,7 @@ export class GuestForm {
             ...state,
             guests: state.guests.map((guest) => {
                 if (guest.id === id) {
+                    console.log('update guest ', key, value)
                     return {
                         ...guest,
                         [key]: value

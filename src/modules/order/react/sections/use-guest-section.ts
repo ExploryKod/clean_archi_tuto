@@ -28,6 +28,7 @@ export const useGuestSection = () => {
     }
         
     function changeOrganizer(id:string) {
+        console.log('change' , id)
         const newState = guestForm.current.changeOrganizer(form, id);
         setForm(newState);
     }
