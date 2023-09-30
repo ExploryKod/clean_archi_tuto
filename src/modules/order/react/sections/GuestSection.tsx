@@ -66,18 +66,18 @@ export const GuestSection: React.FC<{}> = () => {
 // }
 
 const GuestRows: React.FC<{
-    id: string,
+    id: string | number,
     firstName: string,
     lastName: string,
     age: number,
     isOrganizer: boolean,
-    onChange: <T extends keyof OrderingDomainModel.Guest[T]>
-        (id:string, 
+    onChange: <T extends keyof OrderingDomainModel.Guest>
+        (id:string | number, 
         key:T, 
-        value:OrderingDomainModel.Guest[T]
+        value: OrderingDomainModel.Guest[T]
         ) => void,
-    remove: (id:string) => void,
-    changeOrganizer: (id:string) => void
+    remove: (id:string | number) => void,
+    changeOrganizer: (id:string | number) => void
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer}) => {
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
@@ -93,7 +93,8 @@ const GuestRows: React.FC<{
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                         value={firstName}
-                        onChange= {(e) => onChange(id, "firstName", e.target.value)} 
+                        onChange= {(e) => onChange(id, 'firstName', e.target.value)} 
+                   
                         />
                 </label>
             </div>
@@ -109,6 +110,7 @@ const GuestRows: React.FC<{
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                         value={lastName}
                         onChange= {(e) => onChange(id, "lastName", e.target.value)} 
+                      
                         />
                 </label>
             </div>
