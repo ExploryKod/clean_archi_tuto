@@ -14,7 +14,7 @@ export const GuestSection: React.FC<{}> = () => {
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
         {presenter.form.guests.map((guest:any) => (
-            <div key={Math.random()}>
+            <div key={guest.id}>
                 <GuestRows 
                 id={guest.id}
                 firstName={guest.firstName}
