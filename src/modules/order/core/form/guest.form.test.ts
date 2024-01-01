@@ -165,4 +165,8 @@ describe('Update a guest', () => {
         const state = form.updateGuest(stateWithOneUser, "1", key, value)
         expect(state.guests[0][key]).toEqual(value)
     })
+    it("Should not change guest when id does not exist", () =>{
+        const state = form.updateGuest(stateWithOneUser, "2", "firstName", "Helena")
+        expect(state.guests).toEqual(stateWithOneUser.guests)
+    })
 });
