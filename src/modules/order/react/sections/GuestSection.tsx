@@ -8,8 +8,8 @@ import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/order
  
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
-
-    return <main className="py-[50px] mx-auto max-w-[1200px] bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+    
+    return <section className="w-full py-[50px] mx-auto max-w-[1200px] bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         <div className="mx-auto mb-5 w-full flex">
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
@@ -57,7 +57,7 @@ export const GuestSection: React.FC<{}> = () => {
             Suivant
             </button>
         </div>
-    </main>
+    </section>
 }
 
 // const GuestButtons: React.FC<{presenter:any}> = ({presenter}) => {

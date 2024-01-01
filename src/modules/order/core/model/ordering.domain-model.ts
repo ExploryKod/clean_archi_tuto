@@ -10,5 +10,17 @@ export namespace OrderingDomainModel {
         lastName: string,
         age: number
     }
+
+    export type RestaurantList = {
+        restaurants: Restaurant[],
+        restaurantId: string | number | null
+    }
+
+    export type Restaurant = {
+        id: string | number, 
+        restaurantName: string,
+        restaurantType: string,
+        stars: number
+    }
    
 }

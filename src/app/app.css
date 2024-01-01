@@ -9,3 +9,18 @@
     background-image: url('https://images.pexels.com/photos/206665/pexels-photo-206665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     height: 500px;
 }
+
+:root {
+    --header-height: 8vh;
+}
+
+@layer components {
+
+    .header-minh {
+      min-height: var(--header-height);
+    }
+
+    .hero-section-minh {
+      min-height: calc(100vh - var(--header-height));
+    }
+}

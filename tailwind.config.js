@@ -18,6 +18,9 @@ module.exports = withMT({
         mono: ['var(--font-roboto-mono)'],
         mono: ['var(--font-oswald)']
       },
+      spaces: {
+        
+      },
       keyframes: {
         'fade-in-down': {
           '0%': {
