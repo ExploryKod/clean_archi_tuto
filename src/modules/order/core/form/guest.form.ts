@@ -55,10 +55,15 @@ export class GuestForm {
     changeOrganizer(state: OrderingDomainModel.Form, id:string) {
         
         return produce(state, (draft) => {
-           const exists = draft.guests.some((guest) => guest.id ===  id) 
-           draft.organizerId = exists ? id : null
-        })
-
+            const exists = draft.guests.some((guest) => guest.id === id);
+            
+            if(!exists) {
+                return
+            }
+            draft.organizerId = id;
+        });
+    
+       
         // La méthode some() teste si au moins un élément du tableau passe le test implémenté par la fonction fournie. 
         // Elle renvoie un booléen indiquant le résultat du test
         // return {
