@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSearchBar } from "@ratatouille/modules/app/react/search-bar-hook";
 
 const USERS = [

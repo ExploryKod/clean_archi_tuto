@@ -12,6 +12,7 @@ On hoiste nos states (intéressant pour refactor ensuite)
 2. # Création de la méthode removeGuest dans form (hors-react)
 3. # Création de la méthode dans le présenter en utilisant useRef et instanciation d'objet 
 4. # Test sur l'UI directement (via des console.log ici car on a pas encore la possibilité de changer les champs via l'UI)
+5. # Refactor & Validations (ajout de tests) (voir le .md à ce sujet)
 *
 -----------------------------------------
 # Defs utiles dans ce doc:

@@ -4,6 +4,7 @@ import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-g
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Checkbox } from "@material-tailwind/react";
+import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
  
 export const GuestSection: React.FC<{}> = () => {
     const presenter:any = useGuestSection();
@@ -13,7 +14,7 @@ export const GuestSection: React.FC<{}> = () => {
             <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>
         </div>
         {presenter.form.guests.map((guest:any) => (
-            <div key={Math.random()}>
+            <div key={guest.id}>
                 <GuestRows 
                 id={guest.id}
                 firstName={guest.firstName}
@@ -65,14 +66,18 @@ export const GuestSection: React.FC<{}> = () => {
 // }
 
 const GuestRows: React.FC<{
-    id: string,
+    id: string | number,
     firstName: string,
     lastName: string,
     age: number,
     isOrganizer: boolean,
-    onChange: (id:string, key:string, value:string | number) => void,
-    remove: (id:string) => void,
-    changeOrganizer: (id:string) => void
+    onChange: <T extends keyof OrderingDomainModel.Guest>
+        (id:string | number, 
+        key:T, 
+        value: OrderingDomainModel.Guest[T]
+        ) => void,
+    remove: (id:string | number) => void,
+    changeOrganizer: (id:string | number) => void
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer}) => {
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
@@ -88,7 +93,8 @@ const GuestRows: React.FC<{
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                         value={firstName}
-                        onChange= {(e) => onChange(id, "firstName", e.target.value)} 
+                        onChange= {(e) => onChange(id, 'firstName', e.target.value)} 
+                   
                         />
                 </label>
             </div>
@@ -104,6 +110,7 @@ const GuestRows: React.FC<{
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                         value={lastName}
                         onChange= {(e) => onChange(id, "lastName", e.target.value)} 
+                      
                         />
                 </label>
             </div>
