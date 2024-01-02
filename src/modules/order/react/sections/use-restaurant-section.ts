@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProvider';
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 
@@ -14,9 +14,17 @@ export const useRestaurantSection = () => {
         setRestaurantList(newState);
     }
 
+    function selectRestaurant(id:string) {
+
+    }
+
     const [restaurantList, setRestaurantList] = useState<OrderingDomainModel.RestaurantList>({restaurants:[], restaurantId: null});
+    useEffect (() => {
+        displayRestaurants();
+    }, []);
+    
     return {
       restaurantList,
-      displayRestaurants
+      selectRestaurant
     }
 }
