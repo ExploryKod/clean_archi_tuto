@@ -10,6 +10,7 @@ export const useOrderPage = () => {
         }
     };
 
+
     const showGuestSection = () => {
         setToggle(true);
         goToGuestSectionBottom(toggle);
@@ -18,6 +19,7 @@ export const useOrderPage = () => {
     useEffect(() => {
         goToGuestSectionBottom(toggle);
     }, [toggle]);
+
 
     // const hideGuestSection = () => {
     //     setToggle(false);

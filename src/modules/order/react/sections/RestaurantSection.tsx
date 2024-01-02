@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useRestaurantSection } from "@ratatouille/modules/order/react/sections/use-restaurant-section";
-import { Checkbox } from "@material-tailwind/react";
+import { Radio } from "@material-tailwind/react";
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
  
 export const RestaurantSection: React.FC<{}> = () => {
@@ -13,18 +13,21 @@ export const RestaurantSection: React.FC<{}> = () => {
         </div>
         <div className="flex gap-3 justify-center items-center flex-wrap">
         {presenter.restaurantList.restaurants.length > 0 ? presenter.restaurantList.restaurants
+        .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id)
         .map((restaurant:OrderingDomainModel.Restaurant) => (
             <div key={restaurant.id}>
                 <RestaurantRows 
-                id={restaurant.id}
+                id={restaurant.id.toString()}
                 restaurantName={restaurant.restaurantName}
                 restaurantType={restaurant.restaurantType}
                 stars={restaurant.stars} 
-                changeRestaurant={presenter.changeRestaurant}
-                isSelected={restaurant.id === presenter.restaurantList.restaurantId}
+                selectRestaurant={presenter.selectRestaurant}
+                selectedRestaurantId={presenter.restaurantList.restaurantId ? presenter.restaurantList.restaurantId.toString() : null}
                 />
             </div>
-        )) : <div className="my-5 mx-auto w-1/2 rounded px-5 py-2 "><p className="text-center font-semibold text-red-900">Aucun restaurant n&apos;est disponible</p></div>}
+        )) : <div className="my-5 mx-auto w-1/2 rounded px-5 py-2 ">
+                <p className="text-center font-semibold text-red-900">Aucun restaurant n&apos;est disponible</p>
+            </div>}
        </div>
        <div className="w-full mx-auto flex justify-center gap-2">
             <button
@@ -44,36 +47,26 @@ export const RestaurantSection: React.FC<{}> = () => {
 }
 
 const RestaurantRows: React.FC<{
-    id: string | number,
+    id: string,
+    selectedRestaurantId: string,
     restaurantName: string,
     restaurantType: string,
     stars: number,
-    isSelected: boolean,
-    changeRestaurant: (id:string | number) => void
-}> = ({id,restaurantName,restaurantType, stars, changeRestaurant, isSelected}) => {
+    selectRestaurant: any,
+}> = ({id, restaurantName,restaurantType, stars, selectRestaurant, selectedRestaurantId}) => {
+ 
     return (
-    <div className="w-full my-5 mx-auto flex gap-2">
-        
-            <div className="bg-red-500 my-5 mx-3 p-5 min-w-[300px] rounded">
+    
+    <div onClick={() => selectRestaurant(id)} className={`w-full my-5 mx-auto flex gap-2`} >
+            <div className={`${selectedRestaurantId === id ? "bg-red-700" : "bg-red-400"} cursor-pointer my-5 mx-3 p-5 min-w-[300px] rounded`}>
                 <div className="flex flex-col gap-3 items-center justify-center">
                     <h3 className="text-lg font-bold text-[#854854]">{restaurantName}</h3>
                     <p className="text-lg font-bold text-[#854854]">{restaurantType}</p>
-                    <p className="text-lg font-bold text-[#854854]">{stars}</p>
-                </div>
-              
-                <div className="relative flex flex-col justify-end items-center">
-                    <div className="">
-                        <Checkbox  
-                        defaultChecked={isSelected}
-                        onChange={() => changeRestaurant(id)} 
-                        ripple={true}
-                        color="teal"
-                        className="h-6 w-6 shadow-[0_2px_3px_-2px_#000] bg-gray-100 rounded"
-                        />
-                    </div>
+                    <ul className="flex g-2">
+                        {stars > 0  && stars < 7 ? [...Array(stars)].map((e, i) => <li key={i} className="text-lg font-bold text-[#854854]">⭐</li>) : null}
+                    </ul>
                 </div>
             </div>
-
     </div>
     )
 }
