@@ -198,7 +198,7 @@ describe('Set Is Submittable', () => {
 //         const isSubmitable = form.isSubmitable(withOrganizerState)
 //         expect(isSubmitable).toEqual(false)
 //     })
-// });
+});
 
 describe('Update a guest', () => {
     it.each(

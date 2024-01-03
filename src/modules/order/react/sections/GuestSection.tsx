@@ -6,15 +6,24 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Checkbox } from "@material-tailwind/react";
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 
-export const GuestSection: React.FC<{}> = () => {
+export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.RestaurantList}> = ({restaurantList}) => {
     const presenter:any = useGuestSection();
-    
-    return <section className="w-full py-[50px] mx-auto max-w-[1200px] bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-        <div className="mx-auto mb-5 w-full flex">
-            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Invitations</h2>  
-      
+
+    console.log("restaurant list on invite page", restaurantList)   
+    return <section className="
+    w-full py-[50px] mx-auto max-w-[1200px] 
+    bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] 
+    rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+        <div className="mx-auto mb-5 w-full flex flex-col">
+        {restaurantList.restaurantId ? 
+            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">
+            Vous avez choisi de diner là:&nbsp;&quot;{restaurantList.restaurants
+            .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;
+            </h2> : 
+            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Pour inviter, choisissez un restaurant</h2>}
+            <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Vous êtes prêt pour créer votre tablée:</h3>  
         </div>
-        {presenter.form.guests.map((guest:any) => (
+        {restaurantList.restaurantId && presenter.form.guests.map((guest:any) => (
             <div key={guest.id}>
                 <GuestRows 
                 id={guest.id}
@@ -29,7 +38,7 @@ export const GuestSection: React.FC<{}> = () => {
             </div>
         ))}
        
-       <div className="w-full mx-auto flex justify-center gap-2">
+       <div ref={presenter.bottomGuestRef} className="w-full mx-auto flex justify-center gap-2">
             <button
             onClick={presenter.addGuest}
             type="submit"
