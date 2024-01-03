@@ -1,5 +1,4 @@
-import { set } from 'husky';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProvider';
 
 // namespaces
@@ -41,7 +40,13 @@ export const useGuestSection = () => {
     
     const idProvider = useDependencies().idProvider;
     const guestForm = useRef(new GuestForm(idProvider));
+    const bottomGuestRef = useRef<HTMLDivElement>(null);
     const [form, setForm] = useState<OrderingDomainModel.Form>({guests:[], organizerId: null});
+
+    useEffect(() => {
+        // 👇️ scroll to bottom every time a guest is added
+        bottomGuestRef.current?.scrollIntoView({behavior: 'smooth'});
+      }, [form.guests.length]);
 
     return {
         addGuest,
@@ -50,6 +55,7 @@ export const useGuestSection = () => {
         onNext,
         changeOrganizer,
         isSubmitable: isSubmitable(),
-        form
+        form,
+        bottomGuestRef
     }
 }
