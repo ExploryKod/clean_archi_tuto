@@ -7,7 +7,7 @@ import { Dependencies } from "@ratatouille/modules/store/dependencies";
  * @returns
  */
 const createDependencies = (
-  dependencies?: Partial<Dependencies>
+  dependencies?: any
 ): Dependencies => ({
   ...dependencies,
 });
@@ -19,7 +19,7 @@ const createDependencies = (
  */
 export const createTestStore = (config?: {
   initialState?: Partial<AppState>;
-  dependencies?: Partial<Dependencies>;
+  dependencies?: any;
 }) => {
   const initialStore = createStore({
     dependencies: createDependencies(config?.dependencies),
