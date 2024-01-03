@@ -17,27 +17,27 @@ const initialEmptyState: OrderingDomainModel.Form = {
     organizerId: null
 }
 
-const stateWithOneUser: OrderingDomainModel.Form = {
-    guests: [{ id:"1",
+const JohnDoe: OrderingDomainModel.Guest = { 
+    id:"1",
     firstName: 'John',
     lastName: 'Doe',
-    age: 0}],
+    age: 24
+}
+
+const BrigitteMonin: OrderingDomainModel.Guest = { 
+    id:"2",
+    firstName: 'Brigitte',
+    lastName: 'Monin',
+    age: 24
+}
+
+const stateWithOneUser: OrderingDomainModel.Form = {
+    guests: [JohnDoe],
     organizerId: null
 }
    
 const stateWithTwoUsers: OrderingDomainModel.Form = {
-    guests: [{
-        id:"1",
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 0
-    },
-    {
-        id:"2",
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 0
-    }],
+    guests: [ JohnDoe, BrigitteMonin ],
     organizerId: null
 };
 
@@ -51,47 +51,24 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }]
         );
     });
     it('It should add a guest when there is already one', () => {
         const state = form.addGuest(stateWithOneUser);
-        expect(state.guests).toEqual(
-            [{
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
-            {
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            }]
-        );
+        expect(state.guests).toEqual([JohnDoe, JohnDoe]);
     });
+
     it('It should add a guest when there is already two', () => {
         const state = form.addGuest(stateWithTwoUsers);
         expect(state.guests).toEqual(
-            [{
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
-            {
-                id:"2",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
+            [JohnDoe, BrigitteMonin,
             {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }]
         );
     });
@@ -113,9 +90,18 @@ describe('Remove a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }
         ]);
+    });
+
+    it('Should set the organizer id to null when the organizer is removed', () => {
+        const stateWithOrganizer = {
+            ...stateWithOneUser,
+            organizerId: "1"
+        }
+        const state = form.removeGuest(stateWithOrganizer, "1");
+        expect(state.organizerId).toEqual(null);
     });
 });
 
@@ -142,6 +128,45 @@ describe('Set Is Submittable', () => {
         }
         const isSubmitable = form.isSubmitable(withOrganizerState)
         expect(isSubmitable).toEqual(true)
+    })
+
+    it("When age is below 0 or 0, it can't be submittable", () =>{
+        const withOrganizerState = {
+            ...stateWithOneUser,
+            organizerId: "1",
+            guests: [{
+                ...JohnDoe,
+                age: -1
+            }]
+        }
+        const isSubmitable = form.isSubmitable(withOrganizerState)
+        expect(isSubmitable).toEqual(false)
+    })
+
+    it("When firstname is empty, it can't be submittable", () =>{
+        const withOrganizerState = {
+            ...stateWithOneUser,
+            organizerId: "1",
+            guests: [{
+                ...JohnDoe,
+                firstName: ""
+            }]
+        }
+        const isSubmitable = form.isSubmitable(withOrganizerState)
+        expect(isSubmitable).toEqual(false)
+    })
+
+    it("When lastname is empty, it can't be submittable", () =>{
+        const withOrganizerState = {
+            ...stateWithOneUser,
+            organizerId: "1",
+            guests: [{
+                ...JohnDoe,
+                lastName: ""
+            }]
+        }
+        const isSubmitable = form.isSubmitable(withOrganizerState)
+        expect(isSubmitable).toEqual(false)
     })
 });
 

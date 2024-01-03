@@ -17,7 +17,7 @@ export class GuestForm {
                 id: this.idProvider.generate(),
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             })
         })
 
@@ -44,6 +44,9 @@ export class GuestForm {
                 return
             }
             draft.guests.splice(index, 1)
+            if(draft.organizerId === id) {
+                draft.organizerId = null
+            }
         })
         
         // return {
@@ -73,7 +76,12 @@ export class GuestForm {
     }
 
     isSubmitable(state: OrderingDomainModel.Form) {
-        return state.organizerId !== null
+        return (
+            state.organizerId !== null 
+            && state.guests.every((guest) => guest.age > 0
+            && guest.firstName.length > 0
+            && guest.lastName.length > 0)
+        )
     }
 
     updateGuest<T extends keyof OrderingDomainModel.Guest>(
