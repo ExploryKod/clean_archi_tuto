@@ -1,0 +1,46 @@
+# Dans le dossier src/app (racine) > tout ce qui est spécifique à Next
+-> On a un fichier Layout et un fichier page
+-> Toute les pages vont utiliser qu'un seule composant de mon dossier modules
+-> Ce dossier app est obligatoire si on utilise next 
+
+--- Dossier modules ------
+Là se trouve le coeur de l'application et ma clean architecture
+
+app > point d'entrée de l'application
+order > toute notre fonctionnalité concernant la réservation (1)
+store > Contient notre store Redux
+testing > nos utilitaires de test
+
+(1) Mes composants React, mes slices Redux, mes hook, mes sélecteurs .... >>> tout ce qui concerne la réservation
+==> On appel ça du "package by feature" 
+
+# Dans modules/app/react et app/main.ts > je me sépare au maximum de tout ce qui est spécifique à Next
+=> Il y aura donc du Redux, du react mais pas ou si peu de Next.
+=> le dossier react ne contient que ce qui va permettre d'encapsuler notre application
+AppWrapper >> pour le store Redux
+Layout >> pour rendre l'application
+app/main.ts pourra violer les grand principes (lui et le fichier d'entrée des test sont les 2 seuls qui peuvent violer les pp): 
+>>>il est la porte d'entrée de l'application
+
+# modules/stores >>> toute la logique de Redux. Notamment on y passe des dépendances.
+IMPORTANT - Ces dépendances sont la passerelle entre notre domain et l'infrastructure 
+
+Dans dependencies.ts >>> on aura là nos ports à l'intérieur.
+Cela fait que dans l'env de test, de dev, de prod on va pouvoir changer d' "adapter".
+Exemple: en test on va vouloir taper dans un fake (> une bdd fake) OU un in memory donc on prendre l'adapter lié.
+En dev on veux un in memory pour tester rapidement ou la vrai base de donnée.
+++> pour switcher d'adapter on aura nos dépendances qui vont être un mapping entre nos ports (nos interfaces) - ex : IOrderInterface - et nos adapter (dans le test ce sera un in memory et en prod la base de donnée réelle).
+C'est à ça que sert notre dependencies.ts.
+
+=> ça on en aura besoin dans notre Store car les actions qu'on va dispatch dans notre store seront nos use cases.
+=> On a besoin de nos dependencies comme moyen pour nos useCases d'appeler l'infrastructure sans savoir les fonctions appelées derrières
+d'où on a dans store.ts >>> L15 et L24 (appel des dépendances)
+==> Là on est dans l'inversion de dépendance pure et dur
+
+# dossier comme order >> voir cela comme des package (// en Java).
+order/react/pages/order -> OrderPage.tsx
+
+# Chaque dossier qui est dans modules: 
+-> différentes fonctionnalités, features, aspects
+
+# Testing : fonction pour créer un store de test et le test des selector
