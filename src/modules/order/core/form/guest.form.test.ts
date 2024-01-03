@@ -1,6 +1,8 @@
 import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 import { IIDProvider } from '@ratatouille/modules/core/id-provider';
+import { GuestFactory } from '@ratatouille/modules/order/core/model/guest.factory';
+
 class StubIdProvider implements IIDProvider {
     generate() {
         return "1";
@@ -17,27 +19,27 @@ const initialEmptyState: OrderingDomainModel.Form = {
     organizerId: null
 }
 
-const stateWithOneUser: OrderingDomainModel.Form = {
-    guests: [{ id:"1",
+const JohnDoe: OrderingDomainModel.Guest = GuestFactory.create({
+    id:"1",
     firstName: 'John',
     lastName: 'Doe',
-    age: 0}],
+    age: 24
+});
+
+const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
+    id:"2",
+    firstName: 'Brigitte',
+    lastName: 'Monin',
+    age: 24
+});
+
+const stateWithOneUser: OrderingDomainModel.Form = {
+    guests: [JohnDoe],
     organizerId: null
 }
    
 const stateWithTwoUsers: OrderingDomainModel.Form = {
-    guests: [{
-        id:"1",
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 0
-    },
-    {
-        id:"2",
-        firstName: 'John',
-        lastName: 'Doe',
-        age: 0
-    }],
+    guests: [ JohnDoe, BrigitteMonin ],
     organizerId: null
 };
 
@@ -51,47 +53,24 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }]
         );
     });
     it('It should add a guest when there is already one', () => {
         const state = form.addGuest(stateWithOneUser);
-        expect(state.guests).toEqual(
-            [{
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
-            {
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            }]
-        );
+        expect(state.guests).toEqual([JohnDoe, JohnDoe]);
     });
+
     it('It should add a guest when there is already two', () => {
         const state = form.addGuest(stateWithTwoUsers);
         expect(state.guests).toEqual(
-            [{
-                id:"1",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
-            {
-                id:"2",
-                firstName: 'John',
-                lastName: 'Doe',
-                age: 0
-            },
+            [JohnDoe, BrigitteMonin,
             {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }]
         );
     });
@@ -113,9 +92,18 @@ describe('Remove a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 0
+                age: 24
             }
         ]);
+    });
+
+    it('Should set the organizer id to null when the organizer is removed', () => {
+        const stateWithOrganizer = {
+            ...stateWithOneUser,
+            organizerId: "1"
+        }
+        const state = form.removeGuest(stateWithOrganizer, "1");
+        expect(state.organizerId).toEqual(null);
     });
 });
 
@@ -143,7 +131,74 @@ describe('Set Is Submittable', () => {
         const isSubmitable = form.isSubmitable(withOrganizerState)
         expect(isSubmitable).toEqual(true)
     })
-});
+
+    it.each(
+        [
+            {
+                key: "age" as keyof OrderingDomainModel.Guest,
+                value: 0 as OrderingDomainModel.Guest["age"]
+            },
+            {
+                key: "firstName" as keyof OrderingDomainModel.Guest,
+                value: "" as OrderingDomainModel.Guest["firstName"]
+            },
+            {
+                key: "lastName" as keyof OrderingDomainModel.Guest,
+                value: "" as OrderingDomainModel.Guest["lastName"]
+            }
+        ]
+    )(`When %s is empty, it can't be submittable`, ({key, value}) =>{
+        const withOrganizerState = {
+            ...stateWithOneUser,
+            organizerId: "1",
+            guests: [{
+                ...JohnDoe,
+                [key]: value
+            }]
+        }
+        const isSubmitable = form.isSubmitable(withOrganizerState)
+        expect(isSubmitable).toEqual(false)
+    })
+//  ---------- Version avec 3 tests séparés : ancienne version, il est mieux d'utiliser it.each (ci-dessus) ----------
+//     it("When age is below 0 or 0, it can't be submittable", () =>{
+//         const withOrganizerState = {
+//             ...stateWithOneUser,
+//             organizerId: "1",
+//             guests: [{
+//                 ...JohnDoe,
+//                 age: -1
+//             }]
+//         }
+//         const isSubmitable = form.isSubmitable(withOrganizerState)
+//         expect(isSubmitable).toEqual(false)
+//     })
+
+//     it("When firstname is empty, it can't be submittable", () =>{
+//         const withOrganizerState = {
+//             ...stateWithOneUser,
+//             organizerId: "1",
+//             guests: [{
+//                 ...JohnDoe,
+//                 firstName: ""
+//             }]
+//         }
+//         const isSubmitable = form.isSubmitable(withOrganizerState)
+//         expect(isSubmitable).toEqual(false)
+//     })
+
+//     it("When lastname is empty, it can't be submittable", () =>{
+//         const withOrganizerState = {
+//             ...stateWithOneUser,
+//             organizerId: "1",
+//             guests: [{
+//                 ...JohnDoe,
+//                 lastName: ""
+//             }]
+//         }
+//         const isSubmitable = form.isSubmitable(withOrganizerState)
+//         expect(isSubmitable).toEqual(false)
+//     })
+// });
 
 describe('Update a guest', () => {
     it.each(
