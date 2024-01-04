@@ -4,6 +4,8 @@ import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProv
 // namespaces
 import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
 import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
+import { useAppDispatch } from '@ratatouille/modules/store/store';
+import { chooseGuests } from '@ratatouille/modules/order/core/useCase/choose-guest.usecase';
 
 export const useGuestSection = () => {
 
@@ -32,12 +34,15 @@ export const useGuestSection = () => {
         setForm(newState);
     }
 
-    function onNext() {}
+    function onNext() {
+        dispatch(chooseGuests(form));
+    }
 
     function isSubmitable() {
         return guestForm.current.isSubmitable(form)
     }
     
+    const dispatch = useAppDispatch();
     const idProvider = useDependencies().idProvider;
     const guestForm = useRef(new GuestForm(idProvider));
     const bottomGuestRef = useRef<HTMLDivElement>(null);
