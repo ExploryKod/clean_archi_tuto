@@ -21,14 +21,18 @@ export const initialState: OrderingState = {
         organizerId: null
     }
 }
-
+// On va séparer les logiques et utiliser l'event driven dev (en version simplifiée) > voir store.ts
+// On va rassembler a logique entière qui suit l'étape de choix de guest dans un autre endroit, dans un listener
+// voir 'Gestion des étapes' 5.45s
 export const orderingSlice = createSlice({
     name: 'ordering',
     initialState,
     reducers: {
+        setStep(state, action:PayloadAction<orderingStep>){
+            state.step = orderingStep.TABLE;
+        },
         chooseGuests(state, action:PayloadAction<OrderingDomainModel.Form>){
             state.form = action.payload;
-            state.step = orderingStep.TABLE;
         } 
     }
 });
