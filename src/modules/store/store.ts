@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 
 import { combineReducers, configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
 import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { orderingReducer, orderingSlice, orderingStep } from "@ratatouille/modules/order/core/store/ordering.slice";
-import { start } from "repl";
+import { orderingReducer } from "@ratatouille/modules/order/core/store/ordering.slice";
+import { registerOrderingStepListener } from "@ratatouille/modules/order/core/store/ordering.step.listener";
 
 const reducers = combineReducers({
   ordering: orderingReducer,
@@ -25,12 +25,7 @@ export const createStore = (config: {
     middleware: (getDefaultMiddleware) => {
       const listener = createListenerMiddleware();
 
-      listener.startListening({
-        actionCreator: orderingSlice.actions.chooseGuests,
-        effect: (_, api) => {
-          api.dispatch(orderingSlice.actions.setStep(orderingStep.TABLE));
-        }
-      });
+      registerOrderingStepListener(listener);
 
       return getDefaultMiddleware({
         thunk: {
