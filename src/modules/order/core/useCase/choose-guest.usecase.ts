@@ -1,5 +1,5 @@
 import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
-import { orderingActions } from "@ratatouille/modules/order/core/store/store.slice";
+import { orderingActions } from "@ratatouille/modules/order/core/store/ordering.slice";
 import { AppDispatch, AppGetState } from "@ratatouille/modules/store/store";
 
 export const chooseGuests = (form: OrderingDomainModel.Form) => 
