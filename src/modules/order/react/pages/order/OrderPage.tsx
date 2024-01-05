@@ -8,8 +8,8 @@ import { AppState } from "@ratatouille/modules/store/store";
 import { orderingStep } from "@ratatouille/modules/order/core/store/ordering.slice";
 import { MealsSection } from "@ratatouille/modules/order/react/sections/meals/MealsSection";
 import { TableSection } from "@ratatouille/modules/order/react/sections/table/TableSection";
-import { SummarySection } from "@ratatouille/modules/order/react/sections/summary/summarySection";
-import { ReservedSection } from "@ratatouille/modules/order/react/sections/reserved/reservedSection";
+import { SummarySection } from "@ratatouille/modules/order/react/sections/summary/SummarySection";
+import { ReservedSection } from "@ratatouille/modules/order/react/sections/reserved/ReservedSection";
 import { useSelector } from "react-redux";
 
 
