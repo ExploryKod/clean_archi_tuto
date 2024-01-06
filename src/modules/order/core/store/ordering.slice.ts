@@ -6,6 +6,8 @@ export type OrderingState = {
     step: OrderingDomainModel.OrderingStep,
     form: OrderingDomainModel.Form
     availableTables: {
+        status: 'idle' | 'loading' | 'success' | 'error';
+        error: null;
         data: OrderingDomainModel.Table[];
     };
 }
@@ -17,6 +19,8 @@ export const initialState: OrderingState = {
         organizerId: null
     },
     availableTables: {
+        status: 'idle',
+        error: null,
         data: []
     }
 }
@@ -29,6 +33,12 @@ export const orderingSlice = createSlice({
     reducers: {
         setStep(state, action:PayloadAction<OrderingDomainModel.OrderingStep>){
             state.step = OrderingDomainModel.OrderingStep.TABLE;
+        },
+        // Ici j'écris ce reducer suite à avoir écris le 4. de fetch-table.usecase.ts 
+        // Ici pas besoin d'action car on ne fait que changer le status 
+        // Aprés cette étape on doit retourner voir les test de 2. pour voir si ça passe
+        handleTablesLoading(state){
+            state.availableTables.status = 'loading';
         },
         // tableau de tables (commentaire inutil hors apprentissage > les types sont là pour ça)
         storeTables(state, action:PayloadAction<OrderingDomainModel.Table[]>){

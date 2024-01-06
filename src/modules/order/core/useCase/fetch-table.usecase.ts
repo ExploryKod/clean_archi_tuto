@@ -10,4 +10,6 @@ export const fetchTables = async (dispatch: AppDispatch, getState: AppGetState, 
     const tables = await dependencies.tableGateway?.getTables();
     // 3. Je créer donc un dispatch ce qui suppose de créer un nouveau reducers à côté de setStep et chooseGuests (ordering.slice.ts)
     dispatch(orderingSlice.actions.storeTables(tables || []));
+    // 4. Aprés le test (voir 2. dans test) Je créer donc un dispatch pour le status ce qui suppose de créer un nouveau reducers à côté de setStep et chooseGuests (ordering.slice.ts)
+    dispatch(orderingSlice.actions.handleTablesLoading());
 };
