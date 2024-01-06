@@ -1,24 +1,23 @@
 import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export enum orderingStep {
-    GUESTS = 0,
-    TABLE = 5,
-    MEALS = 3,
-    SUMMARY = 2,
-    RESERVED = 4
-}
 
 export type OrderingState = {
-    step: orderingStep,
+    step: OrderingDomainModel.OrderingStep,
     form: OrderingDomainModel.Form
+    availableTables: {
+        data: OrderingDomainModel.Table[];
+    };
 }
 
 export const initialState: OrderingState = {
-    step: orderingStep.GUESTS,
+    step: OrderingDomainModel.OrderingStep.GUESTS,
     form: {
         guests: [],
         organizerId: null
+    },
+    availableTables: {
+        data: []
     }
 }
 // On va séparer les logiques et utiliser l'event driven dev (en version simplifiée) > voir store.ts
@@ -28,8 +27,12 @@ export const orderingSlice = createSlice({
     name: 'ordering',
     initialState,
     reducers: {
-        setStep(state, action:PayloadAction<orderingStep>){
-            state.step = orderingStep.TABLE;
+        setStep(state, action:PayloadAction<OrderingDomainModel.OrderingStep>){
+            state.step = OrderingDomainModel.OrderingStep.TABLE;
+        },
+        // tableau de tables (commentaire inutil hors apprentissage > les types sont là pour ça)
+        storeTables(state, action:PayloadAction<OrderingDomainModel.Table[]>){
+            state.availableTables.data = action.payload;
         },
         chooseGuests(state, action:PayloadAction<OrderingDomainModel.Form>){
             state.form = action.payload;

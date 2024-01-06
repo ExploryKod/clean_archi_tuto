@@ -1,4 +1,5 @@
 import { SystemIdProvider } from "@ratatouille/modules/core/system.id-provider";
+import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
 import { Dependencies } from "@ratatouille/modules/store/dependencies";
 import { AppStore, createStore } from "@ratatouille/modules/store/store";
 
@@ -14,6 +15,13 @@ export class App {
   setupDependencies(): Dependencies {
     return {
       idProvider: new SystemIdProvider(),
+      // tableGateway: {
+      //   getTables: function (): Promise<OrderingDomainModel.Table[]> {
+      //     return Promise.resolve([
+      //       OrderingDomainModel.TableFactory.create({}),
+      //     ]);
+      //   }
+      // },
     };
   }
 }

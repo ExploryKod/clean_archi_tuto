@@ -1,5 +1,6 @@
 import { ListenerMiddlewareInstance } from "@reduxjs/toolkit";
-import { orderingSlice, orderingStep } from "./ordering.slice";
+import { orderingSlice } from "./ordering.slice";
+import { OrderingDomainModel } from "../model/ordering.domain-model";
 
 // On concentrer toute la logique de gestion des étapes via redux ici
 //On sépare donc cela des config pure de redux présente dans store.ts (on appel là bas que cette fonction créé ici)
@@ -10,7 +11,7 @@ export const registerOrderingStepListener = (listener: ListenerMiddlewareInstanc
         // Je choisi donc ici un évènement de type actionCreator
         actionCreator: orderingSlice.actions.chooseGuests,
         effect: (_, api) => {
-          api.dispatch(orderingSlice.actions.setStep(orderingStep.TABLE));
+          api.dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.TABLE));
         }
       });
 }

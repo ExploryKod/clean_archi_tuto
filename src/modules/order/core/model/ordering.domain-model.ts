@@ -22,5 +22,19 @@ export namespace OrderingDomainModel {
         restaurantType: string,
         stars: number
     }
+
+    export enum OrderingStep {
+        GUESTS = 0,
+        TABLE = 1,
+        MEALS = 2,
+        SUMMARY = 3,
+        RESERVED = 4
+    }
+
+    export type Table = {
+        id: string, 
+        title: string,
+        capacity: number
+    }
    
 }
