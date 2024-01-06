@@ -1,5 +1,5 @@
 "use client";
-import { useHeroSection } from '@ratatouille/modules/order/react/sections/use-hero-section';
+import { useHeroSection } from '@taotask/modules/order/react/sections/use-hero-section';
 
 export const HeroSection: React.FC<{showGuestSection: any}> = ({showGuestSection}) => {
     const presenter:any = useHeroSection();

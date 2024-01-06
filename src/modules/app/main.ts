@@ -1,7 +1,7 @@
-import { SystemIdProvider } from "@ratatouille/modules/core/system.id-provider";
-import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { AppStore, createStore } from "@ratatouille/modules/store/store";
+import { SystemIdProvider } from "@taotask/modules/core/system.id-provider";
+import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
+import { Dependencies } from "@taotask/modules/store/dependencies";
+import { AppStore, createStore } from "@taotask/modules/store/store";
 
 export class App {
   public dependencies: Dependencies;

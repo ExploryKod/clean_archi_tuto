@@ -1,4 +1,4 @@
-import { Dependencies } from '@ratatouille/modules/store/dependencies'
+import { Dependencies } from '@taotask/modules/store/dependencies'
 import { createContext, useContext } from 'react'
 
 const DependenciesContext = createContext<Dependencies>(null as any)

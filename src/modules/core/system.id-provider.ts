@@ -1,4 +1,4 @@
-import { IIDProvider } from "@ratatouille/modules/core/id-provider";
+import { IIDProvider } from "@taotask/modules/core/id-provider";
 import { nanoid } from "nanoid";
 
 export class SystemIdProvider implements IIDProvider {

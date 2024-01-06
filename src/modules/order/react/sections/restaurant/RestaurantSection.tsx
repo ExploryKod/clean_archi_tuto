@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
+import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 
 export const RestaurantSection: React.FC<{
     restaurantList: OrderingDomainModel.RestaurantList,

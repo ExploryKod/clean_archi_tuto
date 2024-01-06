@@ -1,6 +1,6 @@
-import { createTestStore } from "@ratatouille/modules/testing/tests-environment";
-import { TableFactory } from "@ratatouille/modules/order/core/model/table.factory";
-import { fetchTables } from "@ratatouille/modules/order/core/useCase/fetch-table.usecase";
+import { createTestStore } from "@taotask/modules/testing/tests-environment";
+import { TableFactory } from "@taotask/modules/order/core/model/table.factory";
+import { fetchTables } from "@taotask/modules/order/core/useCase/fetch-table.usecase";
 
 describe("Fetch table", () => {
     it("Should fetch a table", async () => {

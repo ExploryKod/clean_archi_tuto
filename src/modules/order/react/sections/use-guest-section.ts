@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProvider';
+import { useDependencies } from '@taotask/modules/app/react/DependenciesProvider';
 
 // namespaces
-import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
-import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
-import { useAppDispatch } from '@ratatouille/modules/store/store';
-import { chooseGuests } from '@ratatouille/modules/order/core/useCase/choose-guest.usecase';
+import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
+import { GuestForm } from '@taotask/modules/order/core/form/guest.form';
+import { useAppDispatch } from '@taotask/modules/store/store';
+import { chooseGuests } from '@taotask/modules/order/core/useCase/choose-guest.usecase';
 
 export const useGuestSection = () => {
 

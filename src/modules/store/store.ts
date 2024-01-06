@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 
 import { combineReducers, configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { orderingReducer } from "@ratatouille/modules/order/core/store/ordering.slice";
-import { registerOrderingStepListener } from "@ratatouille/modules/order/core/store/ordering.step.listener";
+import { Dependencies } from "@taotask/modules/store/dependencies";
+import { orderingReducer } from "@taotask/modules/order/core/store/ordering.slice";
+import { registerOrderingStepListener } from "@taotask/modules/order/core/store/ordering.step.listener";
 
 const reducers = combineReducers({
   ordering: orderingReducer,

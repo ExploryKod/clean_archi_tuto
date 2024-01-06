@@ -1,4 +1,4 @@
-import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
+import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
 // En architecture hexagonale on appelle cette interface un port
 // Ce port se place entre mon domain et l'infastructure
 // Aprés on doit créer un adapteur pour implémenter ce port

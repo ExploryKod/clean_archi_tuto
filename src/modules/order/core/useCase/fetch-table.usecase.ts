@@ -1,6 +1,6 @@
-import { orderingSlice } from "@ratatouille/modules/order/core/store/ordering.slice";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { AppDispatch, AppGetState } from "@ratatouille/modules/store/store";
+import { orderingSlice } from "@taotask/modules/order/core/store/ordering.slice";
+import { Dependencies } from "@taotask/modules/store/dependencies";
+import { AppDispatch, AppGetState } from "@taotask/modules/store/store";
 // 1. J'écris cette fonction avoir poser les bases de mon test (fetch-table.usecase.test.ts)
 // 2. Le 3e argument a été mis aprés avoir eu un test qui failed > voir fetch-table.usecase.test.ts
 // 2. Ce 3e argument a été passé dans ordering.slice.ts >> les dépendances elles-même et non tabeau d'objet passé dans les dépendances

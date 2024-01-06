@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
-import { GuestSection } from "@ratatouille/modules/order/react/sections/guest/GuestSection";
-import { RestaurantSection } from "@ratatouille/modules/order/react/sections/restaurant/RestaurantSection";
-import { HeroSection } from "@ratatouille/modules/order/react/sections/hero/HeroSection";
-import { useOrderPage } from "@ratatouille/modules/order/react/pages/order/use-order-page";
-import { AppState } from "@ratatouille/modules/store/store";
-import { MealsSection } from "@ratatouille/modules/order/react/sections/meals/MealsSection";
-import { TableSection } from "@ratatouille/modules/order/react/sections/table/TableSection";
-import { SummarySection } from "@ratatouille/modules/order/react/sections/summary/SummarySection";
-import { ReservedSection } from "@ratatouille/modules/order/react/sections/reserved/ReservedSection";
+import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
+import { GuestSection } from "@taotask/modules/order/react/sections/guest/GuestSection";
+import { RestaurantSection } from "@taotask/modules/order/react/sections/restaurant/RestaurantSection";
+import { HeroSection } from "@taotask/modules/order/react/sections/hero/HeroSection";
+import { useOrderPage } from "@taotask/modules/order/react/pages/order/use-order-page";
+import { AppState } from "@taotask/modules/store/store";
+import { MealsSection } from "@taotask/modules/order/react/sections/meals/MealsSection";
+import { TableSection } from "@taotask/modules/order/react/sections/table/TableSection";
+import { SummarySection } from "@taotask/modules/order/react/sections/summary/SummarySection";
+import { ReservedSection } from "@taotask/modules/order/react/sections/reserved/ReservedSection";
 
 export const OrderPage: React.FC = () => {
   const presenter = useOrderPage();

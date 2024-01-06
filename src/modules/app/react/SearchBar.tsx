@@ -1,4 +1,4 @@
-import { useSearchBar } from "@ratatouille/modules/app/react/search-bar-hook";
+import { useSearchBar } from "@taotask/modules/app/react/search-bar-hook";
 
 const USERS = [
     { id: 1, name: 'Andy', age: 32 },

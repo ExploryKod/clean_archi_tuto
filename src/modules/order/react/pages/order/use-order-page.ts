@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, use } from 'react';
-import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
+import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 
 export const useOrderPage = () => {
 

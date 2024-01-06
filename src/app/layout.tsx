@@ -1,7 +1,7 @@
 import { Roboto, Inter, Roboto_Mono, Oswald } from "next/font/google";
 // Import de notre monde à nous - et plus précisément celui de react - dans la logique de Next.js
-import { Layout } from "@ratatouille/modules/app/react/Layout";
-import { AppWrapper } from "@ratatouille/modules/app/react/AppWrapper";
+import { Layout } from "@taotask/modules/app/react/Layout";
+import { AppWrapper } from "@taotask/modules/app/react/AppWrapper";
 
 const roboto = Roboto({
   subsets: ["latin"],
