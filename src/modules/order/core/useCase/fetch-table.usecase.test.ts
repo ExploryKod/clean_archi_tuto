@@ -1,6 +1,8 @@
 import { createTestStore } from "@taotask/modules/testing/tests-environment";
 import { TableFactory } from "@taotask/modules/order/core/model/table.factory";
 import { fetchTables } from "@taotask/modules/order/core/useCase/fetch-table.usecase";
+import { StubTableGateway } from "@taotask/modules/order/core/testing/stub.table-gateway";
+import { FailingTableGateway } from "@taotask/modules/order/core/testing/failing.tableGateway";
 
 describe("Fetch table", () => {
     it("Should fetch a table", async () => {
@@ -10,9 +12,9 @@ describe("Fetch table", () => {
         const store = createTestStore({
             dependencies: {
                 // On ajoute cette nouvelle dépendance dans le tableau de dépendances (store/dependencies.ts)
-                tableGateway: {
-                    getTables: () => Promise.resolve(listOfTables),
-                }
+                 // 3. (refactor) On appel le stub ici plutot
+                tableGateway: new StubTableGateway(listOfTables),    
+                    // {getTables: () => Promise.resolve(listOfTables),} 
             },
         });
         // 2. Les tests de status se font seulement aprés avoir poser les type et availableTables > status dans ordering.slice.ts
@@ -35,9 +37,9 @@ describe("Fetch table", () => {
 
         const store = createTestStore({
             dependencies: {
-                tableGateway: {
-                    getTables: () => Promise.reject(new Error("Failed to fetch data")),
-                }
+                tableGateway: new FailingTableGateway(),
+                    // 3. (refactor) On appel le stub ici plutot
+                    //Ancienne version sans stub: {getTables: () => Promise.reject(new Error("Failed to fetch data")),}  
             },
         });
         
