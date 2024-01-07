@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
-import { IIDProvider } from "@taotask/modules/core/id-provider";
+import { IIDProvider } from "../../../core/id-provider";
 export class GuestForm {
     constructor(
         private idProvider:IIDProvider

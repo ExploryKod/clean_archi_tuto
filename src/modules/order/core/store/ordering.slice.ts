@@ -7,7 +7,7 @@ export type OrderingState = {
     form: OrderingDomainModel.Form
     availableTables: {
         status: 'idle' | 'loading' | 'success' | 'error';
-        error: null;
+        error: string | null;
         data: OrderingDomainModel.Table[];
     };
 }
@@ -39,10 +39,18 @@ export const orderingSlice = createSlice({
         // Aprés cette étape on doit retourner voir les test de 2. pour voir si ça passe
         handleTablesLoading(state){
             state.availableTables.status = 'loading';
+            state.availableTables.error = null;
+        },
+        // Ici j'écris ce reducer suite à avoir écris le 5. de fetch-table.usecase.ts
+        // Ici pas besoin d'action car on ne fait que changer le status
+        handleTablesError(state, action: PayloadAction<string>){
+            state.availableTables.status = 'error';
+            state.availableTables.error = action.payload;
         },
         // tableau de tables (commentaire inutil hors apprentissage > les types sont là pour ça)
         storeTables(state, action:PayloadAction<OrderingDomainModel.Table[]>){
             state.availableTables.data = action.payload;
+            state.availableTables.status = 'success';
         },
         chooseGuests(state, action:PayloadAction<OrderingDomainModel.Form>){
             state.form = action.payload;

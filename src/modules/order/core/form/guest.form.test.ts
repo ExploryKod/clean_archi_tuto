@@ -1,6 +1,6 @@
 import { GuestForm } from '@taotask/modules/order/core/form/guest.form';
 import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
-import { IIDProvider } from '@taotask/modules/core/id-provider';
+import { IIDProvider } from '../../../core/id-provider';
 import { GuestFactory } from '@taotask/modules/order/core/model/guest.factory';
 
 class StubIdProvider implements IIDProvider {

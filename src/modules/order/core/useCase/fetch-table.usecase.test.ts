@@ -30,4 +30,26 @@ describe("Fetch table", () => {
         //2. Pour que les test des status passe il faut transformer ce test en async
         expect(store.getState().ordering.availableTables.status).toEqual("success");
     });
+
+    it("Should handle fetching table errors", async () => {
+
+        const store = createTestStore({
+            dependencies: {
+                tableGateway: {
+                    getTables: () => Promise.reject(new Error("Failed to fetch data")),
+                }
+            },
+        });
+ 
+        const promise = await store.dispatch(fetchTables);
+        expect(store.getState().ordering.availableTables.status).toEqual("loading");
+        await promise;
+        
+        expect(store.getState().ordering.availableTables.data).toEqual([]);
+        expect(store.getState().ordering.availableTables.status).toEqual("error");
+        expect(store.getState().ordering.availableTables.error).toEqual("Failed to fetch data");
+    });
 });
+
+
+

@@ -12,16 +12,17 @@ import { TableSection } from "@taotask/modules/order/react/sections/table/TableS
 import { SummarySection } from "@taotask/modules/order/react/sections/summary/SummarySection";
 import { ReservedSection } from "@taotask/modules/order/react/sections/reserved/ReservedSection";
 
+
 export const OrderPage: React.FC = () => {
   const presenter = useOrderPage();
   const step = useSelector((state: AppState) => state.ordering.step);
 // attention les props ici de showGuestSection rendent sûrement le composant non réutilisable > pas clean archi
 // Solution ? 
 
-  return <main className="flex flex-col">
-      <HeroSection showGuestSection={presenter.showGuestSection} />
+  return <main className="flex flex-col" ref={presenter.animText}>
+      {!presenter.isGuestSectionVisible && <HeroSection showGuestSection={presenter.showGuestSection} />}
 
-      {(!presenter.isGuestSectionVisible) ||
+      {!presenter.isGuestSectionVisible ||
       (<>
       <div className="pt-5 w-full min-h-[100vh] bg-gradient-to-r from-amber-200 to-yellow-500 flex flex-col gap-10">
         <RestaurantSection restaurantList={presenter.restaurantList} selectRestaurant={presenter.selectRestaurant}/>

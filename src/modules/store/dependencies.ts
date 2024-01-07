@@ -1,4 +1,4 @@
-import { IIDProvider } from '@taotask/modules/core/id-provider';
+import { IIDProvider } from '../core/id-provider';
 import { ITableGateway } from '@taotask/modules/order/core/gateway/table.gateway';
 
 export type Dependencies = {
