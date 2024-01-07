@@ -1,5 +1,5 @@
 import { SystemIdProvider } from "@taotask/modules/core/system.id-provider";
-import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
+import { InMemoryTableGateway } from "@taotask/modules/order/core/gateway-infra/in-memory.table-gateway";
 import { Dependencies } from "@taotask/modules/store/dependencies";
 import { AppStore, createStore } from "@taotask/modules/store/store";
 
@@ -22,6 +22,8 @@ export class App {
       //     ]);
       //   }
       // },
+      
+      tableGateway: new InMemoryTableGateway(),
     };
   }
 }

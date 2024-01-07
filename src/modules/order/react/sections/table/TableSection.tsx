@@ -1,7 +1,8 @@
-import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
+import { useTable } from '@taotask/modules/order/react/sections/table/use-table.hook';
 
 export const TableSection = () => {
-
+    const presenter = useTable();
+    
     return (<>    
     <section className="
     w-full py-[50px] mx-auto max-w-[1200px] 
@@ -10,9 +11,22 @@ export const TableSection = () => {
         <div className="mx-auto mb-5 w-full flex flex-col">
             <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de votre table:</h3>  
         </div>
-       
+        <div className={`flex gap-3 justify-center items-center flex-wrap`}>
+       {presenter.availableTables.length > 0 
+       && presenter.availableTables.map((table: any) => 
+              (
+              <div key={table.id}>
+                <TableCard 
+                title={table.title} 
+                isSelected={presenter.assignTableId === table.id} 
+                onSelect={() => presenter.assignTable(table.id)} 
+                />
+              </div>
+              ))}
+        </div>
        <div className="w-full mx-auto flex justify-center gap-2">
             <button
+            onClick={presenter.onPrevious}
             type="submit"
             className="inline-block rounded bg-[#458236] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
@@ -21,9 +35,11 @@ export const TableSection = () => {
             active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
             dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] 
             dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-            Ajouter
+            Précèdent
             </button>
             <button
+            onClick={presenter.onNext}
+            disabled={!presenter.isSubmittable}
             type="button"
             className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
@@ -39,4 +55,22 @@ export const TableSection = () => {
         </div>
     </section>
     </>)
+}
+
+export const TableCard: React.FC<{
+    title: string,
+    isSelected: boolean,
+    onSelect: () => void,
+}> = ({title, isSelected, onSelect}) => {
+    
+    return (
+    <div onClick={onSelect} className={`w-full my-5 mx-auto flex gap-2`} >
+            <div className={`${isSelected ? "bg-red-700" : "bg-red-400"} cursor-pointer my-5 mx-3 p-5 min-w-[300px] rounded`}>
+                <div className="flex flex-col gap-3 items-center justify-center">
+                    <h3 className={`text-lg font-bold ${isSelected ? "text-orange-300" : "text-[#854854]"}`}>{title}</h3>
+                    <p className={`text-lg font-bold  ${isSelected ? "text-orange-300" : "text-[#854854]"}`}>{}</p>
+                </div>
+            </div>
+    </div>
+    )
 }
