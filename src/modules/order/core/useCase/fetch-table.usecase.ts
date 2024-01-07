@@ -7,7 +7,8 @@ import { extractErrorMessage } from "@taotask/modules/shared/error.utils"
 // 2. Ce 3e argument a été passé dans ordering.slice.ts >> les dépendances elles-même et non tabeau d'objet passé dans les dépendances
 // 2. C'est via les Thunks de redux > ExtraArgument que l'on peut passer ce 3e argument (store.ts)(Cours : TableGateway 7:00)
 // 2. Je peux également passé en asynchrone ma function fetchTables car c'est un type Promise (Cours : TableGateway 7:00)
-export const fetchTables = async (dispatch: AppDispatch, getState: AppGetState, dependencies:Dependencies) => {
+// 6. le underscore permet de gérer les "unused variable" (Cours : TableGateway 18:00)
+export const fetchTables = async (dispatch: AppDispatch, _: AppGetState, dependencies:Dependencies) => {
     // 5. création du try - catch pour gérer les erreurs
     dispatch(orderingSlice.actions.handleTablesLoading());
     try {
