@@ -20,7 +20,7 @@ describe("Fetch table", () => {
         // 2. Pour que les test passe il faut alors dispatch une action qui va se charger du status (handleTableLoading) > voir fetch-table.usecase.ts
 
         // 2. Avant de résoudre la promise le status doit être égale à loading d'où la création d'une variable promise
-        const promise = await store.dispatch(fetchTables);
+        const promise = store.dispatch(fetchTables);
         expect(store.getState().ordering.availableTables.status).toEqual("loading");
         await promise;
         // 1. availableTables est un nouveau state ce qui a supposé la création de nouvelles entrées dans OrderingState et InitialState (store/ordering.slice.ts)
@@ -40,8 +40,8 @@ describe("Fetch table", () => {
                 }
             },
         });
- 
-        const promise = await store.dispatch(fetchTables);
+        
+        const promise = store.dispatch(fetchTables);
         expect(store.getState().ordering.availableTables.status).toEqual("loading");
         await promise;
         

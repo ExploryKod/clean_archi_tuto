@@ -8,15 +8,15 @@ import { AppDispatch, AppGetState } from "@taotask/modules/store/store";
 // 2. Je peux également passé en asynchrone ma function fetchTables car c'est un type Promise (Cours : TableGateway 7:00)
 export const fetchTables = async (dispatch: AppDispatch, getState: AppGetState, dependencies:Dependencies) => {
     // 5. création du try - catch pour gérer les erreurs
+    dispatch(orderingSlice.actions.handleTablesLoading());
     try {
         const tables = await dependencies.tableGateway?.getTables();
         // 3. Je créer donc un dispatch ce qui suppose de créer un nouveau reducers à côté de setStep et chooseGuests (ordering.slice.ts)
         dispatch(orderingSlice.actions.storeTables(tables || []));
         // 4. Aprés le test (voir 2. dans test) Je créer donc un dispatch pour le status ce qui suppose de créer un nouveau reducers à côté de setStep et chooseGuests (ordering.slice.ts)
-        dispatch(orderingSlice.actions.handleTablesLoading());
     } catch(e) {
         // 5. Je créer donc un dispatch pour le status ce qui suppose de créer un nouveau reducers à côté de setStep et chooseGuests (ordering.slice.ts)
-        dispatch(orderingSlice.actions.handleTablesError(e.message));
+        dispatch(orderingSlice.actions.handleTablesError((e as Error).message));
     }
  
 };
