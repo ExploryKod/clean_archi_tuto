@@ -4,8 +4,10 @@ import { useDependencies } from '@taotask/modules/app/react/DependenciesProvider
 // namespaces
 import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 import { GuestForm } from '@taotask/modules/order/core/form/guest.form';
-import { useAppDispatch } from '@taotask/modules/store/store';
+import { AppState, useAppDispatch } from '@taotask/modules/store/store';
 import { chooseGuests } from '@taotask/modules/order/core/useCase/choose-guest.usecase';
+import { IIDProvider } from '@taotask/modules/core/id-provider';
+import { useSelector } from 'react-redux';
 
 export const useGuestSection = () => {
 
@@ -41,12 +43,15 @@ export const useGuestSection = () => {
     function isSubmitable() {
         return guestForm.current.isSubmitable(form)
     }
-    
+    const initialState = useSelector((state: AppState) => state.ordering.form);
     const dispatch = useAppDispatch();
     const idProvider = useDependencies().idProvider;
-    const guestForm = useRef(new GuestForm(idProvider));
+    const guestForm = useRef(new GuestForm(idProvider as IIDProvider));
     const bottomGuestRef = useRef<HTMLDivElement>(null);
-    const [form, setForm] = useState<OrderingDomainModel.Form>({guests:[], organizerId: null});
+    const [form, setForm] = useState<OrderingDomainModel.Form>(initialState);
+
+    // Cela ne permettais pas d'assurer la persistance de l'état précédent (si je clique sur précèdent, le guests se vide, remis à 0)
+    // const [form, setForm] = useState<OrderingDomainModel.Form>({guests:[], organizerId: null});
 
     useEffect(() => {
         // 👇️ scroll to bottom every time a guest is added

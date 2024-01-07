@@ -18,6 +18,7 @@ export const TableSection = () => {
               <div key={table.id}>
                 <TableCard 
                 title={table.title} 
+                capacity={table.capacity}
                 isSelected={presenter.assignTableId === table.id} 
                 onSelect={() => presenter.assignTable(table.id)} 
                 />
@@ -39,7 +40,7 @@ export const TableSection = () => {
             </button>
             <button
             onClick={presenter.onNext}
-            disabled={!presenter.isSubmittable}
+            disabled={presenter.isSubmittable === false}
             type="button"
             className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
@@ -59,16 +60,30 @@ export const TableSection = () => {
 
 export const TableCard: React.FC<{
     title: string,
+    capacity: number,
     isSelected: boolean,
     onSelect: () => void,
-}> = ({title, isSelected, onSelect}) => {
+}> = ({title, capacity, isSelected, onSelect}) => {
     
     return (
     <div onClick={onSelect} className={`w-full my-5 mx-auto flex gap-2`} >
             <div className={`${isSelected ? "bg-red-700" : "bg-red-400"} cursor-pointer my-5 mx-3 p-5 min-w-[300px] rounded`}>
                 <div className="flex flex-col gap-3 items-center justify-center">
                     <h3 className={`text-lg font-bold ${isSelected ? "text-orange-300" : "text-[#854854]"}`}>{title}</h3>
-                    <p className={`text-lg font-bold  ${isSelected ? "text-orange-300" : "text-[#854854]"}`}>{}</p>
+                    <ul className="flex g-2">
+                        {capacity ? [...Array(capacity)].map((seat, i) => <li key={i} className="text-lg font-bold text-[#854854]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke={isSelected ? "#FFA500" : "#854854"} 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="lucide lucide-user-round">
+                            <circle cx="12" cy="8" r="5"/>
+                            <path d="M20 21a8 8 0 0 0-16 0"/>
+                        </svg>
+                        </li>) : null}
+                    </ul>
                 </div>
             </div>
     </div>

@@ -9,6 +9,31 @@ export class InMemoryTableGateway implements ITableGateway {
                 id : "1",
                 title: "Prés de la fenêtre",
                 capacity: 4
+            }),
+            TableFactory.create({
+                id : "2",
+                title: "Prés de la fenêtre",
+                capacity: 4
+            }),
+            TableFactory.create({
+                id : "3",
+                title: "Au centre",
+                capacity: 2
+            }),
+            TableFactory.create({
+                id : "4",
+                title: "Prés de la porte",
+                capacity: 6
+            }),
+            TableFactory.create({
+                id : "5",
+                title: "A l'entrée",
+                capacity: 10
+            }),
+            TableFactory.create({
+                id : "6",
+                title: "Prés du bar",
+                capacity: 8
             })
         ]
         

@@ -32,7 +32,9 @@ export const orderingSlice = createSlice({
     initialState,
     reducers: {
         setStep(state, action:PayloadAction<OrderingDomainModel.OrderingStep>){
-            state.step = OrderingDomainModel.OrderingStep.TABLE;
+            state.step = action.payload;
+            // Version non-fonctionnel mais utile au début pour accéder juste à la section TABLE
+            // state.step = OrderingDomainModel.OrderingStep.TABLE;
         },
         // Ici j'écris ce reducer suite à avoir écris le 4. de fetch-table.usecase.ts 
         // Ici pas besoin d'action car on ne fait que changer le status 
