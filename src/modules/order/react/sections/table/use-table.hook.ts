@@ -1,6 +1,7 @@
 import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
 import { orderingSlice } from "@taotask/modules/order/core/store/ordering.slice";
 import { chooseTable } from "@taotask/modules/order/core/useCase/choose-table.usecase";
+import { invariant } from "@taotask/modules/shared/invariant";
 // import { TableFactory } from "@taotask/modules/order/core/model/table.factory";
 import { AppState, useAppDispatch } from "@taotask/modules/store/store";
 import { useState } from "react";
@@ -22,6 +23,8 @@ export const useTable = () => {
     }
 
     function onNext(){
+        // sécurité > defensing programming et même c'est un invariant >> on va donc créer invariant.ts dans shared où on aura le throw new Error
+        invariant(assignTableId !== null, "Assign table id must be set");
         // On remarque ici le point d'exclamation à la fin > permet d'avoir string | null >> voir en l'enlevant pour check
         // On va gérer le passage de l'étape ailleurs > voir les reducers dans ordering.slice.ts
         dispatch(chooseTable(assignTableId!));

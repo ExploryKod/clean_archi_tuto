@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
-import { IIDProvider } from "../../../core/id-provider";
+import { IIDProvider } from "@taotask/modules/core/id-provider";
 export class GuestForm {
     constructor(
         private idProvider:IIDProvider
@@ -11,7 +11,7 @@ export class GuestForm {
         // Création de Form pour éviter de spécifier via des commentaires qu'il faut un unique organisateur
         
         // Voir le cours sur immer et le paradigme fonctionnel vs impératif, pourquoi ici j'utilise dans produce le p imp.
-        return produce(state, (draft) => {
+        return produce(state, (draft: any) => {
             // je peux travailler sur draft comme si c'était un state, de façon immutable dans p. imp.
             draft.guests.push({
                 id: this.idProvider.generate(),
@@ -38,8 +38,8 @@ export class GuestForm {
 
     removeGuest(state:OrderingDomainModel.Form, id:string) {
         
-        return produce (state, (draft) => {
-            const index = draft.guests.findIndex((guest) => guest.id === id)
+        return produce (state, (draft: any) => {
+            const index = draft.guests.findIndex((guest: any) => guest.id === id)
             if (index < 0) {
                 return
             }
@@ -57,8 +57,8 @@ export class GuestForm {
 
     changeOrganizer(state: OrderingDomainModel.Form, id:string) {
         
-        return produce(state, (draft) => {
-            const exists = draft.guests.some((guest) => guest.id === id);
+        return produce(state, (draft: any) => {
+            const exists = draft.guests.some((guest: any) => guest.id === id);
             
             if(!exists) {
                 return
@@ -90,8 +90,8 @@ export class GuestForm {
         key:T, 
         value:OrderingDomainModel.Guest[T]) {
 
-        return produce(state, (draft) => {
-            const guest = draft.guests.find((guest) => guest.id === id)
+        return produce(state, (draft: any) => {
+            const guest = draft.guests.find((guest: any) => guest.id === id)
             // on commence par une négation (mieux) que de vérifier si guest est true et mettre guest[key] dans la condition
             if (!guest) {
                 return

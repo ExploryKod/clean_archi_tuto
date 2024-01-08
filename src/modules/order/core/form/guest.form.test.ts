@@ -16,7 +16,8 @@ class StubIdProvider implements IIDProvider {
 const idProvider = new StubIdProvider();
 const initialEmptyState: OrderingDomainModel.Form = {    
     guests: [],
-    organizerId: null
+    organizerId: null,
+    tableId: null
 }
 
 const JohnDoe: OrderingDomainModel.Guest = GuestFactory.create({
@@ -35,12 +36,15 @@ const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
 
 const stateWithOneUser: OrderingDomainModel.Form = {
     guests: [JohnDoe],
-    organizerId: null
+    organizerId: null,
+    tableId: null
 }
    
 const stateWithTwoUsers: OrderingDomainModel.Form = {
     guests: [ JohnDoe, BrigitteMonin ],
-    organizerId: null
+    organizerId: null,
+    tableId: null
+
 };
 
 const form = new GuestForm(idProvider);
