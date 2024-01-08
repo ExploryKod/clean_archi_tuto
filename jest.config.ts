@@ -8,7 +8,7 @@ export default {
     moduleFileExtensions: ["js", "json", "ts", "tsx"],
     rootDir: "src",
     moduleNameMapper: {
-      "^@ratatouille/(.*)$": "<rootDir>/$1",
+      "^@taotask/(.*)$": "<rootDir>/$1",
     },
     coveragePathIgnorePatterns: [
       "/node_modules/",

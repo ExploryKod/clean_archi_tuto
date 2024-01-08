@@ -1,6 +1,7 @@
-import { SystemIdProvider } from "@ratatouille/modules/core/system.id-provider";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { AppStore, createStore } from "@ratatouille/modules/store/store";
+import { SystemIdProvider } from "@taotask/modules/core/system.id-provider";
+import { InMemoryTableGateway } from "@taotask/modules/order/core/gateway-infra/in-memory.table-gateway";
+import { Dependencies } from "@taotask/modules/store/dependencies";
+import { AppStore, createStore } from "@taotask/modules/store/store";
 
 export class App {
   public dependencies: Dependencies;
@@ -14,6 +15,15 @@ export class App {
   setupDependencies(): Dependencies {
     return {
       idProvider: new SystemIdProvider(),
+      // tableGateway: {
+      //   getTables: function (): Promise<OrderingDomainModel.Table[]> {
+      //     return Promise.resolve([
+      //       OrderingDomainModel.TableFactory.create({}),
+      //     ]);
+      //   }
+      // },
+      
+      tableGateway: new InMemoryTableGateway(),
     };
   }
 }

@@ -1,10 +1,10 @@
 "use client";
 import React from 'react';
-import { useGuestSection } from "@ratatouille/modules/order/react/sections/use-guest-section";
+import { useGuestSection } from "@taotask/modules/order/react/sections/guest/use-guest-section";
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Checkbox } from "@material-tailwind/react";
-import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
+import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 
 export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.RestaurantList}> = ({restaurantList}) => {
     const presenter:any = useGuestSection();

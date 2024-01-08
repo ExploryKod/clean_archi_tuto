@@ -1,5 +1,5 @@
-import { AppState, createStore } from "@ratatouille/modules/store/store";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
+import { AppState, createStore } from "@taotask/modules/store/store";
+import { Dependencies } from "@taotask/modules/store/dependencies";
 
 /**
  * Create testing dependencies with provided defaults

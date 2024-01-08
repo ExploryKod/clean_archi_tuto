@@ -83,8 +83,8 @@ modules/core sera donc le coeur de l'application en général
 **Nous créons donc le composant du provider de la react context API en utilisant children:** 
 
 >```
->import { Dependencies } from '@ratatouille/modules/store/dependencies'
->import { app } from '@ratatouille/modules/app/main'
+>import { Dependencies } from '@taotask/modules/store/dependencies'
+>import { app } from '@taotask/modules/app/main'
 >import { createContext } from 'react'
 >
 >const DependenciesContext = createContext<Dependencies>(null as any)

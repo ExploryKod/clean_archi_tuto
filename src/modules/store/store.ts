@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { Dependencies } from "@ratatouille/modules/store/dependencies";
-import { orderingReducer } from "@ratatouille/modules/order/core/store/ordering.slice";
+import { combineReducers, configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
+import { Dependencies } from "@taotask/modules/store/dependencies";
+import { orderingReducer } from "@taotask/modules/order/core/store/ordering.slice";
+import { registerOrderingStepListener } from "@taotask/modules/order/core/store/ordering.step.listener";
+import { registerFetcherListeners } from "@taotask/modules/order/core/store/fetcher.listener";
 
 const reducers = combineReducers({
   ordering: orderingReducer,
@@ -22,11 +24,16 @@ export const createStore = (config: {
     reducer: reducers,
     devTools: true,
     middleware: (getDefaultMiddleware) => {
+      const listener = createListenerMiddleware();
+
+      registerOrderingStepListener(listener);
+      registerFetcherListeners(listener);
+
       return getDefaultMiddleware({
         thunk: {
           extraArgument: config.dependencies,
         },
-      });
+      }).prepend(listener.middleware);
     },
   });
 
