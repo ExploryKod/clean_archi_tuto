@@ -1,5 +1,6 @@
 import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
 import { orderingSlice } from "@taotask/modules/order/core/store/ordering.slice";
+import { chooseTable } from "@taotask/modules/order/core/useCase/choose-table.usecase";
 // import { TableFactory } from "@taotask/modules/order/core/model/table.factory";
 import { AppState, useAppDispatch } from "@taotask/modules/store/store";
 import { useState } from "react";
@@ -21,7 +22,11 @@ export const useTable = () => {
     }
 
     function onNext(){
-        dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.MEALS))
+        // On remarque ici le point d'exclamation à la fin > permet d'avoir string | null >> voir en l'enlevant pour check
+        // On va gérer le passage de l'étape ailleurs > voir les reducers dans ordering.slice.ts
+        dispatch(chooseTable(assignTableId!));
+        // Ancienne version avant d'avoir implémenter le choose-table.usecase.ts
+        // dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.MEALS))
     }
 
     function onPrevious(){

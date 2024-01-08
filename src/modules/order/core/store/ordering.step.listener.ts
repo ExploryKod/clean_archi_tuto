@@ -14,4 +14,12 @@ export const registerOrderingStepListener = (listener: ListenerMiddlewareInstanc
           api.dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.TABLE));
         }
       });
+
+      listener.startListening({
+        // Dés que l'on choisis une table on passe à l'étape de choix de meal (voir ordering.slice.ts)
+        actionCreator: orderingSlice.actions.chooseTable,
+        effect: (_, api) => {
+          api.dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.MEALS));
+        }
+      });
 }

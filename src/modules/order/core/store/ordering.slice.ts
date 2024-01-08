@@ -1,7 +1,6 @@
 import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-
 export type OrderingState = {
     step: OrderingDomainModel.OrderingStep,
     form: OrderingDomainModel.Form
@@ -45,7 +44,7 @@ export const orderingSlice = createSlice({
             state.availableTables.error = null;
         },
         // Ici j'écris ce reducer suite à avoir écris le 5. de fetch-table.usecase.ts
-        // Ici pas besoin d'action car on ne fait que changer le status
+        // Ici on avait pas besoin d'action tant qu' on ne faisait que changer le status mais pour l'erreur on a besoin de l'action
         handleTablesError(state, action: PayloadAction<string>){
             state.availableTables.status = 'error';
             state.availableTables.error = action.payload;
@@ -57,7 +56,12 @@ export const orderingSlice = createSlice({
         },
         chooseGuests(state, action:PayloadAction<OrderingDomainModel.Form>){
             state.form = action.payload;
-        } 
+        },
+        chooseTable(state, action:PayloadAction<string>){
+            state.form.tableId = action.payload;
+            // Ne sert plus car on a créé un listener:
+            // state.step = OrderingDomainModel.OrderingStep.MEALS;
+        }, 
     }
 });
 
