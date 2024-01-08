@@ -16,13 +16,14 @@ export const initialState: OrderingState = {
     step: OrderingDomainModel.OrderingStep.GUESTS,
     form: {
         guests: [],
-        organizerId: null
+        organizerId: null,
+        tableId: null
     },
     availableTables: {
         status: 'idle',
         error: null,
         data: []
-    }
+    },
 }
 // On va séparer les logiques et utiliser l'event driven dev (en version simplifiée) > voir store.ts
 // On va rassembler a logique entière qui suit l'étape de choix de guest dans un autre endroit, dans un listener

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 // 4. On va ensuite quitter la fake data interne à cette fonction et user plutôt du selector (redux)
 // 4. Je retrouve alors ma table qui est dans le in-memory.table-gateway.ts
 // 5. Le bouton précèdent / suivant >> easy à faire grâce à nos dispatch et notre useAppDispatch(), orderingslice.actions et OrderingStep.GUEST etc...
+// 6. On va ensuite faire un usecase (hors-react) (choose-table.usecase.ts)
 export const useTable = () => {
 
     function assignTable(tableId: string){
