@@ -1,6 +1,8 @@
-import {OrderingDomainModel} from '@ratatouille/modules/order/core/model/ordering.domain-model';
+import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
+import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
 
 export const MealsSection = () => {
+    const presenter = useMeals()
 
     return (<>
       <section className="
@@ -8,7 +10,7 @@ export const MealsSection = () => {
     bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] 
     rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         <div className="mx-auto mb-5 w-full flex flex-col">
-            <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de votre table:</h3>  
+            <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de vos plats:</h3>  
         </div>
        
        <div className="w-full mx-auto flex justify-center gap-2">
@@ -41,3 +43,4 @@ export const MealsSection = () => {
     </>)
 
 }
+

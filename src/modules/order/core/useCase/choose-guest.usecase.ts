@@ -1,6 +1,6 @@
-import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
-import { orderingActions } from "@ratatouille/modules/order/core/store/ordering.slice";
-import { AppDispatch, AppGetState } from "@ratatouille/modules/store/store";
+import { OrderingDomainModel } from "@taotask/modules/order/core/model/ordering.domain-model";
+import { orderingActions } from "@taotask/modules/order/core/store/ordering.slice";
+import { AppDispatch, AppGetState } from "@taotask/modules/store/store";
 
 export const chooseGuests = (form: OrderingDomainModel.Form) => 
 async (dispatch: AppDispatch, getState: AppGetState) => {

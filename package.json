@@ -1,5 +1,5 @@
 {
-  "name": "ratatouille",
+  "name": "taotask",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@gsap/react": "^2.0.2",
     "@material-tailwind/react": "^2.1.2",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
@@ -29,9 +30,11 @@
     "eslint-config-next": "13.4.5",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.0",
+    "gsap": "^3.12.4",
     "husky": "^8.0.3",
     "immer": "^10.0.2",
     "jest": "^29.5.0",
+    "lucide-react": "^0.307.0",
     "nanoid": "^3.3.6",
     "next": "13.4.5",
     "prettier": "^2.8.8",
