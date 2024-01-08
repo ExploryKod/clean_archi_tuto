@@ -1,6 +1,8 @@
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
+import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
 
 export const MealsSection = () => {
+    const presenter = useMeals()
 
     return (<>
       <section className="
@@ -41,3 +43,4 @@ export const MealsSection = () => {
     </>)
 
 }
+
