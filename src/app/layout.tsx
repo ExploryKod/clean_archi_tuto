@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${roboto_mono.variable} ${oswald.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${roboto_mono.variable} ${oswald.variable} overflow-x-hidden`}>
       <body className={roboto.className}>
         <AppWrapper>
           <Layout>{children}</Layout>

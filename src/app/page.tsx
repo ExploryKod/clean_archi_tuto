@@ -3,5 +3,10 @@ import { OrderPage } from "@taotask/modules/order/react/pages/order/OrderPage";
 import "@taotask/app/app.css";
 
 export default function Home() {
-  return <OrderPage />;
+  return (
+    <>
+      <OrderPage />
+
+    </>);
 }
+

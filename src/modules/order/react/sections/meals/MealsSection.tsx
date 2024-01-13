@@ -1,5 +1,9 @@
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
 import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
+import Carousel from '@taotask/modules/order/react/components/carousel/Carousel';
+import '@taotask/modules/order/react/components/carousel/Carousel.css';
+
+
 
 export const MealsSection = () => {
     const presenter = useMeals()
@@ -11,8 +15,29 @@ export const MealsSection = () => {
     rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         <div className="mx-auto mb-5 w-full flex flex-col">
             <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de vos plats:</h3>  
-        </div>
-       
+        </div> 
+     
+        <div className="mx-auto mb-5 w-full flex flex-col bg-gray-500">
+        {presenter.guests.map((guest:any) => (
+            <MealComposer 
+                key={guest.id} 
+                guestId={guest.id}
+                firstName={guest.firstName}
+                lastName={guest.lastName}
+                selectedEntryId={guest.meals.entry} 
+                selectedMainCourseId={guest.meals.mainCourse}
+                selectedDessertId={guest.meals.dessert}
+                selectedDrinkId={guest.meals.drink}
+                entries={presenter.getSelectableEntries(guest.id)}
+                mainCourses={presenter.getSelectableMainCourses(guest.id)}
+                desserts={presenter.getSelectableDesserts(guest.id)}
+                drinks={presenter.getSelectableDrinks(guest.id)}
+                onEntrySelected={presenter.assignEntry}
+                onMainCourseSelected={presenter.assignMainCourse}
+                onDessertSelected={presenter.assignDessert}
+                onDrinkSelected={presenter.assignDrink}
+            />))}
+       </div>
        <div className="w-full mx-auto flex justify-center gap-2">
             <button
             type="submit"
@@ -43,4 +68,62 @@ export const MealsSection = () => {
     </>)
 
 }
+
+export const MealComposer: React.FC<{
+    guestId: string,
+    firstName: string,
+    lastName: string,
+
+    selectedEntryId: string,
+    selectedMainCourseId: string,
+    selectedDessertId: string,
+    selectedDrinkId: string,
+
+    entries: OrderingDomainModel.Meal[],
+    mainCourses: OrderingDomainModel.Meal[],
+    desserts: OrderingDomainModel.Meal[],
+    drinks: OrderingDomainModel.Meal[],
+
+    onEntrySelected: (guestId:string, id: string) => void,
+    onMainCourseSelected: (guestId:string, id: string) => void,
+    onDessertSelected: (guestId:string, id: string) => void,
+    onDrinkSelected: (guestId:string, id: string) => void,
+
+}> = ({
+    guestId,
+    firstName,
+    lastName,
+
+    selectedEntryId,
+    selectedMainCourseId,
+    selectedDessertId,
+    selectedDrinkId,
+
+    entries,
+    mainCourses,
+    desserts,
+    drinks,
+
+    onEntrySelected,
+    onMainCourseSelected,
+    onDessertSelected,
+    onDrinkSelected,
+}) => {
+    return (<>
+        <div className="App">
+      <Carousel
+        show={2}
+        infiniteLoop
+        withIndicator
+      >
+        {entries.map((entry:any) => (
+            <h2 key={entry.id} data-testid={`carousel-item-${entry.id}`}>{entry.name}</h2>
+        ))}   
+      </Carousel>
+    </div>
+    </>)
+}
+
+
+
 

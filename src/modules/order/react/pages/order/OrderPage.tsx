@@ -15,7 +15,9 @@ import { ReservedSection } from "@taotask/modules/order/react/sections/reserved/
 
 export const OrderPage: React.FC = () => {
   const presenter = useOrderPage();
-  const step = useSelector((state: AppState) => state.ordering.step);
+  // TODO: décomenter pour retrouver les vraies steps
+  // const step = useSelector((state: AppState) => state.ordering.step);
+  const step = useSelector((state: AppState) => OrderingDomainModel.OrderingStep.MEALS);
 // attention les props ici de showGuestSection rendent sûrement le composant non réutilisable > pas clean archi
 // Solution ? 
 
