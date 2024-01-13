@@ -31,7 +31,7 @@ const child = GuestFactory.create({
 // Création de plats pour les tests
 
 const adultDessert = MealFactory.create(
-    {id: '1', title: 'Tiramisu Alcoolisé', type: OrderingDomainModel.MealType.DESSERT, price: 5}
+    {id: '1', title: 'Tiramisu Alcoolisé', type: OrderingDomainModel.MealType.DESSERT, requiredAge:18, price: 5}
 ); 
 
 const regularDessert = MealFactory.create(
@@ -43,7 +43,7 @@ const regularMainCourse = MealFactory.create(
 ); 
 
 const adultMainCourse = MealFactory.create(
-    {id: '4', title: 'Weed confit', type: OrderingDomainModel.MealType.MAIN_COURSE, price: 5}
+    {id: '4', title: 'Weed confit', type: OrderingDomainModel.MealType.MAIN_COURSE, requiredAge:18, price: 5}
 ); 
 
 const regularEntry = MealFactory.create(
@@ -51,11 +51,11 @@ const regularEntry = MealFactory.create(
 ); 
 
 const adultEntry = MealFactory.create(
-    {id: '6', title: 'Raita alcoolisée', type: OrderingDomainModel.MealType.ENTRY, price: 5}
+    {id: '6', title: 'Raita alcoolisée', type: OrderingDomainModel.MealType.ENTRY, requiredAge:18, price: 5}
 ); 
 
 const adultDrink = MealFactory.create(
-    {id: '7', title: 'Rhum', type: OrderingDomainModel.MealType.DRINK, price: 5}
+    {id: '7', title: 'Rhum', type: OrderingDomainModel.MealType.DRINK, requiredAge:18, price: 5}
 ); 
 
 const regularDrink = MealFactory.create(
@@ -75,14 +75,29 @@ const meals: OrderingDomainModel.Meal[] = [
 
 describe('Selecting Meals', () => {
     describe('When selecting an entry', () => {
-        it('should return an empty array if no meals is providing', () => {
-            const result = mealForm.getSelectableEntries([], adult);
-            expect(result).toEqual([]);
-        });
-        it('when meals entries are available, it should return all meals entries', () => {
-            const result = mealForm.getSelectableEntries(meals, adult);
-            expect(result).toEqual([regularEntry, adultEntry]);
-        });
+        //Anatomy du each: it.each([])('', () => {})
+        it.each([
+            {meals: [], guest: adult, expected: []},
+            {meals, guest: adult, expected: [regularEntry,adultEntry]},
+            {meals, guest: child, expected: [regularEntry]},
+
+        ])(``, ({meals, guest, expected}) => {
+            const result = mealForm.getSelectableEntries(meals, guest);
+            expect(result).toEqual(expected);
+        })
+        // it.each do the same as this:
+        // it('should return an empty array if no meals is providing', () => {
+        //     const result = mealForm.getSelectableEntries([], adult);
+        //     expect(result).toEqual([]);
+        // });
+        // it('when meals entries are available, it should return all meals entries', () => {
+        //     const result = mealForm.getSelectableEntries(meals, adult);
+        //     expect(result).toEqual([regularEntry, adultEntry]);
+        // });
+        // it('when meals entries are available and guest are children, it should return children meals entries', () => {
+        //     const result = mealForm.getSelectableEntries(meals, child);
+        //     expect(result).toEqual([regularEntry]);
+        // });
         // Aprés avoir créer getSelectableEntries avec les bon retour, on a refactor à ce stade.
     
     });
