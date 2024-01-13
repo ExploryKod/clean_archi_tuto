@@ -25,6 +25,42 @@ export class MealForm {
             !this.hasRequiredAge(meal, guest)) 
             });
     }
+
+    getSelectableMainCourse(
+        meals: OrderingDomainModel.Meal[],
+        guest: OrderingDomainModel.Guest
+    ) {
+               
+    return meals.filter(meal => {
+            return !(
+            !this.isMealType(meal, OrderingDomainModel.MealType.MAIN_COURSE) || 
+            !this.hasRequiredAge(meal, guest)) 
+            });
+    }
+
+    getSelectableDessert(
+        meals: OrderingDomainModel.Meal[],
+        guest: OrderingDomainModel.Guest
+    ) {
+               
+    return meals.filter(meal => {
+            return !(
+            !this.isMealType(meal, OrderingDomainModel.MealType.DESSERT) || 
+            !this.hasRequiredAge(meal, guest)) 
+            });
+    }
+
+    getSelectableDrink(
+        meals: OrderingDomainModel.Meal[],
+        guest: OrderingDomainModel.Guest
+    ) {
+               
+    return meals.filter(meal => {
+            return !(
+            !this.isMealType(meal, OrderingDomainModel.MealType.DRINK) || 
+            !this.hasRequiredAge(meal, guest)) 
+            });
+    }
 }
 
 // Before refactoring
