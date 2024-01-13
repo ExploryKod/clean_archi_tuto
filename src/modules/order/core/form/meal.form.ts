@@ -1,4 +1,5 @@
 import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
+import { produce } from 'immer';
 // Refactoring > Extract conditions to made these as private methods (or properties ??) to have arguments
 // Condition qui return false puis true: voir si je peux pas direct return la condition (qui retourne true ou false)
 export class MealForm {
@@ -60,6 +61,62 @@ export class MealForm {
             !this.isMealType(meal, OrderingDomainModel.MealType.DRINK) || 
             !this.hasRequiredAge(meal, guest)) 
             });
+    }
+
+    assignEntry(
+        form: OrderingDomainModel.Form,
+        guestId: string | number,
+        mealId: OrderingDomainModel.MealId | null
+    ) {
+        return produce(form, draft => {
+            const guest = draft.guests.find(guest => guest.id === guestId);
+            if(!guest) {
+                return;
+            }
+           guest.meals.entry = mealId;
+        });
+    }
+
+    assignMainCourse(
+        form: OrderingDomainModel.Form,
+        guestId: string | number,
+        mealId: OrderingDomainModel.MealId | null
+    ) {
+        return produce(form, draft => {
+            const guest = draft.guests.find(guest => guest.id === guestId);
+            if(!guest) {
+                return;
+            }
+           guest.meals.mainCourse = mealId;
+        });
+    }
+
+    assignDessert(
+        form: OrderingDomainModel.Form,
+        guestId: string | number,
+        mealId: OrderingDomainModel.MealId | null
+    ) {
+        return produce(form, draft => {
+            const guest = draft.guests.find(guest => guest.id === guestId);
+            if(!guest) {
+                return;
+            }
+           guest.meals.dessert = mealId;
+        });
+    }
+
+    assignDrink(
+        form: OrderingDomainModel.Form,
+        guestId: string | number,
+        mealId: OrderingDomainModel.MealId | null
+    ) {
+        return produce(form, draft => {
+            const guest = draft.guests.find(guest => guest.id === guestId);
+            if(!guest) {
+                return;
+            }
+           guest.meals.drink = mealId;
+        });
     }
 }
 

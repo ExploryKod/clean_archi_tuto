@@ -141,3 +141,81 @@ describe('Selecting Meals', () => {
         })
     });
 });
+
+
+describe('Selecting Meals', () => {
+    const form: OrderingDomainModel.Form = {
+        guests: [adult, child],
+        organizerId: adult.id,
+        tableId: '1',
+    };
+
+    describe('When selecting (assigning) an entry', () => {
+        it('Should give null if no meal is selected', () => {
+                const result = mealForm.assignEntry(form, adult.id, null);
+                expect(result.guests[0].meals.entry).toBeNull();
+            });
+
+        it('Should assign the entry and return entry id if an entry meal is selected', () => {
+            const result = mealForm.assignEntry(form, adult.id, adultEntry.id);
+            expect(result.guests[0].meals.entry).toEqual(adultEntry.id);
+        });
+
+        it('Should return to initial state if guest id is non-existant', () => {
+            const result = mealForm.assignEntry(form, "non-existant", adultEntry.id);
+            expect(result).toEqual(form);
+        });
+    });
+
+    describe('When assigning a mainCourse', () => {
+        it('Should give null if no meal is selected', () => {
+                const result = mealForm.assignMainCourse(form, adult.id, null);
+                expect(result.guests[0].meals.mainCourse).toBeNull();
+            });
+
+        it('Should assign the meal and return the meal id if an entry meal is selected', () => {
+            const result = mealForm.assignMainCourse(form, adult.id, adultMainCourse.id);
+            expect(result.guests[0].meals.mainCourse).toEqual(adultMainCourse.id);
+        });
+
+        it('Should return to initial state if guest id is non-existant', () => {
+            const result = mealForm.assignMainCourse(form, "non-existant", adultMainCourse.id);
+            expect(result).toEqual(form);
+        });
+    });
+
+    describe('When assigning a Dessert', () => {
+        it('Should give null if no meal is selected', () => {
+                const result = mealForm.assignDessert(form, adult.id, null);
+                expect(result.guests[0].meals.dessert).toBeNull();
+            });
+
+        it('Should assign the meal and return the meal id if an entry meal is selected', () => {
+            const result = mealForm.assignDessert(form, adult.id, adultDessert.id);
+            expect(result.guests[0].meals.dessert).toEqual(adultDessert.id);
+        });
+
+        it('Should return to initial state if guest id is non-existant', () => {
+            const result = mealForm.assignDessert(form, "non-existant", adultDessert.id);
+            expect(result).toEqual(form);
+        });
+    });
+
+    describe('When assigning a Drink', () => {
+        it('Should give null if no meal is selected', () => {
+                const result = mealForm.assignDrink(form, adult.id, null);
+                expect(result.guests[0].meals.drink).toBeNull();
+            });
+
+        it('Should assign the meal and return the meal id if an entry meal is selected', () => {
+            const result = mealForm.assignDrink(form, adult.id, adultDrink.id);
+            expect(result.guests[0].meals.drink).toEqual(adultDrink.id);
+        });
+
+        it('Should return to initial state if guest id is non-existant', () => {
+            const result = mealForm.assignDrink(form, "non-existant", adultDrink.id);
+            expect(result).toEqual(form);
+        });
+    });
+ 
+});
