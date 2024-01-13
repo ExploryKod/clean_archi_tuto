@@ -20,7 +20,8 @@ export namespace OrderingDomainModel {
 
     export type Meal = {
         id: MealId,
-        title: MealType,
+        title: string,
+        type: MealType,
         price: number,
         requiredAge: number | null,
     }
