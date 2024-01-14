@@ -68,7 +68,8 @@ export const useMeals = () => {
 
     function isSubmittable() { return false; }
     const dispatch = useAppDispatch();
-    const meals: OrderingDomainModel.Meal[] = [];
+    // Dernière pierre à l'édifice > aprés avoir créer les availableMeals avec redux, les listener, error, loading etc...
+    const meals: OrderingDomainModel.Meal[] = useSelector((state: AppState) => state.ordering.availableMeals.data);
     const initialState = useSelector((state: AppState) => state.ordering.form);
     const [form, setForm] = useState<OrderingDomainModel.Form>(initialState);
     //  Une fois nos tests et MealForm créé avec ses méthodes, on va l'instancier dans une ref pour appeler .current sur certaines méthodes

@@ -2,12 +2,8 @@ import { GuestForm } from '@taotask/modules/order/core/form/guest.form';
 import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 import { IIDProvider } from '../../../core/id-provider';
 import { GuestFactory } from '@taotask/modules/order/core/model/guest.factory';
+import { StubIdProvider } from '@taotask/modules/core/stub.id-provider';
 
-class StubIdProvider implements IIDProvider {
-    generate() {
-        return "1";
-    }
-}
 
 // On hoiste nos states (intéressant pour refactor ensuite)
 // Cela n'est possible que si on reste stateless 

@@ -16,8 +16,29 @@ export const MealsSection = () => {
         <div className="mx-auto mb-5 w-full flex flex-col">
             <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de vos plats:</h3>  
         </div> 
-     
+
+        <div className="App">
+
+    </div>
+        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
+             {presenter.guests.map((guest:any) => (
+                <>
+                    <div key={guest.id}>
+                        <span>{guest.firstName} - {guest.LastName}</span>
+                        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
+                        <Carousel
+                            show={1}
+                         >
+                            {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}
+                        </Carousel>
+                        </div>
+                    </div>
+                </>
+             ))}
+        </div>
+   
         <div className="mx-auto mb-5 w-full flex flex-col bg-gray-500">
+     
         {presenter.guests.map((guest:any) => (
             <MealComposer 
                 key={guest.id} 
@@ -37,7 +58,9 @@ export const MealsSection = () => {
                 onDessertSelected={presenter.assignDessert}
                 onDrinkSelected={presenter.assignDrink}
             />))}
+           
        </div>
+  
        <div className="w-full mx-auto flex justify-center gap-2">
             <button
             onClick={presenter.onPrevious}
@@ -112,17 +135,8 @@ export const MealComposer: React.FC<{
     onDrinkSelected,
 }) => {
     return (<>
-        <div className="App">
-      <Carousel
-        show={2}
-        infiniteLoop
-        withIndicator
-      >
-        {entries.map((entry:any) => (
-            <h2 key={entry.id} data-testid={`carousel-item-${entry.id}`}>{entry.name}</h2>
-        ))}   
-      </Carousel>
-    </div>
+    
+   
     </>)
 }
 
