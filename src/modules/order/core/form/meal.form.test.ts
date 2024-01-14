@@ -217,5 +217,30 @@ describe('Selecting Meals', () => {
             expect(result).toEqual(form);
         });
     });
- 
 });
+
+const isSubmitableForm: OrderingDomainModel.Form = {
+    guests: [GuestFactory.create({meals: {entry: null, mainCourse: adultMainCourse.id, dessert: null, drink: null}})],
+    organizerId: adult.id,
+    tableId: '1',
+};
+
+const isNotSubmitableForm: OrderingDomainModel.Form = {
+    guests: [GuestFactory.create({meals: {entry: null, mainCourse: null, dessert: null, drink: null}})],
+    organizerId: adult.id,
+    tableId: '1',
+};
+
+describe('Submitable', () => {
+    it.each([
+        {form: isSubmitableForm, expected: true},
+        {form: isNotSubmitableForm, expected: false},
+    ])(``, ({form, expected}) => {
+        const result = mealForm.isSubmitable(form);
+        expect(result).toEqual(expected);
+    });
+});
+
+
+
+// Aprés avoir finit nos test ici lié à la logique du formuaire hors react > on va revenir dans react et presenter pour instancier MealForm.

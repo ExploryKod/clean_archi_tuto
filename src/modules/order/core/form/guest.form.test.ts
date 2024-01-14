@@ -24,7 +24,8 @@ const JohnDoe: OrderingDomainModel.Guest = GuestFactory.create({
     id:"1",
     firstName: 'John',
     lastName: 'Doe',
-    age: 24
+    age: 24,
+    meals: {entry: null, mainCourse: null, dessert: null, drink: null}
 });
 
 const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
@@ -37,14 +38,13 @@ const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
 const stateWithOneUser: OrderingDomainModel.Form = {
     guests: [JohnDoe],
     organizerId: null,
-    tableId: null
+    tableId: null,
 }
    
 const stateWithTwoUsers: OrderingDomainModel.Form = {
     guests: [ JohnDoe, BrigitteMonin ],
     organizerId: null,
     tableId: null
-
 };
 
 const form = new GuestForm(idProvider);
@@ -57,7 +57,8 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }]
         );
     });
@@ -74,7 +75,8 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }]
         );
     });
@@ -96,7 +98,8 @@ describe('Remove a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }
         ]);
     });

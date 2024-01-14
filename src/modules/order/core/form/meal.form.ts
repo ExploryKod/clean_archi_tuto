@@ -118,6 +118,10 @@ export class MealForm {
            guest.meals.drink = mealId;
         });
     }
+
+    isSubmitable(state: OrderingDomainModel.Form) {
+        return state.guests.every((guest) => guest.meals.mainCourse !== null)
+    }
 }
 
 // Before refactoring
