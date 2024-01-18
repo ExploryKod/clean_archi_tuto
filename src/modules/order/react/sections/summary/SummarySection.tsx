@@ -1,6 +1,7 @@
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
 
 export const SummarySection = () => {
+    const presenter = useSummary()
 
     return (<>
       <section className="

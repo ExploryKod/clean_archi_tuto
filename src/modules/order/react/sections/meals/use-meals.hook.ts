@@ -4,6 +4,7 @@ import { orderingSlice } from "@taotask/modules/order/core/store/ordering.slice"
 import { AppState, useAppDispatch } from "@taotask/modules/store/store";
 import { useRef, useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
+import {chooseMeal} from "@taotask/modules/order/core/useCase/choose-meal.usecase";
 
 export const useMeals = () => {
 
@@ -68,7 +69,8 @@ export const useMeals = () => {
     }
 
     function onNext() {
-        dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.SUMMARY))
+        // Aprés avoir créer le use case on branche la fonction chooseMeal ici
+        dispatch(chooseMeal(form))
     }
 
     function onPrevious() {
