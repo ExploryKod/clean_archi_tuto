@@ -2,12 +2,8 @@ import { GuestForm } from '@taotask/modules/order/core/form/guest.form';
 import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.domain-model';
 import { IIDProvider } from '../../../core/id-provider';
 import { GuestFactory } from '@taotask/modules/order/core/model/guest.factory';
+import { StubIdProvider } from '@taotask/modules/core/stub.id-provider';
 
-class StubIdProvider implements IIDProvider {
-    generate() {
-        return "1";
-    }
-}
 
 // On hoiste nos states (intéressant pour refactor ensuite)
 // Cela n'est possible que si on reste stateless 
@@ -24,7 +20,8 @@ const JohnDoe: OrderingDomainModel.Guest = GuestFactory.create({
     id:"1",
     firstName: 'John',
     lastName: 'Doe',
-    age: 24
+    age: 24,
+    meals: {entry: null, mainCourse: null, dessert: null, drink: null}
 });
 
 const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
@@ -37,14 +34,13 @@ const BrigitteMonin: OrderingDomainModel.Guest = GuestFactory.create({
 const stateWithOneUser: OrderingDomainModel.Form = {
     guests: [JohnDoe],
     organizerId: null,
-    tableId: null
+    tableId: null,
 }
    
 const stateWithTwoUsers: OrderingDomainModel.Form = {
     guests: [ JohnDoe, BrigitteMonin ],
     organizerId: null,
     tableId: null
-
 };
 
 const form = new GuestForm(idProvider);
@@ -57,7 +53,8 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }]
         );
     });
@@ -74,7 +71,8 @@ describe('Add a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }]
         );
     });
@@ -96,7 +94,8 @@ describe('Remove a Guest', () => {
                 id:"1",
                 firstName: 'John',
                 lastName: 'Doe',
-                age: 24
+                age: 24,
+                meals: {entry: null, mainCourse: null, dessert: null, drink: null}
             }
         ]);
     });

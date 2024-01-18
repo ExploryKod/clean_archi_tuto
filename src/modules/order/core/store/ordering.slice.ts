@@ -9,6 +9,11 @@ export type OrderingState = {
         error: string | null;
         data: OrderingDomainModel.Table[];
     };
+    availableMeals: {
+        status: 'idle' | 'loading' | 'success' | 'error';
+        error: string | null;
+        data: OrderingDomainModel.Meal[];
+    }
 }
 
 export const initialState: OrderingState = {
@@ -23,6 +28,11 @@ export const initialState: OrderingState = {
         error: null,
         data: []
     },
+    availableMeals: {
+        status: 'idle',
+        error: null,
+        data: []
+    }
 }
 // On va séparer les logiques et utiliser l'event driven dev (en version simplifiée) > voir store.ts
 // On va rassembler a logique entière qui suit l'étape de choix de guest dans un autre endroit, dans un listener
@@ -49,7 +59,6 @@ export const orderingSlice = createSlice({
             state.availableTables.status = 'error';
             state.availableTables.error = action.payload;
         },
-        // tableau de tables (commentaire inutil hors apprentissage > les types sont là pour ça)
         storeTables(state, action:PayloadAction<OrderingDomainModel.Table[]>){
             state.availableTables.data = action.payload;
             state.availableTables.status = 'success';
@@ -62,6 +71,18 @@ export const orderingSlice = createSlice({
             // Ne sert plus car on a créé un listener:
             // state.step = OrderingDomainModel.OrderingStep.MEALS;
         }, 
+        storeMeals(state, action:PayloadAction<OrderingDomainModel.Meal[]>) {
+            state.availableMeals.data = action.payload;
+            state.availableMeals.status = 'success';
+        },
+        handleMealsLoading(state){
+            state.availableMeals.status = 'loading';
+            state.availableMeals.error = null;
+        },
+        handleMealsError(state, action: PayloadAction<string>){
+            state.availableMeals.status = 'error';
+            state.availableMeals.error = action.payload;
+        },
     }
 });
 

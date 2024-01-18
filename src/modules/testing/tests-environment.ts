@@ -1,5 +1,8 @@
 import { AppState, createStore } from "@taotask/modules/store/store";
 import { Dependencies } from "@taotask/modules/store/dependencies";
+import { StubTableGateway } from "@taotask/modules/order/core/testing/stub.table-gateway";
+import { StubMealGateway } from "@taotask/modules/order/core/testing/stub.meal-gateway";
+import { StubIdProvider } from "@taotask/modules/core/stub.id-provider";
 
 /**
  * Create testing dependencies with provided defaults
@@ -7,8 +10,11 @@ import { Dependencies } from "@taotask/modules/store/dependencies";
  * @returns
  */
 const createDependencies = (
-  dependencies?: any
+  dependencies?: Partial<Dependencies>
 ): Dependencies => ({
+  idProvider : new StubIdProvider(),
+  tableGateway: new StubTableGateway(),
+  mealGateway: new StubMealGateway(),
   ...dependencies,
 });
 
