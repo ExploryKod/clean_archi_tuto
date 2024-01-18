@@ -20,17 +20,48 @@ export const MealsSection = () => {
         <div className="App">
 
     </div>
-        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
+        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
              {presenter.guests.map((guest:any) => (
                 <>
                     <div key={guest.id}>
-                        <span>{guest.firstName} - {guest.LastName}</span>
-                        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
-                        <Carousel
-                            show={1}
-                         >
-                            {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}
-                        </Carousel>
+                        <span>{guest.firstName} - {guest.lastName}</span>
+                        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-3">
+                            <section>
+                            <div>
+                                <h1>Entrées</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="my-5 text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
+                            <section>
+                            <div>
+                                <h1>Plat</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableMainCourses(guest.id).map((main) => (<div className="my-5 text-center bg-yellow-200" key={main.id}>{main.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
+                            <section>
+                            <div>
+                                <h1>Dessert</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableDesserts(guest.id).map((dessert) => (<div className="my-5 text-center bg-yellow-200" key={dessert.id}>{dessert.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
                         </div>
                     </div>
                 </>

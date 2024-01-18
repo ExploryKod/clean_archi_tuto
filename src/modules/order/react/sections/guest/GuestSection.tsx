@@ -34,6 +34,7 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
                 remove={presenter.removeGuest}
                 changeOrganizer={presenter.changeOrganizer}
                 isOrganizer={guest.id === presenter.form.organizerId}
+                checkboxRef={presenter.checkBoxOrganizer}
                 />
             </div>
         ))}
@@ -88,7 +89,9 @@ const GuestRows: React.FC<{
         ) => void,
     remove: (id:string | number) => void,
     changeOrganizer: (id:string | number) => void
-}> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer}) => {
+    checkboxRef: any
+}> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer, checkboxRef}) => {
+
     return (
     <div className="my-5 mx-auto flex gap-2 justify-center">
         
@@ -102,7 +105,6 @@ const GuestRows: React.FC<{
                         placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                        value={firstName}
                         onChange= {(e) => onChange(id, 'firstName', e.target.value)} 
                    
                         />
@@ -118,7 +120,7 @@ const GuestRows: React.FC<{
                         placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                        value={lastName}
+                        min="0"
                         onChange= {(e) => onChange(id, "lastName", e.target.value)} 
                       
                         />
@@ -134,7 +136,7 @@ const GuestRows: React.FC<{
                         placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                         invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                        value={age}
+                        min="0"
                         onChange= {(e) => onChange(id, "age", parseInt(e.target.value))} 
                         />
                 </label>
@@ -151,8 +153,10 @@ const GuestRows: React.FC<{
                     <Checkbox  
                     defaultChecked={isOrganizer}
                     onChange={() => changeOrganizer(id)} 
+                    ref={checkboxRef}
                     ripple={true}
                     color="teal"
+                 
                     className="h-6 w-6 shadow-[0_2px_3px_-2px_#000] bg-gray-100 rounded"
                     />
                 </div>
