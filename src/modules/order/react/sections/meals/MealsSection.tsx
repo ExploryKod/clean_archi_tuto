@@ -1,7 +1,7 @@
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
 import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
 import Carousel from '@taotask/modules/order/react/components/carousel/Carousel';
-import '@taotask/modules/order/react/components/carousel/Carousel.css';
+import '@taotask/modules/order/react/components/carousel/carousel.css';
 
 
 
