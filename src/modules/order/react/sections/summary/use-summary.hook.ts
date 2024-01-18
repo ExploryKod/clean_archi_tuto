@@ -65,8 +65,9 @@ const selectSummary = (state: AppState): Summary => {
 
 export const useSummary = () => {
 
+    function onNext(){
 
-    function onNext(){}
+    }
 
     function onPrevious(){
         dispatch(orderingSlice.actions.setStep(OrderingStep.MEALS))
