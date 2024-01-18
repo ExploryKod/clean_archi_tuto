@@ -1,6 +1,9 @@
-import {AppState} from "@taotask/modules/store/store";
+// Pour le récap on ne tape pas en direct dans le redux mais dans la couche intermédiaire qui est le présenteur
+import {AppState, useAppDispatch} from "@taotask/modules/store/store";
 import {OrderingDomainModel} from "@taotask/modules/order/core/model/ordering.domain-model";
 import {useSelector} from "react-redux";
+import {orderingSlice} from "@taotask/modules/order/core/store/ordering.slice";
+import OrderingStep = OrderingDomainModel.OrderingStep;
 
 type MealSummary = {
     id: string,
@@ -65,8 +68,11 @@ export const useSummary = () => {
 
     function onNext(){}
 
-    function onPrevious(){}
+    function onPrevious(){
+        dispatch(orderingSlice.actions.setStep(OrderingStep.MEALS))
+    }
 
+    const dispatch = useAppDispatch()
     const summary = useSelector(selectSummary)
 
     return {

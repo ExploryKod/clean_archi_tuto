@@ -4,7 +4,7 @@ import { orderingSlice } from "@taotask/modules/order/core/store/ordering.slice"
 import { AppState, useAppDispatch } from "@taotask/modules/store/store";
 import { useRef, useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
-import {chooseMeal} from "@taotask/modules/order/core/useCase/choose-meal.usecase";
+import { chooseMeal } from "@taotask/modules/order/core/useCase/choose-meal.usecase";
 
 export const useMeals = () => {
 
