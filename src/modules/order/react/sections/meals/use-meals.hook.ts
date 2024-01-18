@@ -52,11 +52,20 @@ export const useMeals = () => {
         setForm(nextState)
     }
 
-    function assignMainCourse(guestId: string, mealId: string) {}
+    function assignMainCourse(guestId: string, mealId: string) {
+        const nextState = mealForm.current.assignMainCourse(form, guestId, mealId)
+        setForm(nextState)
+    }
 
-    function assignDessert(guestId: string, mealId: string) {}
+    function assignDessert(guestId: string, mealId: string) {
+        const nextState = mealForm.current.assignDessert(form, guestId, mealId)
+        setForm(nextState)
+    }
 
-    function assignDrink(guestId: string, mealId: string) {}
+    function assignDrink(guestId: string, mealId: string) {
+        const nextState = mealForm.current.assignDrink(form, guestId, mealId)
+        setForm(nextState)
+    }
 
     function onNext() {
         dispatch(orderingSlice.actions.setStep(OrderingDomainModel.OrderingStep.SUMMARY))
@@ -92,12 +101,6 @@ export const useMeals = () => {
         isSubmittable: isSubmittable()
     }
 }
-
-
-
-
-
-
 
 // Version qui précède le montage de la class MealForm dans core
 
