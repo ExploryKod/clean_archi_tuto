@@ -2,6 +2,7 @@ import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.do
 import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
 import Carousel from '@taotask/modules/order/react/components/carousel/Carousel';
 import '@taotask/modules/order/react/components/carousel/carousel.css';
+import React from "react";
 
 
 
@@ -20,55 +21,55 @@ export const MealsSection = () => {
         <div className="App">
 
     </div>
-        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
-             {presenter.guests.map((guest:any) => (
-                <>
-                    <div key={guest.id}>
-                        <span>{guest.firstName} - {guest.lastName}</span>
-                        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-3">
-                            <section>
-                            <div>
-                                <h1>Entrées</h1>
-                            </div>
-                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5">
-                                <Carousel
-                                    show={1}
-                                >
-                                    {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="my-5 text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}
-                                </Carousel>
-                            </div>
-                            </section>
-                            <section>
-                            <div>
-                                <h1>Plat</h1>
-                            </div>
-                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
-                                <Carousel
-                                    show={1}
-                                >
-                                    {presenter.getSelectableMainCourses(guest.id).map((main) => (<div className="my-5 text-center bg-yellow-200" key={main.id}>{main.title}</div>))}
-                                </Carousel>
-                            </div>
-                            </section>
-                            <section>
-                            <div>
-                                <h1>Dessert</h1>
-                            </div>
-                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
-                                <Carousel
-                                    show={1}
-                                >
-                                    {presenter.getSelectableDesserts(guest.id).map((dessert) => (<div className="my-5 text-center bg-yellow-200" key={dessert.id}>{dessert.title}</div>))}
-                                </Carousel>
-                            </div>
-                            </section>
-                        </div>
-                    </div>
-                </>
-             ))}
-        </div>
+        {/*<div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">*/}
+             {/*{presenter.guests.map((guest:any) => (*/}
+             {/*   <>*/}
+        {/*            <div key={guest.id}>*/}
+        {/*                <span>{guest.firstName} - {guest.lastName}</span>*/}
+        {/*                <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-3">*/}
+        {/*                    <section>*/}
+        {/*                    <div>*/}
+        {/*                        <h1>Entrées</h1>*/}
+        {/*                    </div>*/}
+        {/*                    <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5">*/}
+        {/*                        /!*<Carousel*!/*/}
+        {/*                        /!*    show={1}*!/*/}
+        {/*                        /!*>*!/*/}
+        {/*                        /!*    {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="my-5 text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}*!/*/}
+        {/*                        /!*</Carousel>*!/*/}
+        {/*                    </div>*/}
+        {/*                    </section>*/}
+        {/*                    <section>*/}
+        {/*                    <div>*/}
+        {/*                        <h1>Plat</h1>*/}
+        {/*                    </div>*/}
+        {/*                    <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">*/}
+        {/*                        /!*<Carousel*!/*/}
+        {/*                        /!*    show={1}*!/*/}
+        {/*                        /!*>*!/*/}
+        {/*                        /!*    {presenter.getSelectableMainCourses(guest.id).map((main) => (<div className="my-5 text-center bg-yellow-200" key={main.id}>{main.title}</div>))}*!/*/}
+        {/*                        /!*</Carousel>*!/*/}
+        {/*                    </div>*/}
+        {/*                    </section>*/}
+        {/*                    <section>*/}
+        {/*                    <div>*/}
+        {/*                        <h1>Dessert</h1>*/}
+        {/*                    </div>*/}
+        {/*                    <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">*/}
+        {/*                        /!*<Carousel*!/*/}
+        {/*                        /!*    show={1}*!/*/}
+        {/*                        /!*>*!/*/}
+        {/*                        /!*    {presenter.getSelectableDesserts(guest.id).map((dessert) => (<div className="my-5 text-center bg-yellow-200" key={dessert.id}>{dessert.title}</div>))}*!/*/}
+        {/*                        /!*</Carousel>*!/*/}
+        {/*                    </div>*/}
+        {/*                    </section>*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </>*/}
+        {/*     ))}*/}
+        {/*</div>*/}
    
-        <div className="mx-auto mb-5 w-full flex flex-col bg-gray-500">
+        <div className="mx-auto mb-5 w-full flex flex-col">
      
         {presenter.guests.map((guest:any) => (
             <MealComposer 
@@ -166,8 +167,25 @@ export const MealComposer: React.FC<{
     onDrinkSelected,
 }) => {
     return (<>
-    
-   
+
+        <div className="mx-auto mb-5 w-full flex flex-col">
+            <h4 className="mx-auto my-3 text-lg font-bold">{firstName} {lastName}</h4>
+        </div>
+
+        <div className="mx-auto mb-5 w-full flex max-w-[600px]">
+            {entries.map((entry) => (
+                <div key={entry.id} onClick={() => onEntrySelected(guestId, entry.id)} className={`w-full my-5 mx-auto flex gap-2`} >
+                    <div className={`cursor-pointer my-5 mx-3 p-5 w-[200px] flex-wrap rounded bg-yellow-700`}>
+                        <div className="flex flex-col gap-3 items-start justify-center">
+                            <h3 className={`text-lg font-bold text-yellow-100`}>{entry.title}</h3>
+                            <p className={`text-sm font-bold text-yellow-100}`}>{entry.price} €</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+
     </>)
 }
 
