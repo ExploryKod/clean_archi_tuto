@@ -32,6 +32,10 @@ export const useGuestSection = () => {
         
     function changeOrganizer(id:string) {
         console.log('change' , id)
+        if(checkBoxOrganizer.current) {
+            console.log("ref checkbox", checkBoxOrganizer.current.checked);
+        }
+      
         const newState = guestForm.current.changeOrganizer(form, id);
         setForm(newState);
     }
@@ -49,6 +53,7 @@ export const useGuestSection = () => {
     const guestForm = useRef(new GuestForm(idProvider as IIDProvider));
     const bottomGuestRef = useRef<HTMLDivElement>(null);
     const [form, setForm] = useState<OrderingDomainModel.Form>(initialState);
+    const checkBoxOrganizer = useRef<HTMLInputElement>(null)
 
     // Cela ne permettais pas d'assurer la persistance de l'état précédent (si je clique sur précèdent, le guests se vide, remis à 0)
     // const [form, setForm] = useState<OrderingDomainModel.Form>({guests:[], organizerId: null});
@@ -66,6 +71,7 @@ export const useGuestSection = () => {
         changeOrganizer,
         isSubmitable: isSubmitable(),
         form,
-        bottomGuestRef
+        bottomGuestRef,
+        checkBoxOrganizer
     }
 }

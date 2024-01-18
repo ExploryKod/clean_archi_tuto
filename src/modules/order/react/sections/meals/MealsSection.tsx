@@ -16,8 +16,60 @@ export const MealsSection = () => {
         <div className="mx-auto mb-5 w-full flex flex-col">
             <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Choix de vos plats:</h3>  
         </div> 
-     
+
+        <div className="App">
+
+    </div>
+        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
+             {presenter.guests.map((guest:any) => (
+                <>
+                    <div key={guest.id}>
+                        <span>{guest.firstName} - {guest.lastName}</span>
+                        <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-3">
+                            <section>
+                            <div>
+                                <h1>Entrées</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableEntries(guest.id).map((entry) => (<div className="my-5 text-center bg-yellow-200" key={entry.id}>{entry.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
+                            <section>
+                            <div>
+                                <h1>Plat</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 ">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableMainCourses(guest.id).map((main) => (<div className="my-5 text-center bg-yellow-200" key={main.id}>{main.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
+                            <section>
+                            <div>
+                                <h1>Dessert</h1>
+                            </div>
+                            <div className="mx-auto mb-5 w-full flex flex-col items-center justify-center gap-5 bg-gray-500">
+                                <Carousel
+                                    show={1}
+                                >
+                                    {presenter.getSelectableDesserts(guest.id).map((dessert) => (<div className="my-5 text-center bg-yellow-200" key={dessert.id}>{dessert.title}</div>))}
+                                </Carousel>
+                            </div>
+                            </section>
+                        </div>
+                    </div>
+                </>
+             ))}
+        </div>
+   
         <div className="mx-auto mb-5 w-full flex flex-col bg-gray-500">
+     
         {presenter.guests.map((guest:any) => (
             <MealComposer 
                 key={guest.id} 
@@ -37,10 +89,13 @@ export const MealsSection = () => {
                 onDessertSelected={presenter.assignDessert}
                 onDrinkSelected={presenter.assignDrink}
             />))}
+           
        </div>
+  
        <div className="w-full mx-auto flex justify-center gap-2">
             <button
-            type="submit"
+            onClick={presenter.onPrevious}
+            type="button"
             className="inline-block rounded bg-[#458236] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
             focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
@@ -48,9 +103,10 @@ export const MealsSection = () => {
             active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
             dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] 
             dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-            Ajouter
+            Précèdent
             </button>
             <button
+            onClick={presenter.onNext}
             type="button"
             className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
             shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
@@ -110,17 +166,8 @@ export const MealComposer: React.FC<{
     onDrinkSelected,
 }) => {
     return (<>
-        <div className="App">
-      <Carousel
-        show={2}
-        infiniteLoop
-        withIndicator
-      >
-        {entries.map((entry:any) => (
-            <h2 key={entry.id} data-testid={`carousel-item-${entry.id}`}>{entry.name}</h2>
-        ))}   
-      </Carousel>
-    </div>
+    
+   
     </>)
 }
 
