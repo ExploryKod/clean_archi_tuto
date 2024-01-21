@@ -5,16 +5,19 @@ export type OrderingState = {
     step: OrderingDomainModel.OrderingStep,
     form: OrderingDomainModel.Form
     availableTables: {
+        data: OrderingDomainModel.Table[];
         status: 'idle' | 'loading' | 'success' | 'error';
         error: string | null;
-        data: OrderingDomainModel.Table[];
     };
     availableMeals: {
+        data: OrderingDomainModel.Meal[];
         status: 'idle' | 'loading' | 'success' | 'error';
         error: string | null;
-        data: OrderingDomainModel.Meal[];
-    }
+    };
+    reservation: ReservationStatus;
 }
+
+export type ReservationStatus = { status: "idle" } | {status: "loading" } | {status: "success"} | {status: "error", error: string}
 
 export const initialState: OrderingState = {
     step: OrderingDomainModel.OrderingStep.GUESTS,
@@ -32,7 +35,8 @@ export const initialState: OrderingState = {
         status: 'idle',
         error: null,
         data: []
-    }
+    },
+    reservation: { status: "idle" }
 }
 // On va séparer les logiques et utiliser l'event driven dev (en version simplifiée) > voir store.ts
 // On va rassembler a logique entière qui suit l'étape de choix de guest dans un autre endroit, dans un listener

@@ -8,5 +8,5 @@ export type Dependencies = {
     // Nouvelle dépendance ajoutée pour les test de fetch-table.usecase.test.ts
     tableGateway?: ITableGateway;
     mealGateway?: IMealGateway;
-    reservationGateway: IReservationGateway;
+    reservationGateway?: IReservationGateway;
 };
