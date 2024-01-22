@@ -19,11 +19,11 @@ describe("Fetch meals", () => {
         });
 
         const promise = store.dispatch(fetchMeals);
-        expect(store.getState().ordering.availableTables.status).toEqual("loading");
+        expect(store.getState().ordering.availableMeals.status).toEqual("loading");
        
         await promise;
         expect(store.getState().ordering.availableMeals.data).toEqual(listOfMeals);
-        expect(store.getState().ordering.availableTables.status).toEqual("success");
+        expect(store.getState().ordering.availableMeals.status).toEqual("success");
     });
 
     it("Should handle fetching meals errors", async () => {

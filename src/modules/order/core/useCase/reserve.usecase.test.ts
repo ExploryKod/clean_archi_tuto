@@ -54,8 +54,28 @@ describe("Reserve", () => {
 
         const promise = store.dispatch(reserve())
         expect(store.getState().ordering.reservation.status).toEqual("loading")
-
         await promise;
+        expect(store.getState().ordering.reservation.status).toEqual("success")
+
+        reservationGateway.expectReserveWasCallWith({  
+            tableId: "1",
+            guests: [
+                {
+                    id: "1",
+                    firstName: "",
+                    lastName: "",
+                    age: 21,
+                    isOrganizer: true,
+                    meals: {
+                        entry: null,
+                        mainCourse: "1",
+                        dessert: null,
+                        drink: null
+                    }
+                }
+            ]
+        })
+        expect(store.getState().ordering.step).toEqual(OrderingDomainModel.OrderingStep.RESERVED)
     })
 })
 
