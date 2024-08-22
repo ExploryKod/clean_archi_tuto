@@ -33,7 +33,7 @@ type Summary = {
 const selectSummary = (state: AppState): Summary => {
 
     function findMealById(id: string) {
-        return meals.find((meal: OrderingDomainModel.Meal) => meal === meal) ?? null
+        return meals.find((meal) => meal === meal) ?? null
     }
 
 
@@ -63,22 +63,16 @@ const selectSummary = (state: AppState): Summary => {
     };
 };
 
-export const useSummary = () => {
+export const useReserved = () => {
 
-    function onNext(){
-       dispatch(orderingSlice.actions.setStep(OrderingStep.RESERVED))
+    function onNewTable(){
+       dispatch(orderingSlice.actions.setStep(OrderingStep.GUESTS))
     }
 
-    function onPrevious(){
-        dispatch(orderingSlice.actions.setStep(OrderingStep.MEALS))
-    }
 
     const dispatch = useAppDispatch()
-    const summary = useSelector(selectSummary)
-
+ 
     return {
-        onNext,
-        onPrevious,
-        summary
+        onNewTable
     }
 }
