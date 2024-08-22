@@ -50,6 +50,7 @@ export const useMeals = () => {
 
     function assignEntry(guestId: string, mealId: string) {
         const nextState = mealForm.current.assignEntry(form, guestId, mealId)
+        console.log('meals-step - selectedEntries:', nextState)
         setForm(nextState)
     }
 
@@ -86,6 +87,8 @@ export const useMeals = () => {
     //  Une fois nos tests et MealForm créé avec ses méthodes, on va l'instancier dans une ref pour appeler .current sur certaines méthodes
     const mealForm = useRef(new MealForm())
 
+    console.log('meals-step - meals:', meals)
+    
 
 
     return {
