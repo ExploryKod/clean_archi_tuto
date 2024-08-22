@@ -33,7 +33,7 @@ type Summary = {
 const selectSummary = (state: AppState): Summary => {
 
     function findMealById(id: string) {
-        return meals.find((meal: OrderingDomainModel.Meal) => meal === meal) ?? null
+        return meals.find((meal: OrderingDomainModel.Meal) => meal.id === id) ?? null
     }
 
 
@@ -74,7 +74,7 @@ export const useSummary = () => {
     }
 
     const dispatch = useAppDispatch()
-    const summary = useSelector(selectSummary)
+    const summary: Summary = useSelector(selectSummary)
 
     return {
         onNext,
