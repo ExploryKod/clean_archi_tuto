@@ -18,8 +18,16 @@ export class InMemoryMealGateway implements IMealGateway {
             {id: '4', title: 'Weed confit', type: OrderingDomainModel.MealType.MAIN_COURSE, requiredAge:18, price: 5},
             {id: '5', title: 'Raita', type: OrderingDomainModel.MealType.ENTRY, requiredAge:1, price: 5},
             {id: '6', title: 'Raita alcoolisée', type: OrderingDomainModel.MealType.ENTRY, requiredAge:18, price: 5},
-            {id: '7', title: 'Rhum', type: OrderingDomainModel.MealType.DRINK, requiredAge:18, price: 5},
-            {id: '8', title: 'Jus D\'Orange', type: OrderingDomainModel.MealType.DRINK, requiredAge:1, price: 5}
+            {id: '7', title: 'Rhum', type: OrderingDomainModel.MealType.DRINK, requiredAge:0, price: 5},
+            {id: '8', title: 'Jus D\'Orange', type: OrderingDomainModel.MealType.DRINK, requiredAge:1, price: 5},
+            {id: '9', title: 'Tiramisu Alcoolisé', type: OrderingDomainModel.MealType.ENTRY, requiredAge:18, price: 5},
+            {id: '10', title: 'Tiramisu', type: OrderingDomainModel.MealType.ENTRY, requiredAge:1, price: 5},
+            {id: '11', title: 'Salade des Alpilles', type: OrderingDomainModel.MealType.MAIN_COURSE, requiredAge:1, price: 5},
+            {id: '12', title: 'Marinade de Boeuf', type: OrderingDomainModel.MealType.MAIN_COURSE, requiredAge:0, price: 5},
+            {id: '13', title: 'Melon d\' Avignon', type: OrderingDomainModel.MealType.ENTRY, requiredAge:1, price: 5},
+            {id: '14', title: 'Tomates du Sud', type: OrderingDomainModel.MealType.ENTRY, requiredAge:18, price: 5},
+            {id: '15', title: 'Avocats', type: OrderingDomainModel.MealType.ENTRY, requiredAge:0, price: 5},
+            {id: '16', title: 'Carottes rapées', type: OrderingDomainModel.MealType.ENTRY, requiredAge:0, price: 5}
         ]
         
     }

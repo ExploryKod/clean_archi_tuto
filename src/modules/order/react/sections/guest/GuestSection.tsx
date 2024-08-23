@@ -10,18 +10,14 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
     const presenter:any = useGuestSection();
 
     console.log("restaurant list on invite page", restaurantList)   
-    return <section className="
-    w-full py-[50px] mx-auto max-w-[1200px] 
-    bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] 
-    rounded animate-fade-in-down shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-        <div className="mx-auto mb-5 w-full flex flex-col">
+    return <section className="bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] mx-auto py-[50px] rounded w-full max-w-[1200px] animate-fade-in-down">
+        <div className="flex flex-col mx-auto mb-5 w-full">
         {restaurantList.restaurantId ? 
-            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">
-            Vous avez choisi de diner là:&nbsp;&quot;{restaurantList.restaurants
-            .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;
+            <h2 className="mx-auto my-3 font-bold text-[#854854] text-xl">
+            Qui voulez-vous inviter&nbsp;&quot;{restaurantList.restaurants
+            .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;&nbsp;?
             </h2> : 
-            <h2 className="mx-auto my-3 text-xl font-bold text-[#854854]">Pour inviter, choisissez un restaurant</h2>}
-            <h3 className="mx-auto my-3 text-lg font-bold text-[#854854]">Vous êtes prêt pour créer votre tablée:</h3>  
+            <h2 className="mx-auto my-3 font-bold text-[#854854] text-xl">Pour inviter, choisissez un restaurant</h2>}
         </div>
         {restaurantList.restaurantId && presenter.form.guests.map((guest:any) => (
             <div key={guest.id}>
@@ -39,32 +35,18 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
             </div>
         ))}
        
-       <div ref={presenter.bottomGuestRef} className="w-full mx-auto flex justify-center gap-2">
+       <div ref={presenter.bottomGuestRef} className="flex justify-center gap-2 mx-auto w-full">
             <button
             onClick={presenter.addGuest}
             type="submit"
-            className="inline-block rounded bg-[#458236] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
-            shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
-            focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
-            focus:outline-none focus:ring-0 
-            active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
-            dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] 
-            dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-            Ajouter
+            className="inline-block bg-[#458236] hover:bg-primary-600 focus:bg-primary-600 active:bg-primary-700 shadow-[0_4px_9px_-4px_#3b71ca] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] px-6 pt-2.5 pb-2 rounded focus:ring-0 font-medium text-white text-xs uppercase leading-normal transition duration-150 ease-in-out focus:outline-none">
+            Inviter une personne
             </button>
             <button
             onClick={presenter.onNext}
             disabled={presenter.isSubmitable === false}
             type="button"
-            className="inline-block rounded bg-[#458236]  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white 
-            shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 
-            disabled:bg-gray-500 disabled:text-gray-50 disabled:border-gray-200 disabled:shadow-none
-            hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
-            focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 
-            active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
-            dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] 
-            dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] 
-            dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+            className="inline-block disabled:border-gray-200 bg-[#458236] hover:bg-primary-600 focus:bg-primary-600 active:bg-primary-700 disabled:bg-gray-500 shadow-[0_4px_9px_-4px_#3b71ca] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] disabled:shadow-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] px-6 pt-2.5 pb-2 rounded focus:ring-0 font-medium text-white text-xs disabled:text-gray-50 uppercase leading-normal transition duration-150 ease-in-out focus:outline-none">
             Suivant
             </button>
         </div>
@@ -93,18 +75,15 @@ const GuestRows: React.FC<{
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer, checkboxRef}) => {
 
     return (
-    <div className="my-5 mx-auto flex gap-2 justify-center">
+    <div className="flex justify-center gap-2 mx-auto my-5">
         
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
-                    <span className="block text-sm font-medium text-slate-700">Prénom</span>
+                    <span className="block font-medium text-slate-700 text-sm">Prénom</span>
                         <input type="text" 
                         id="firstName"
                         placeholder="Andrew"
-                        className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
-                        placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-                        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                        invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
                         onChange= {(e) => onChange(id, 'firstName', e.target.value)} 
                    
                         />
@@ -112,14 +91,11 @@ const GuestRows: React.FC<{
             </div>
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
-                    <span className="block text-sm font-medium text-slate-700">Nom</span>
+                    <span className="block font-medium text-slate-700 text-sm">Nom</span>
                         <input type="text" 
                         id="lastName"
                         placeholder="Collins"
-                        className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
-                        placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-                        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                        invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
                         min="0"
                         onChange= {(e) => onChange(id, "lastName", e.target.value)} 
                       
@@ -128,14 +104,11 @@ const GuestRows: React.FC<{
             </div>
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
-                    <span className="block text-sm font-medium text-slate-700">Âge</span>
+                    <span className="block font-medium text-slate-700 text-sm">Âge</span>
                         <input type="number" 
                         id="age"
                         placeholder="25"
-                        className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm
-                        placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-                        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                        invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
                         min="0"
                         onChange= {(e) => onChange(id, "age", parseInt(e.target.value))} 
                         />
@@ -143,13 +116,12 @@ const GuestRows: React.FC<{
             </div>
           
             <div className="relative flex flex-col justify-end items-center">
-                <Button className="group shadow-[0_2px_3px_-2px_#000] block ml-5 mb-1 p-0 h-auto w-auto 
-                                    text-sm bg-gray-100 rounded" onClick={() => remove(id)}>
-                    <RiDeleteBin6Line className="text-red-600 group-hover:text-white h-4 w-4 self-center" />
+                <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
+                    <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
                 </Button>
             </div>
             <div className="relative flex flex-col justify-end items-center">
-                <div className="absolute left-1 bottom-[-5px]">
+                <div className="bottom-[-5px] left-1 absolute">
                     <Checkbox  
                     defaultChecked={isOrganizer}
                     onChange={() => changeOrganizer(id)} 
@@ -157,7 +129,7 @@ const GuestRows: React.FC<{
                     ripple={true}
                     color="teal"
                  
-                    className="h-6 w-6 shadow-[0_2px_3px_-2px_#000] bg-gray-100 rounded"
+                    className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
                     />
                 </div>
               
