@@ -1,4 +1,5 @@
 import React, { Children } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './carousel.css'
 
 export interface ICarouselProps {
@@ -363,9 +364,9 @@ const Carousel = ({
             <button
               data-testid="left-button"
               onClick={previousItem}
-              className="left-arrow-button"
+              className="left-arrow-button group"
             >
-              <span className="left-arrow" />
+                <ChevronLeft className='group-hover:text-white text-[#458236]' />
             </button>
           : null
         }
@@ -407,9 +408,9 @@ const Carousel = ({
               type="button"
               data-testid="right-button"
               onClick={nextItem}
-              className="right-arrow-button"
+              className="right-arrow-button group"
             >
-              <span className="right-arrow" />
+              <ChevronRight className='group-hover:text-white text-[#458236]' />
             </button>
           : null
         }

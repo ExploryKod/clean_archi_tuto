@@ -4,6 +4,7 @@ import { InMemoryTableGateway } from "@taotask/modules/order/core/gateway-infra/
 import { Dependencies } from "@taotask/modules/store/dependencies";
 import { AppStore, createStore } from "@taotask/modules/store/store";
 
+
 export class App {
   public dependencies: Dependencies;
   public store: AppStore;

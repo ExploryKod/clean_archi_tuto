@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import {orderingSlice} from "@taotask/modules/order/core/store/ordering.slice";
 import OrderingStep = OrderingDomainModel.OrderingStep;
 
+
 type MealSummary = {
     id: string,
     title: string
@@ -36,6 +37,10 @@ const selectSummary = (state: AppState): Summary => {
         return meals.find((meal: OrderingDomainModel.Meal) => meal.id === id) ?? null
     }
 
+    function findRestaurantById(id: string) {
+        return meals.find((meal: OrderingDomainModel.Meal) => meal.restaurantId === id) ?? null
+    }
+
 
     const tableId = state.ordering.form.tableId
     const table = state.ordering.availableTables.data.find((table: OrderingDomainModel.Table) => table.id === tableId)!
@@ -51,7 +56,8 @@ const selectSummary = (state: AppState): Summary => {
             mainCourse: findMealById(guest.meals.mainCourse!)!,
             dessert: guest.meals.dessert ? findMealById(guest.meals.dessert): null,
             drink: guest.meals.drink ? findMealById(guest.meals.drink): null
-        }
+        },
+        restaurantId: guest.restaurantId ? findRestaurantById(guest.restaurantId.toString()): null
     }))
 
     return {

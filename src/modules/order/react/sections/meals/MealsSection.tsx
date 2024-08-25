@@ -1,10 +1,9 @@
-import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
-import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
-import Carousel from '@taotask/modules/order/react/components/carousel/Carousel';
-import '@taotask/modules/order/react/components/carousel/carousel.css';
 import React from "react";
-
-
+import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
+import Image  from 'next/image'
+import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
+import  Carousel  from '@taotask/modules/order/react/components/carousel/Carousel';
+import ImageContainer from "../../components/containers/ImageContainer";
 
 export const MealsSection = () => {
     const presenter = useMeals()
@@ -15,12 +14,9 @@ export const MealsSection = () => {
             <h3 className="mx-auto my-3 font-bold text-[#854854] text-lg">Choix de vos plats:</h3>  
         </div> 
 
-        <div className="App">
 
-    </div>
- 
         <div className="flex flex-col mx-auto mb-5 w-full">
-     
+        
         {presenter.guests.map((guest:any) => (
             <MealComposer 
                 key={guest.id} 
@@ -42,7 +38,7 @@ export const MealsSection = () => {
             />))}
            
        </div>
-  
+
        <div className="flex justify-center gap-2 mx-auto w-full">
             <button
             onClick={presenter.onPrevious}
@@ -102,28 +98,48 @@ export const MealComposer: React.FC<{
     onDessertSelected,
     onDrinkSelected,
 }) => {
+
+    
+
     return (<>
 
         <div className="flex flex-col mx-auto mb-5 w-full">
             <h4 className="mx-auto my-3 font-bold text-lg">{firstName} {lastName}</h4>
         </div>
 
-        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[1200px]">
+        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[1200px] h-56 sm:h-64 xl:h-80 2xl:h-96">
+          
+        <Carousel show={3}>
             {entries.map((entry) => (
+              
                 <div key={entry.id} onClick={() => onEntrySelected(guestId, entry.id)} className={`
                 max-w-[300px] my-5 mx-auto flex items-center justify-center gap-2`} >
-                    <div className={`cursor-pointer ${selectedEntryId === entry.id ? "bg-[#C9371F]" : "bg-yellow-700"} hover:opacity-90
-                        my-5 mx-3 p-5 w-[200px] min-h-[200px] flex-wrap rounded bg-yellow-700`}>
-                        <div className="flex flex-col justify-center items-start gap-3">
-                            <h3 className={`text-center text-lg font-bold text-yellow-100`}>{entry.title}</h3>
-                            <p className={`text-center text-sm font-bold text-yellow-100`}>{entry.price} €</p>
+
+                    <div className={`relative cursor-pointer group hover:opacity-90
+                        my-5 mx-3 p-0 w-[200px] flex-wrap rounded`}>
+
+                        <ImageContainer >
+                        <Image 
+                            width={200}
+                            height={200}
+                            src={entry.imageUrl}
+                            alt={entry.title}
+                            className="group-hover:opacity-90 rounded w-[200px] h-[200px] object-cover"
+                        />
+                        </ImageContainer>
+
+                        <div className={`flex flex-col rounded group-hover:opacity-90 justify-center items-center gap-3 mt-4 p-5 min-h-[100px] ${selectedEntryId === entry.id ? 
+                        "bg-[#C9371F] border-2 border border-[#C9371F]" : "bg-transparent border border-2 border-yellow-900"}`}>
+                            <h3 className={`text-center text-sm font-bold text-yellow-900`}>{entry.title}</h3>
+                            <p className={`text-center text-sm font-bold text-yellow-900`}>{entry.price} €</p>
                         </div>
+                   
                     </div>
                 </div>
+              
             ))}
+      </Carousel> 
         </div>
-
-
     </>)
 }
 
