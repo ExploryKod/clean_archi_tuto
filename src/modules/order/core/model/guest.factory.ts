@@ -13,6 +13,7 @@ export class GuestFactory {
                 dessert: null,
                 drink : null
             },
+            restaurantId: null,
             ...data
         }
     }

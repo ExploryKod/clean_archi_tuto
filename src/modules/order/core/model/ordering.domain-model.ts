@@ -2,7 +2,6 @@ export namespace OrderingDomainModel {
     
     export type Form = {
         guests: Guest[],
-        restaurants: RestaurantList,
         organizerId: string | number | null,
         tableId: string | null
     }
