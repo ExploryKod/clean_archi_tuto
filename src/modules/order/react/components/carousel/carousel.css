@@ -54,24 +54,20 @@
     z-index: 1;
     top: 50%;
     transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    background-color: white;
-    border: 1px solid #ddd;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background-color: #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-                rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-                rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     transition: all 150ms linear;
   }
-  
+
+
   .left-arrow-button:hover, .right-arrow-button:hover {
-    background-color: #ddd;
+    background-color: #458236;
   }
   
   .left-arrow-button:focus, .right-arrow-button:focus {
@@ -79,35 +75,13 @@
   }
   
   .left-arrow-button {
-    left: 24px;
+    left: 10px;
   }
   
   .right-arrow-button {
-    right: 24px;
+    right: 10px;
   }
-  
-  .left-arrow {
-    display: block;
-    width: 0;
-    height: 0;
-    border-top: 7.5px solid transparent;
-    border-bottom: 7.5px solid transparent;
-    border-right:10px solid #484848;
-    border-left: 5px solid transparent;
-    transform: translateX(-25%);
-  }
-  
-  .right-arrow {
-    display: block;
-    width: 0;
-    height: 0;
-    border-top: 7.5px solid transparent;
-    border-bottom: 7.5px solid transparent;
-    border-left:10px solid #484848;
-    border-right: 5px solid transparent;
-    transform: translateX(25%);
-  }
-  
+    
   @media (hover: none) and (pointer: coarse) {
     .left-arrow-button, .right-arrow-button {
       display: none;

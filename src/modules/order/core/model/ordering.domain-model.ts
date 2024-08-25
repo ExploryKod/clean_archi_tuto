@@ -1,6 +1,8 @@
 export namespace OrderingDomainModel {
+    
     export type Form = {
         guests: Guest[],
+        restaurants: RestaurantList,
         organizerId: string | number | null,
         tableId: string | null
     }
@@ -10,6 +12,7 @@ export namespace OrderingDomainModel {
 
     // Alias pour rendre compréhensible nos string dans dessert: string | null (string est en fait un id)
     export type MealId = string;
+    export type RestaurantId = string | number | null;
     // Enumération de tous les plats possible
     export enum MealType {
         ENTRY = "ENTRY",
@@ -20,10 +23,12 @@ export namespace OrderingDomainModel {
 
     export type Meal = {
         id: MealId,
+        restaurantId: RestaurantId,
         title: string,
         type: MealType,
         price: number,
         requiredAge: number | null,
+        imageUrl: string
     }
 
     export type Guest = {
@@ -37,11 +42,12 @@ export namespace OrderingDomainModel {
             dessert: MealId | null,
             drink : MealId | null
         }
+        restaurantId: RestaurantId
     }
 
     export type RestaurantList = {
         restaurants: Restaurant[],
-        restaurantId: string | number | null
+        restaurantId: RestaurantId 
     }
 
     export type Restaurant = {
