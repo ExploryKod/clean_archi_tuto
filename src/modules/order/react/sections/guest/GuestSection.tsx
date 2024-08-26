@@ -107,7 +107,7 @@ const GuestRows: React.FC<{
                         <input type="number" 
                         id="age"
                         placeholder="25"
-                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full md:max-w-[50px] text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
+                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full md:max-w-[70px] text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
                         min="0"
                         onChange= {(e) => onChange(id, "age", parseInt(e.target.value))} 
                         />
