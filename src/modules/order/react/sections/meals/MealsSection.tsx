@@ -39,7 +39,7 @@ export const MealsSection = () => {
            
        </div>
 
-       <div className="flex justify-center gap-2 mx-auto w-full">
+       <div className="max-lg:mt-[150px] flex justify-center gap-2 mx-auto w-full">
             <button
             onClick={presenter.onPrevious}
             type="button"
