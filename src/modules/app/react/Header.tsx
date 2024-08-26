@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
   <div className="flex flex-wrap justify-between items-center px-6 w-full">
     <div className="flex items-center">
       <button
-        className="block border-0 lg:hidden bg-transparent hover:shadow-none focus:shadow-none py-2 pr-2.5 focus:ring-0 text-neutral-500 dark:text-neutral-200 hover:no-underline focus:no-underline focus:outline-none"
+        className="block border-0 hidden bg-transparent hover:shadow-none focus:shadow-none py-2 pr-2.5 focus:ring-0 text-neutral-500 dark:text-neutral-200 hover:no-underline focus:no-underline focus:outline-none"
         type="button" data-te-collapse-init data-te-target="#navbarSupportedContentY"
         aria-controls="navbarSupportedContentY" aria-expanded="false" aria-label="Toggle navigation">
           <span>
