@@ -9,7 +9,7 @@ import { OrderingDomainModel } from '@taotask/modules/order/core/model/ordering.
 export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.RestaurantList}> = ({restaurantList}) => {
     const presenter:any = useGuestSection();
 
-    console.log("restaurant list on invite page", restaurantList)   
+
     return <section className="bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] mx-auto py-[50px] rounded w-full max-w-[1200px] animate-fade-in-down">
         <div className="flex flex-col mx-auto mb-5 w-full">
         {restaurantList.restaurantId ? 
@@ -53,10 +53,6 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
     </section>
 }
 
-// const GuestButtons: React.FC<{presenter:any}> = ({presenter}) => {
-    
-//     return 
-// }
 
 const GuestRows: React.FC<{
     id: string | number,
@@ -75,7 +71,7 @@ const GuestRows: React.FC<{
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer, checkboxRef}) => {
 
     return (
-    <div className="flex justify-center gap-2 mx-auto my-5">
+    <div className="flex flex-col md:flex-row justify-center gap-2 mx-auto my-5">
         
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
