@@ -23,11 +23,13 @@ export const SummarySection = () => {
                   <div className="mb-3">
                     <p className="text-orange-900">{guest.name}</p>
                   </div>
-                  <div className="flex flex-col justify-center items-center grow">
-                    <p className="text-center text-yellow-900">{guest.meals.entry && guest.meals.entry.title}</p>
-                    <p className="text-center text-yellow-900">{guest.meals.mainCourse && guest.meals.mainCourse.title}</p>
-                    <p className="text-center text-yellow-900">{guest.meals.dessert && guest.meals.dessert.title}</p>
-                    <p className="text-center text-yellow-900">{guest.meals.drink && guest.meals.drink.title}</p>
+                  <div className={`flex flex-col justify-center items-center grow`}>
+                    <p className="text-center text-yellow-900">{guest.meals.entry ? guest.meals.entry.title : null}</p>
+                    <p className="text-center text-yellow-900">{guest.meals.mainCourse ? guest.meals.mainCourse.title : null}</p>
+                    <p className="text-center text-yellow-900">{guest.meals.dessert ? guest.meals.dessert.title : null}</p>
+                    <p className="text-center text-yellow-900">{guest.meals.drink ? guest.meals.drink.title : null}</p>
+                    {!guest.meals.entry && !guest.meals.mainCourse && !guest.meals.dessert && !guest.meals.drink ? 
+                      (<p className="text-center text-yellow-900">Vous ne mangez rien ?</p>) : null}
                   </div>
               
               </div>
