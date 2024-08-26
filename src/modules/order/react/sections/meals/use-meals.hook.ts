@@ -50,7 +50,6 @@ export const useMeals = () => {
 
     function assignEntry(guestId: string, mealId: string) {
         const nextState = mealForm.current.assignEntry(form, guestId, mealId)
-        console.log('meals-step - selectedEntries:', nextState)
         setForm(nextState)
     }
 
@@ -68,6 +67,25 @@ export const useMeals = () => {
         const nextState = mealForm.current.assignDrink(form, guestId, mealId)
         setForm(nextState)
     }
+
+
+    function assignMeals(guestId: string, mealId: string, mealType: string) {
+        switch (mealType) {
+            case OrderingDomainModel.MealType.ENTRY:
+                assignEntry(guestId, mealId);
+                break;
+            case OrderingDomainModel.MealType.MAIN_COURSE:
+                assignMainCourse(guestId, mealId);
+                break;
+            case OrderingDomainModel.MealType.DESSERT:
+                assignDessert(guestId, mealId);
+                break;
+            case OrderingDomainModel.MealType.DRINK:
+                assignDrink(guestId, mealId);
+                break;
+        }
+    }
+
 
     function onNext() {
         // Aprés avoir créer le use case on branche la fonction chooseMeal ici
@@ -87,21 +105,19 @@ export const useMeals = () => {
     //  Une fois nos tests et MealForm créé avec ses méthodes, on va l'instancier dans une ref pour appeler .current sur certaines méthodes
     const mealForm = useRef(new MealForm())
 
-    console.log('meals-step - meals:', meals)
-    
-
-
     return {
         getSelectableEntries,
         getSelectableMainCourses,
         getSelectableDesserts,
         getSelectableDrinks,
+        assignMeals,
         assignEntry,
         assignMainCourse,
         assignDessert,
         assignDrink,
         onNext,
         onPrevious,
+        meals: meals || null,
         guests: form.guests,
         isSubmittable: isSubmittable()
     }
