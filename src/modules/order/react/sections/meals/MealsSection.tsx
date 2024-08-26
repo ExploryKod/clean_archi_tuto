@@ -39,7 +39,7 @@ export const MealsSection = () => {
            
        </div>
 
-       <div className="max-lg:mt-[150px] flex justify-center gap-2 mx-auto w-full">
+       <div className="flex justify-center gap-2 mx-auto max-lg:mt-[150px] w-full">
             <button
             onClick={presenter.onPrevious}
             type="button"
@@ -116,19 +116,19 @@ export const MealComposer: React.FC<{
                 max-w-[300px] my-5 mx-auto flex items-center justify-center gap-2`} >
 
                     <div className={`relative cursor-pointer group hover:opacity-90
-                        my-5 mx-3 p-0 w-[200px] flex-wrap rounded`}>
+                        my-5 mx-3 p-0 md:w-[200px] flex-wrap rounded`}>
 
-                        <ImageContainer >
+                        <ImageContainer classNames="hidden md:flex flex-col items-center justify-center">
                         <Image 
                             width={200}
                             height={200}
                             src={entry.imageUrl}
                             alt={entry.title}
-                            className="group-hover:opacity-90 rounded w-[200px] h-[200px] object-cover"
+                            className="group-hover:opacity-90 rounded md:w-[200px] md:h-[200px] object-cover"
                         />
                         </ImageContainer>
 
-                        <div className={`flex flex-col rounded group-hover:opacity-90 justify-center items-center gap-3 mt-4 p-5 min-h-[100px] ${selectedEntryId === entry.id ? 
+                        <div className={`flex flex-col rounded group-hover:opacity-90 justify-center items-center gap-3 mt-4 p-5 md:min-h-[100px] ${selectedEntryId === entry.id ? 
                         "bg-[#C9371F] border-2 border border-[#C9371F]" : "bg-transparent border border-2 border-yellow-900"}`}>
                             <h3 className={`text-center text-sm font-bold text-yellow-900`}>{entry.title}</h3>
                             <p className={`text-center text-sm font-bold text-yellow-900`}>{entry.price} €</p>

@@ -133,25 +133,21 @@ const GuestRows: React.FC<{
                 </div>
              </div>
 
-            <div className="flex justify-between items-center md:hidden mx-auto w-full max-w-[425px]">
+            <div className="flex justify-center items-center gap-[150px] md:hidden mx-auto w-full max-w-[425px]">
                 <div className="relative flex flex-col justify-end items-center md:hidden">
                     <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
                         <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
                     </Button>
                 </div>
-                
-                <div className="bottom-[-5px] left-1 absolute">
-                    <Checkbox  
-                    defaultChecked={isOrganizer}
-                    onChange={() => changeOrganizer(id)} 
-                    ref={checkboxRef}
-                    ripple={true}
-                    color="teal"
-                    className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
-                    />
-                </div>
+                <Checkbox  
+                defaultChecked={isOrganizer}
+                onChange={() => changeOrganizer(id)} 
+                ref={checkboxRef}
+                ripple={true}
+                color="teal"
+                className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
+                />
             </div>
-           
     </div>
     )
 }
