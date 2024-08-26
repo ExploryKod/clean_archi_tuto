@@ -11,7 +11,19 @@ export const MealsSection = () => {
     return (<>
       <section className="bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] mx-auto py-[50px] rounded w-full max-w-[1200px] animate-fade-in-down">
         <div className="flex flex-col mx-auto mb-5 w-full">
-            <h3 className="mx-auto my-3 font-bold text-[#854854] text-lg">Choix de vos plats:</h3>  
+            <h3 className="mx-auto my-3 font-bold text-[#854854] text-lg uppercase">Commandes des plats</h3>  
+            <div className="flex justify-center items-center bg-orange-200 mx-auto my-3 p-5 rounded rounded max-w-[700px]">
+                <Image src="/waiter.svg" height={200} width={200} alt="waiter" />
+                <div>
+                    <p className="mx-auto text-left text-md text-red-900 italic">
+                    Vous ne pouvez choisir qu&#39;un plat de chaque type par personne.</p>
+                    <p className="mx-auto mt-2 text-left text-md text-red-900 italic">Par exemple pour prendre <span className="font-bold">plusieurs entrées</span>, 
+                    revenez en arrière et créer un second invité 
+                    avec les mêmes prénom et nom que celui désireux de prendre plusieurs entrées.</p>
+                </div>
+               
+            </div>
+         
         </div> 
 
 
@@ -137,7 +149,7 @@ export const MealComposer: React.FC<{
 
         <div className="flex flex-col mx-auto mx-auto mb-5 p-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
             <div className="border-[#458236] border-2 mx-auto p-3 border rounded w-full">
-                <h4 className="mx-auto font-bold text-center text-lg">Choix de {firstName} {lastName}</h4>
+                <h4 className="mx-auto font-bold text-center text-lg text-orange-900">Choix de {firstName} {lastName}</h4>
                 <div className="flex justify-center items-center gap-5 mx-auto p-3">
                     <span className="bg-blue-100 px-2.5 py-0.5 rounded font-medium text-blue-800 text-sm">Entrées</span>
                     <span className="bg-gray-100 px-2.5 py-0.5 rounded font-medium text-gray-800 text-sm">Plats</span>

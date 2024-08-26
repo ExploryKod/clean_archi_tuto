@@ -19,7 +19,6 @@ export const ReservedSection = () => {
                 <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Nous présenterons cette fonctionnalité plus tard avec des service comme Resend</p>
                 <a href="https://resend.com" className={`block text-md text-center font-bold  text-orange-900 hover:text-[#458236] `}>Découvrir Resend</a>
             </div>
-          
         </div>
        
        <div className="flex justify-center gap-2 mx-auto w-full">

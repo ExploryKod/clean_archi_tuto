@@ -29,8 +29,8 @@ const oswald = Oswald({
 })
 
 export const metadata = {
-  title: "Saveurs des suds",
-  description: "Réservation de tables de restaurant dans les régions du sud de l'Europe",
+  title: "Saveurs des suds -demo",
+  description: "Site de démonstration de réservation de tables de restaurant fait en clean architecture en utilisant le TDD comme méthodologie",
 };
 
 export default function RootLayout({
