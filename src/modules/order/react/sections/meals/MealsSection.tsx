@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
 import Image  from 'next/image'
 import { useMeals } from '@taotask/modules/order/react/sections/meals/use-meals.hook';
@@ -27,10 +27,12 @@ export const MealsSection = () => {
                 selectedMainCourseId={guest.meals.mainCourse}
                 selectedDessertId={guest.meals.dessert}
                 selectedDrinkId={guest.meals.drink}
+                meals={presenter.meals}
                 entries={presenter.getSelectableEntries(guest.id)}
                 mainCourses={presenter.getSelectableMainCourses(guest.id)}
                 desserts={presenter.getSelectableDesserts(guest.id)}
                 drinks={presenter.getSelectableDrinks(guest.id)}
+                onMealSelected={presenter.assignMeals}
                 onEntrySelected={presenter.assignEntry}
                 onMainCourseSelected={presenter.assignMainCourse}
                 onDessertSelected={presenter.assignDessert}
@@ -68,11 +70,12 @@ export const MealComposer: React.FC<{
     selectedDessertId: string,
     selectedDrinkId: string,
 
+    meals: OrderingDomainModel.Meal[],
     entries: OrderingDomainModel.Meal[],
     mainCourses: OrderingDomainModel.Meal[],
     desserts: OrderingDomainModel.Meal[],
     drinks: OrderingDomainModel.Meal[],
-
+    onMealSelected: (guestId: string, id: string, type: string) => void,
     onEntrySelected: (guestId:string, id: string) => void,
     onMainCourseSelected: (guestId:string, id: string) => void,
     onDessertSelected: (guestId:string, id: string) => void,
@@ -88,52 +91,92 @@ export const MealComposer: React.FC<{
     selectedDessertId,
     selectedDrinkId,
 
+    meals,
     entries,
     mainCourses,
     desserts,
     drinks,
-
+    onMealSelected,
     onEntrySelected,
     onMainCourseSelected,
     onDessertSelected,
     onDrinkSelected,
 }) => {
 
-    const my_entry = entries.find(entry => entry.id === selectedEntryId);
+
+    const mealBorder = {
+        "ENTRY": "border-2 border border-blue-800",
+        "MAIN_COURSE": "border-2 border border-gray-800",
+        "DESSERT": "border-2 border border-red-800",
+        "DRINK": "border-2 border border-green-800",
+    }
+
+    const mealStyles = {
+        "ENTRY": "bg-blue-100 border-2 border border-blue-800 text-blue-800",
+        "MAIN_COURSE": "bg-gray-100 border-2 border border-gray-800 text-gray-800",
+        "DESSERT": "bg-red-100 border-2 border border-red-800 text-red-800",
+        "DRINK": "bg-green-100 border-2 border border-green-800 text-green-800",
+    }
+
+    const mealColors = {
+        "ENTRY": "blue",
+        "MAIN_COURSE": "gray",
+        "DESSERT": "red",
+        "DRINK": "green",
+    }
+
+
+    const mealTypes = {
+        "ENTRY": "Entrée",
+        "MAIN_COURSE": "Plat",
+        "DESSERT": "Dessert",
+        "DRINK": "Boisson",
+    }
 
     return (<>
 
         <div className="flex flex-col mx-auto mx-auto mb-5 p-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
             <div className="border-[#458236] border-2 mx-auto p-3 border rounded w-full">
-                <h4 className="mx-auto mt-3 font-bold text-lg">{firstName} {lastName}</h4>
+                <h4 className="mx-auto font-bold text-center text-lg">Choix de {firstName} {lastName}</h4>
+                <div className="flex justify-center items-center gap-5 mx-auto p-3">
+                    <span className="bg-blue-100 px-2.5 py-0.5 rounded font-medium text-blue-800 text-sm">Entrées</span>
+                    <span className="bg-gray-100 px-2.5 py-0.5 rounded font-medium text-gray-800 text-sm">Plats</span>
+                    <span className="bg-red-100 px-2.5 py-0.5 rounded font-medium text-red-800 text-sm">Desserts</span>
+                    <span className="bg-green-100 px-2.5 py-0.5 rounded font-medium text-green-800 text-sm">Boissons</span>
+                </div>
             </div>
         </div>
 
         <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
           
         <Carousel show={3}>
-            {entries.map((entry) => (
+            {meals.map((meal) => (
               
-                <div key={entry.id} onClick={() => onEntrySelected(guestId, entry.id)} className={`
+                <div key={meal.id} onClick={() => onMealSelected(guestId, meal.id, meal.type)} className={`
                 max-w-[300px] my-5 mx-auto flex items-center justify-center gap-2`} >
-
+                   
                     <div className={`relative cursor-pointer group hover:opacity-90
                         my-5 mx-3 p-0 md:w-[200px] flex-wrap rounded`}>
-
-                        <ImageContainer classNames="hidden sm:flex flex-col items-center justify-center">
+                         <span className={`inline-block mb-4 bg-${mealColors[meal.type]}-100 px-2.5 py-0.5 rounded font-medium text-${mealColors[meal.type]}-800 text-sm`}>{mealTypes[meal.type]}</span>
+                        <ImageContainer classNames="flex flex-col items-center justify-center">
                         <Image 
                             width={200}
                             height={200}
-                            src={entry.imageUrl}
-                            alt={entry.title}
+                            src={meal.imageUrl}
+                            alt={meal.title}
                             className="group-hover:opacity-90 rounded md:w-[200px] md:h-[200px] object-cover"
                         />
                         </ImageContainer>
 
-                        <div className={`flex flex-col rounded group-hover:opacity-90 justify-center items-center gap-3 mt-4 p-5 md:min-h-[100px] ${selectedEntryId === entry.id ? 
-                        "bg-[#C9371F] border-2 border border-[#C9371F]" : "bg-transparent border border-2 border-yellow-900"}`}>
-                            <h3 className={`text-center text-sm font-bold text-yellow-900`}>{entry.title}</h3>
-                            <p className={`text-center text-sm font-bold text-yellow-900`}>{entry.price} €</p>
+                        <div className={`flex flex-col rounded group-hover:opacity-90 justify-center items-center gap-3 mt-4 p-5 md:min-h-[100px] 
+                        ${meal.type && (selectedEntryId === meal.id || 
+                                        selectedDrinkId === meal.id || 
+                                        selectedDessertId === meal.id || 
+                                        selectedMainCourseId === meal.id) ? 
+                            `${mealStyles[meal.type]}` : `bg-transparent border border-2 ${mealBorder[meal.type]}`}`}
+                            >
+                            <h3 className={`text-center text-sm font-bold`}>{meal.title}</h3>
+                            <p className={`text-center text-sm font-bold`}>{meal.price} €</p>
                         </div>
                    
                     </div>

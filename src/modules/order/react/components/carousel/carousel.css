@@ -82,12 +82,6 @@
     right: 10px;
   }
     
-  @media (hover: none) and (pointer: coarse) {
-    .left-arrow-button, .right-arrow-button {
-      display: none;
-    }
-  }
-  
   .indicator-container {
     display: flex;
     flex-direction: row;

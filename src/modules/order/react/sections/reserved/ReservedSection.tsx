@@ -11,12 +11,13 @@ export const ReservedSection = () => {
         </div>
 
         <div className="flex flex-col mx-auto mb-5">
-            <div className="bg-[#6A4A38] mx-auto px-9 py-6 rounded w-full max-w-[600px]">
-            <p className={`mb-2 text-md text-center text-[#FDEFD8]`}>Etant donné un trés grand nombre de demandes, 
-                il n&#39;est pas possible pour ce restaurant de proposer un choix de créneaux, nous avons donc choisi pour vous un créneau disponible.</p>
-                <p className={`mb-2 text-md text-center text-[#FDEFD8]`}>Nous vous donnons rendez-vous aprés-demain à <span className="font-bold">19h30</span></p>
-                <p className={`mb-2 text-md text-center text-[#FDEFD8]`}>Sans garantir que le créneau puisse être changé, le restaurant laisse son téléphone au cas où vous voudriez le changer :</p>
-                <a href="tel:#" className={`block text-md text-center font-bold  text-[#FDEFD8] hover:text-[#458236] `}>07.09.56.90.00</a>
+            <div className="border-[#6A4A38] border-2 mx-auto px-9 py-6 border rounded w-full max-w-[600px]">
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Merci d&#39;avoir assister à la démo de notre site de réservation fictif</p>
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Ce site étant un site de démonstration dans sa version minimale, le processus de commande s&#39;arrête là.</p>
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>La réservation pourrait se terminer par l&#39; envoi d&#39;un email ou via un formulaire de contact qui a tout pré-enregistré.</p>
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Cela implique de nouveaux défis en matière de RGPD, de sécurité et d&#39;analyse du comportement utilisateur qui, idéalement, préfère être prévenu plus tôt qu&#39;en fin de réservation.</p>
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Nous présenterons cette fonctionnalité plus tard avec des service comme Resend</p>
+                <a href="https://resend.com" className={`block text-md text-center font-bold  text-orange-900 hover:text-[#458236] `}>Découvrir Resend</a>
             </div>
           
         </div>
