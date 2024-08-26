@@ -18,7 +18,7 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
             .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;&nbsp;?
             </h2> : 
             <h2 className="mx-auto my-3 font-bold text-[#854854] text-xl">Pour inviter, choisissez un restaurant</h2>}
-            <small>Cochez pour choisir l'organisateur du groupe</small>
+            <small>Cochez pour choisir l&#39;organisateur du groupe</small>
         </div>
         {restaurantList.restaurantId && presenter.form.guests.map((guest:any) => (
             <div key={guest.id}>
