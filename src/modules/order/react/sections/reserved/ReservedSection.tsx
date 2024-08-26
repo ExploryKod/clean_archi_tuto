@@ -16,7 +16,7 @@ export const ReservedSection = () => {
                 <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Ce site étant un site de démonstration dans sa version minimale, le processus de commande s&#39;arrête là.</p>
                 <p className={`mb-2 text-md text-center text-[#6A4A38]`}>La réservation pourrait se terminer par l&#39; envoi d&#39;un email ou via un formulaire de contact qui a tout pré-enregistré.</p>
                 <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Cela implique de nouveaux défis en matière de RGPD, de sécurité et d&#39;analyse du comportement utilisateur qui, idéalement, préfère être prévenu plus tôt qu&#39;en fin de réservation.</p>
-                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Nous présenterons cette fonctionnalité plus tard avec des service comme Resend</p>
+                <p className={`mb-2 text-md text-center text-[#6A4A38]`}>Nous présenterons cette fonctionnalité plus tard avec des services comme Resend</p>
                 <a href="https://resend.com" className={`block text-md text-center font-bold  text-orange-900 hover:text-[#458236] `}>Découvrir Resend</a>
             </div>
         </div>
