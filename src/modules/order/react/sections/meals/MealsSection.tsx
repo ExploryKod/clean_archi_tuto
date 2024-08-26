@@ -99,15 +99,17 @@ export const MealComposer: React.FC<{
     onDrinkSelected,
 }) => {
 
-    
+    const my_entry = entries.find(entry => entry.id === selectedEntryId);
 
     return (<>
 
-        <div className="flex flex-col mx-auto mb-5 w-full">
-            <h4 className="mx-auto my-3 font-bold text-lg">{firstName} {lastName}</h4>
+        <div className="flex flex-col mx-auto mx-auto mb-5 p-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
+            <div className="border-[#458236] border-2 mx-auto p-3 border rounded w-full">
+                <h4 className="mx-auto mt-3 font-bold text-lg">{firstName} {lastName}</h4>
+            </div>
         </div>
 
-        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[1200px] h-70 lg:h-96">
+        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
           
         <Carousel show={3}>
             {entries.map((entry) => (
@@ -118,7 +120,7 @@ export const MealComposer: React.FC<{
                     <div className={`relative cursor-pointer group hover:opacity-90
                         my-5 mx-3 p-0 md:w-[200px] flex-wrap rounded`}>
 
-                        <ImageContainer classNames="hidden lg:flex flex-col items-center justify-center">
+                        <ImageContainer classNames="hidden sm:flex flex-col items-center justify-center">
                         <Image 
                             width={200}
                             height={200}
