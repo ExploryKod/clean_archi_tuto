@@ -27,12 +27,12 @@ export const SummarySection = () => {
                     <p className="text-orange-900">{guest.name}</p>
                   </div>
                   <div className={`flex flex-col justify-center items-center grow`}>
-                    <p className="my-3 text-center text-yellow-900 italic">{guest.meals.drink.requiredAge >= 18 && guest.isOrganizer ? "Eviter l'alcool car vous organisez" : null}</p>
+                    <p className="my-3 text-center text-yellow-900 italic">{guest.meals.drink.requiredAge !== null && guest.meals.drink.requiredAge >= 18 && guest.isOrganizer ? "Eviter l'alcool car vous organisez" : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.entry ? guest.meals.entry.title : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.mainCourse ? guest.meals.mainCourse.title : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.dessert ? guest.meals.dessert.title : null}</p>
-                    <div className={`${guest.meals.drink && guest.meals.drink.requiredAge >= 18 ? "flex gap-3 items-center justify-center" : ""}`}>
-                    {guest.isOrganizer && (guest.meals.drink && guest.meals.drink.requiredAge >= 18) ? <Image src="/danger.svg" height={18} width={18} alt="" /> : null}
+                    <div className={`${guest.meals.drink && guest.meals.drink.requiredAge !== null && guest.meals.drink.requiredAge >= 18 ? "flex gap-3 items-center justify-center" : ""}`}>
+                    {guest.isOrganizer && (guest.meals.drink && guest.meals.drink.requiredAge !== null && guest.meals.drink.requiredAge >= 18) ? <Image src="/danger.svg" height={18} width={18} alt="" /> : null}
                     <p className="text-center text-yellow-900">{guest.meals.drink ? 
                         guest.meals.drink.title 
                         : null}</p>
