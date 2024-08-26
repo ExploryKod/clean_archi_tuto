@@ -41,7 +41,8 @@ export namespace OrderingDomainModel {
             dessert: MealId | null,
             drink : MealId | null
         }
-        restaurantId: RestaurantId
+        restaurantId: RestaurantId,
+        isOrganizer: boolean
     }
 
     export type RestaurantList = {

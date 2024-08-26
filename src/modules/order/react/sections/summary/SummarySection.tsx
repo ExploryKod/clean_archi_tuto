@@ -1,6 +1,6 @@
 import {OrderingDomainModel} from '@taotask/modules/order/core/model/ordering.domain-model';
 import {useSummary} from "@taotask/modules/order/react/sections/summary/use-summary.hook";
-
+import Image from "next/image"
 export const SummarySection = () => {
     const presenter = useSummary()
 
@@ -18,16 +18,25 @@ export const SummarySection = () => {
         <div className="flex flex-wrap justify-center gap-2 mx-auto my-3 w-full max-w-[75%]">
             {presenter.summary.guests.map((guest: any) => (
               <div key={guest.id} className={`
-                flex flex-col justify-center items-center border-[#458236] border-1 
+                relative flex flex-col justify-center items-center border-[#458236] border-1 
                 mb-5 p-3 border rounded min-w-[300px] basis-1/4`}>
-                  <div className="mb-3">
+                    {guest.isOrganizer ? 
+                   <span className="block -top-2 left-2 absolute border-[#458236] border-1 bg-[#F9EC7E] px-2.5 py-0.5 border rounded font-medium text-green-900 text-sm">J&#39;organise</span>: null}
+                 
+                  <div className="mt-5 mb-3">
                     <p className="text-orange-900">{guest.name}</p>
                   </div>
                   <div className={`flex flex-col justify-center items-center grow`}>
+                    <p className="my-3 text-center text-yellow-900 italic">{guest.meals.drink.requiredAge >= 18 && guest.isOrganizer ? "Eviter l'alcool car vous organisez" : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.entry ? guest.meals.entry.title : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.mainCourse ? guest.meals.mainCourse.title : null}</p>
                     <p className="text-center text-yellow-900">{guest.meals.dessert ? guest.meals.dessert.title : null}</p>
-                    <p className="text-center text-yellow-900">{guest.meals.drink ? guest.meals.drink.title : null}</p>
+                    <div className={`${guest.meals.drink && guest.meals.drink.requiredAge >= 18 ? "flex gap-3 items-center justify-center" : ""}`}>
+                    {guest.isOrganizer && (guest.meals.drink && guest.meals.drink.requiredAge >= 18) ? <Image src="/danger.svg" height={18} width={18} alt="" /> : null}
+                    <p className="text-center text-yellow-900">{guest.meals.drink ? 
+                        guest.meals.drink.title 
+                        : null}</p>
+                    </div>
                     {!guest.meals.entry && !guest.meals.mainCourse && !guest.meals.dessert && !guest.meals.drink ? 
                       (<p className="text-center text-yellow-900">Vous ne mangez rien ?</p>) : null}
                   </div>

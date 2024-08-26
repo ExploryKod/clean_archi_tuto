@@ -18,7 +18,7 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
             .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;&nbsp;?
             </h2> : 
             <h2 className="mx-auto my-3 font-bold text-[#854854] text-xl">Pour inviter, choisissez un restaurant</h2>}
-            <span className="mx-auto my-2 text-[#854854] text-xs italic">Cochez pour choisir l&#39;organisateur du groupe</span>
+            <span className="mx-auto my-2 text-[#854854] text-xs italic">L&#39;organisateur est la personne qui ne boit pas et se charge du déplacement des invités.</span>
         </div>
         {restaurantList.restaurantId && presenter.form.guests.map((guest:any) => (
             <div key={guest.id}>
@@ -107,7 +107,7 @@ const GuestRows: React.FC<{
                         <input type="number" 
                         id="age"
                         placeholder="25"
-                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
+                        className="block border-slate-300 focus:border-sky-500 focus:invalid:border-pink-500 disabled:border-slate-200 invalid:border-pink-500 bg-white disabled:bg-slate-50 shadow-sm disabled:shadow-none mt-1 px-3 py-2 border rounded-md focus:ring-1 focus:ring-sky-500 focus:invalid:ring-pink-500 w-full md:max-w-[50px] text-sm disabled:text-slate-500 invalid:text-pink-600 placeholder-slate-400 focus:outline-none"
                         min="0"
                         onChange= {(e) => onChange(id, "age", parseInt(e.target.value))} 
                         />
@@ -120,6 +120,7 @@ const GuestRows: React.FC<{
                 </Button>
             </div>
             <div className="relative md:flex flex-col justify-end items-center hidden">
+                <span className="top-0 left-0 absolute text-orange-900 text-xs italic">Organisateur</span>
                 <div className="bottom-[-5px] left-1 absolute">
                     <Checkbox  
                     defaultChecked={isOrganizer}
@@ -133,12 +134,14 @@ const GuestRows: React.FC<{
                 </div>
              </div>
 
-            <div className="flex justify-center items-center gap-[150px] md:hidden mx-auto w-full max-w-[425px]">
+            <div className="flex justify-between items-center md:hidden mx-auto w-full max-w-[204px]">
                 <div className="relative flex flex-col justify-end items-center md:hidden">
-                    <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
+                    <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
                         <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
                     </Button>
                 </div>
+                <div className="flex justify-end items-center">
+                <span className="text-orange-900 text-xs italic">J&#39;organise</span>
                 <Checkbox  
                 defaultChecked={isOrganizer}
                 onChange={() => changeOrganizer(id)} 
@@ -147,6 +150,7 @@ const GuestRows: React.FC<{
                 color="teal"
                 className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
                 />
+                </div>
             </div>
     </div>
     )

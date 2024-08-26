@@ -31,11 +31,6 @@ export const useGuestSection = () => {
     }
         
     function changeOrganizer(id:string) {
-        console.log('change' , id)
-        if(checkBoxOrganizer.current) {
-            console.log("ref checkbox", checkBoxOrganizer.current.checked);
-        }
-      
         const newState = guestForm.current.changeOrganizer(form, id);
         setForm(newState);
     }

@@ -14,6 +14,7 @@ export class GuestFactory {
                 drink : null
             },
             restaurantId: null,
+            isOrganizer: false,
             ...data
         }
     }

@@ -8,6 +8,8 @@ import ImageContainer from "../../components/containers/ImageContainer";
 export const MealsSection = () => {
     const presenter = useMeals()
 
+    console.log(presenter.guests)
+
     return (<>
       <section className="bg-[rgba(236,253,245,0.4)] hover:bg-[rgba(236,253,245,0.6)] shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] mx-auto py-[50px] rounded w-full max-w-[1200px] animate-fade-in-down">
         <div className="flex flex-col mx-auto mb-5 w-full">
@@ -33,6 +35,7 @@ export const MealsSection = () => {
             <MealComposer 
                 key={guest.id} 
                 guestId={guest.id}
+                guest={presenter.guests.find(g => g.id === guest.id) || null}
                 firstName={guest.firstName}
                 lastName={guest.lastName}
                 selectedEntryId={guest.meals.entry} 
@@ -74,6 +77,7 @@ export const MealsSection = () => {
 
 export const MealComposer: React.FC<{
     guestId: string,
+    guest: OrderingDomainModel.Guest | null,
     firstName: string,
     lastName: string,
 
@@ -95,6 +99,7 @@ export const MealComposer: React.FC<{
 
 }> = ({
     guestId,
+    guest,
     firstName,
     lastName,
 
@@ -145,6 +150,10 @@ export const MealComposer: React.FC<{
         "DRINK": "Boisson",
     }
 
+    if(!guest) {
+        return null;
+    }
+
     return (<>
 
         <div className="flex flex-col mx-auto mx-auto mb-5 p-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
@@ -162,7 +171,9 @@ export const MealComposer: React.FC<{
         <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[400px] sm:max-w-[700px] lg:max-w-[1024px] xl:max-w-[1200px]">
           
         <Carousel show={3}>
-            {meals.map((meal) => (
+            {meals.filter(meal => 
+            (meal.requiredAge === null || meal.requiredAge <= guest.age))
+            .map((meal) => (
               
                 <div key={meal.id} onClick={() => onMealSelected(guestId, meal.id, meal.type)} className={`
                 max-w-[300px] my-5 mx-auto flex items-center justify-center gap-2`} >
