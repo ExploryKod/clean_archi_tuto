@@ -107,7 +107,7 @@ export const MealComposer: React.FC<{
             <h4 className="mx-auto my-3 font-bold text-lg">{firstName} {lastName}</h4>
         </div>
 
-        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[1200px] h-80 2xl:h-96">
+        <div className="flex flex-wrap mx-auto mb-5 w-full max-w-[1200px] h-80 xl:h-90 2xl:h-96">
           
         <Carousel show={3}>
             {entries.map((entry) => (
