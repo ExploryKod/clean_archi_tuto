@@ -118,7 +118,7 @@ export const MealComposer: React.FC<{
                     <div className={`relative cursor-pointer group hover:opacity-90
                         my-5 mx-3 p-0 md:w-[200px] flex-wrap rounded`}>
 
-                        <ImageContainer classNames="hidden md:flex flex-col items-center justify-center">
+                        <ImageContainer classNames="hidden lg:flex flex-col items-center justify-center">
                         <Image 
                             width={200}
                             height={200}
