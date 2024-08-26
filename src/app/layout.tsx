@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${inter.variable} ${roboto_mono.variable} ${oswald.variable} overflow-x-hidden`}>
-      <body className={roboto.className}>
+      <body className={`${roboto.className} hidden sm:flex flex-col`}>
         <AppWrapper>
           <Layout>{children}</Layout>
         </AppWrapper>

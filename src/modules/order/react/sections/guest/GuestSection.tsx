@@ -18,7 +18,7 @@ export const GuestSection: React.FC<{restaurantList: OrderingDomainModel.Restaur
             .filter((restaurant:OrderingDomainModel.Restaurant) => restaurant.id === restaurantList.restaurantId)[0].restaurantName}&quot;&nbsp;?
             </h2> : 
             <h2 className="mx-auto my-3 font-bold text-[#854854] text-xl">Pour inviter, choisissez un restaurant</h2>}
-            <span className="mx-auto italic my-2 text-[#854854] text-xs">Cochez pour choisir l&#39;organisateur du groupe</span>
+            <span className="mx-auto my-2 text-[#854854] text-xs italic">Cochez pour choisir l&#39;organisateur du groupe</span>
         </div>
         {restaurantList.restaurantId && presenter.form.guests.map((guest:any) => (
             <div key={guest.id}>
@@ -72,7 +72,7 @@ const GuestRows: React.FC<{
 }> = ({id,firstName,lastName, age, onChange, remove, changeOrganizer, isOrganizer, checkboxRef}) => {
 
     return (
-    <div className="flex flex-col md:flex-row justify-center gap-2 mx-auto my-5">
+    <div className="flex md:flex-row flex-col justify-center gap-2 mx-auto my-5">
         
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
@@ -86,6 +86,7 @@ const GuestRows: React.FC<{
                         />
                 </label>
             </div>
+
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block font-medium text-slate-700 text-sm">Nom</span>
@@ -99,6 +100,7 @@ const GuestRows: React.FC<{
                         />
                 </label>
             </div>
+
             <div className="relative flex flex-col justify-center items-center">
                 <label className="block">
                     <span className="block font-medium text-slate-700 text-sm">Âge</span>
@@ -112,12 +114,12 @@ const GuestRows: React.FC<{
                 </label>
             </div>
           
-            <div className="hidden relative md:flex flex-col justify-end items-center">
+            <div className="relative md:flex flex-col justify-end items-center hidden">
                 <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
                     <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
                 </Button>
             </div>
-            <div className="hidden relative md:flex flex-col justify-end items-center">
+            <div className="relative md:flex flex-col justify-end items-center hidden">
                 <div className="bottom-[-5px] left-1 absolute">
                     <Checkbox  
                     defaultChecked={isOrganizer}
@@ -129,25 +131,27 @@ const GuestRows: React.FC<{
                     className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
                     />
                 </div>
+             </div>
 
-                <div className="mx-auto max-w-[425px] flex items-center justify-between md:hidden">
-                    <div className="hidden relative md:flex flex-col justify-end items-center">
-                        <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
-                            <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
-                        </Button>
-                    </div>
-                    <div className="hidden relative md:flex flex-col justify-end items-center">
-                    <div className="bottom-[-5px] left-1 absolute">
-                        <Checkbox  
-                        defaultChecked={isOrganizer}
-                        onChange={() => changeOrganizer(id)} 
-                        ref={checkboxRef}
-                        ripple={true}
-                        color="teal"
-                        className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
+            <div className="flex justify-between items-center md:hidden mx-auto w-full max-w-[425px]">
+                <div className="relative flex flex-col justify-end items-center md:hidden">
+                    <Button className="block bg-gray-100 shadow-[0_2px_3px_-2px_#000] mb-1 ml-5 p-0 rounded w-auto h-auto text-sm group" onClick={() => remove(id)}>
+                        <RiDeleteBin6Line className="group-hover:text-white w-4 h-4 text-red-600 self-center" />
+                    </Button>
+                </div>
+                
+                <div className="bottom-[-5px] left-1 absolute">
+                    <Checkbox  
+                    defaultChecked={isOrganizer}
+                    onChange={() => changeOrganizer(id)} 
+                    ref={checkboxRef}
+                    ripple={true}
+                    color="teal"
+                    className="bg-gray-100 shadow-[0_2px_3px_-2px_#000] rounded w-6 h-6"
                     />
-                    </div>
+                </div>
             </div>
-        </div>
+           
+    </div>
     )
 }
