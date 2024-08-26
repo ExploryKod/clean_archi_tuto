@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
     <div className="lg:!flex flex-grow items-center hidden !visible basis-[100%] lg:basis-auto"
       id="navbarSupportedContentY" data-te-collapse-item>
 
-      <ul className="lg:flex lg:flex-row mr-auto" data-te-navbar-nav-ref>
+      <ul className="hidden lg:hidden lg:flex-row mr-auto" data-te-navbar-nav-ref>
         <li data-te-nav-item-ref>
           <a className="block lg:px-2 py-2 pr-2 text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 focus:text-neutral-600 dark:focus:text-neutral-300 [&.active]:text-black/80 dark:[&.active]:text-white/80 disabled:text-black/30 dark:disabled:text-white/30 dark:text-neutral-200 transition duration-150 ease-in-out"
             href="#!" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light"
@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
 
     </div>
 
-    <div className="flex items-center my-1 lg:my-0 lg:ml-auto">
+    <div className="hidden items-center my-1 lg:my-0 lg:ml-auto">
       <button type="button"
         className="inline-block hover:bg-neutral-500 dark:hover:bg-neutral-700 hover:bg-opacity-10 dark:hover:bg-opacity-60 mr-2 px-6 pt-2.5 pb-2 rounded focus:ring-0 font-medium text-primary text-xs hover:text-primary-600 dark:hover:text-primary-500 focus:text-primary-600 dark:focus:text-primary-500 active:text-primary-700 dark:active:text-primary-600 dark:text-primary-400 uppercase leading-normal transition duration-150 ease-in-out focus:outline-none"
         data-te-ripple-init data-te-ripple-color="light">
