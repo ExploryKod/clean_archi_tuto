@@ -29,8 +29,8 @@ const oswald = Oswald({
 })
 
 export const metadata = {
-  title: "Ratatouille",
-  description: "Réservation de tables de restaurant",
+  title: "Saveurs des suds",
+  description: "Réservation de tables de restaurant dans les régions du sud de l'Europe",
 };
 
 export default function RootLayout({
