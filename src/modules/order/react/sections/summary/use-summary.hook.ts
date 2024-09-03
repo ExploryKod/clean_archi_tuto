@@ -17,7 +17,7 @@ type Guest = {
     isOrganizer: boolean,
     meals: {
         entry: MealSummary | null,
-        mainCourse: MealSummary,
+        mainCourse: MealSummary | null,
         dessert: MealSummary | null,
         drink: MealSummary | null
     }
